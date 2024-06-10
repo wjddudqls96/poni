@@ -40,6 +40,10 @@ dependencies {
     implementation("io.jsonwebtoken:jjwt-impl:0.11.2")
     implementation("io.jsonwebtoken:jjwt-jackson:0.11.2")
     implementation("com.auth0:java-jwt:3.13.0")
+
+    // Itext for PDF
+    implementation 'com.itextpdf:itext7-core:7.2.3'
+    implementation 'com.itextpdf:html2pdf:4.0.4'
 }
 
 tasks.named('test') {
