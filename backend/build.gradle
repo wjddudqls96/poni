@@ -52,6 +52,9 @@ dependencies {
 
     // Komoran
     implementation 'com.github.shin285:KOMORAN:3.3.9'
+
+    //thymleaf
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 }
 
 tasks.named('test') {
