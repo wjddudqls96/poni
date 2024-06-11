@@ -97,6 +97,7 @@ public class SecurityConfig {
         skipPathList.add(new Path(HttpMethod.POST, "/user"));
         skipPathList.add(new Path(HttpMethod.POST, "/api/pdf/**"));
         skipPathList.add(new Path(HttpMethod.GET, "/test"));
+        skipPathList.add(new Path(HttpMethod.GET, "/test/gpt"));
 
         FilterSkipMatcher matcher = new FilterSkipMatcher(skipPathList, "/**");
         JwtAuthFilter filter = new JwtAuthFilter(matcher, extractor);
