@@ -3,7 +3,6 @@ package com.epson.poni.model;
 import com.epson.poni.model.enums.AuthType;
 import jakarta.persistence.*;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -18,6 +17,12 @@ public class User {
     private Long id;
 
     @Column
+    private String userName;
+
+    @Column
+    private String password;
+
+    @Column
     private String language;
 
     @Column
@@ -30,42 +35,29 @@ public class User {
     @JoinColumn(name = "setting_id")
     private Setting setting;
 
+
+    @Column
+    @Enumerated(EnumType.STRING)
+    private AuthType type = AuthType.USER;
+
+    public User(String userName, String password){
+        this.userName = userName;
+        this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", userId='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", type=" + type +
+                '}';
+    }
+
     @Builder
     public void Change(String language, String deviceId){
         this.deviceId = deviceId;
         this.language =  language;
     }
-
-
-//    @Column
-//    private String userId;
-//
-//    @Column
-//    private String password;
-//
-//    @Column
-//    private String refreshToken;
-//
-//    @Column
-//    @Enumerated(EnumType.STRING)
-//    private AuthType type = AuthType.USER;
-//
-//    public User(String userId, String password){
-//        this.userId = userId;
-//        this.password = password;
-//    }
-//
-//    public User() {
-//
-//    }
-//
-//    @Override
-//    public String toString() {
-//        return "User{" +
-//                "id=" + id +
-//                ", userId='" + userId + '\'' +
-//                ", password='" + password + '\'' +
-//                ", type=" + type +
-//                '}';
-//    }
 }

@@ -37,9 +37,8 @@ public class JwtTokenUtils {
     final String ACCESS_TOKEN = "ACCESS_TOKEN";
     final String REFRESH_TOKEN = "REFRESH_TOKEN";
 
-    public Map<String, String> generateJwtToken(UserDetailsImpl userDetails){
+    public String generateJwtToken(UserDetailsImpl userDetails){
         try {
-            Map<String, String> map = new HashMap<>();
 
             String accessToken = JWT.create()
                     .withIssuer("test")
@@ -47,20 +46,10 @@ public class JwtTokenUtils {
                     .withClaim(CLAIM_EXPIRED_DATE, new Date(System.currentTimeMillis() + ACCESS_TOKEN_VALID_MILLI_SEC))
                     .sign(Algorithm.HMAC256(JWT_SECRET));
 
-            String refreshToken = JWT.create()
-                    .withIssuer("test")
-                    .withClaim(CLAIM_USER_NAME, userDetails.getUsername())
-                    .withClaim(CLAIM_EXPIRED_DATE, new Date(System.currentTimeMillis() + REFRESH_TOKEN_VALID_MILLI_SEC))
-                    .sign(Algorithm.HMAC256(JWT_SECRET));
-
-            map.put(ACCESS_TOKEN, accessToken);
-            map.put(REFRESH_TOKEN, refreshToken);
-
-            User user = userRepository.findByUserId(userDetails.getUsername());
-            user.setRefreshToken(refreshToken);
+            User user = userRepository.findByUserName(userDetails.getUsername());
             userRepository.save(user);
 
-            return map;
+            return accessToken;
         }
         catch (Exception e){
             throw new IllegalArgumentException("ERROR CREATE JWT TOKEN");

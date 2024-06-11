@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class PdfController {
     private final HtmlPdfService htmlPdfService;
 
-    private static final String pdfDestination = "./output.pdf";
+//    private static final String pdfDestination = "./output.pdf";
 
     @PostMapping("/convert")
     public void convertHtmlToPdf() throws IOException {
-        htmlPdfService.createPdfFromHtml(pdfDestination);
+        htmlPdfService.createAndUploadPdf();
     }
 }
