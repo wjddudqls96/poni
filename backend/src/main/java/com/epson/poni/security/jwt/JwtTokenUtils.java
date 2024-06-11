@@ -8,8 +8,6 @@ import com.epson.poni.repository.UserRepository;
 
 import com.epson.poni.security.UserDetailsImpl;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -41,7 +39,7 @@ public class JwtTokenUtils {
         try {
 
             String accessToken = JWT.create()
-                    .withIssuer("test")
+                    .withIssuer("static/test")
                     .withClaim(CLAIM_USER_NAME, userDetails.getUsername())
                     .withClaim(CLAIM_EXPIRED_DATE, new Date(System.currentTimeMillis() + ACCESS_TOKEN_VALID_MILLI_SEC))
                     .sign(Algorithm.HMAC256(JWT_SECRET));
@@ -59,7 +57,7 @@ public class JwtTokenUtils {
     public String reissuanceAccessToken(String username){
         try {
             String accessToken = JWT.create()
-                    .withIssuer("test")
+                    .withIssuer("static/test")
                     .withClaim(CLAIM_USER_NAME, username)
                     .withClaim(CLAIM_EXPIRED_DATE, new Date(System.currentTimeMillis() + ACCESS_TOKEN_VALID_MILLI_SEC))
                     .sign(Algorithm.HMAC256(JWT_SECRET));
@@ -75,7 +73,7 @@ public class JwtTokenUtils {
     public String reissuanceRefreshToken(String username){
         try {
             String refreshToken = JWT.create()
-                    .withIssuer("test")
+                    .withIssuer("static/test")
                     .withClaim(CLAIM_USER_NAME, username)
                     .withClaim(CLAIM_EXPIRED_DATE, new Date(System.currentTimeMillis() + ACCESS_TOKEN_VALID_MILLI_SEC))
                     .sign(Algorithm.HMAC256(JWT_SECRET));
