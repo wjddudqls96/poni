@@ -14,9 +14,7 @@ public class FormLoginSuccessHandler extends SavedRequestAwareAuthenticationSucc
     private final JwtTokenUtils jwtTokenUtils;
 
     String ACCESS_TOKEN_HEADER = "Access_Token";
-    String REFRESH_TOKEN_HEADER = "Refresh_Token";
     String TOKEN_TYPE = "BEARER";
-    ObjectMapper objectMapper = new ObjectMapper();
 
     public FormLoginSuccessHandler(JwtTokenUtils jwtTokenUtils) {
         this.jwtTokenUtils = jwtTokenUtils;
@@ -26,10 +24,9 @@ public class FormLoginSuccessHandler extends SavedRequestAwareAuthenticationSucc
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws ServletException, IOException {
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-        Map<String, String> tokens = jwtTokenUtils.generateJwtToken(userDetails);
+        String tokens = jwtTokenUtils.generateJwtToken(userDetails);
 
-        response.addHeader(ACCESS_TOKEN_HEADER,  TOKEN_TYPE + " " + tokens.get("ACCESS_TOKEN"));
-        response.addHeader(REFRESH_TOKEN_HEADER, TOKEN_TYPE + " " + tokens.get("REFRESH_TOKEN"));
+        response.addHeader(ACCESS_TOKEN_HEADER,  TOKEN_TYPE + " " + tokens);
         response.setContentType("application/json");
     }
 }

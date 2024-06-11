@@ -44,6 +44,9 @@ dependencies {
     // Itext for PDF
     implementation 'com.itextpdf:itext7-core:7.2.3'
     implementation 'com.itextpdf:html2pdf:4.0.4'
+
+    // s3
+    implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
 }
 
 tasks.named('test') {
