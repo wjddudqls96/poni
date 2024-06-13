@@ -1,6 +1,6 @@
 package com.epson.poni.controller;
 
-import com.epson.poni.service.GptService;
+import com.epson.poni.utils.GptConnection;
 import com.epson.poni.utils.KoreanAnalyzer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class testController {
 
     private final KoreanAnalyzer koreanAnalyzer;
-    private final GptService gptService;
+    private final GptConnection gptConnection;
 
     @GetMapping("/test")
     public void test(){
@@ -20,6 +20,6 @@ public class testController {
 
     @GetMapping("/test/gpt")
     public void test2(){
-        gptService.requestGrammarAnalyze("나는 최고의 개발자다.");
+        gptConnection.requestGrammarAnalyze("나는 최고의 개발자다.");
     }
 }
