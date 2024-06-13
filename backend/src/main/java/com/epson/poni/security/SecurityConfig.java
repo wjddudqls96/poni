@@ -6,18 +6,14 @@ import com.epson.poni.security.filter.FormLoginFilter;
 import com.epson.poni.security.filter.JwtAuthFilter;
 import com.epson.poni.security.jwt.HeaderTokenExtractor;
 import com.epson.poni.security.jwt.JwtTokenUtils;
-import com.epson.poni.security.provider.FormLoginAuthProvider;
-import com.epson.poni.security.provider.JWTAuthProvider;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -96,6 +92,8 @@ public class SecurityConfig {
         skipPathList.add(new Path(HttpMethod.POST, "/user/login"));
         skipPathList.add(new Path(HttpMethod.POST, "/user"));
         skipPathList.add(new Path(HttpMethod.POST, "/api/pdf/**"));
+        skipPathList.add(new Path(HttpMethod.GET, "/static/test"));
+        skipPathList.add(new Path(HttpMethod.GET, "/static/test/gpt"));
 
         FilterSkipMatcher matcher = new FilterSkipMatcher(skipPathList, "/**");
         JwtAuthFilter filter = new JwtAuthFilter(matcher, extractor);

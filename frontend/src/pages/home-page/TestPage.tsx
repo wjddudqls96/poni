@@ -11,8 +11,8 @@ const TestPage: React.FC = () => {
 
   return (
     <div>
-        TestPage
-        <button onClick={hadleNavigate}>Go to About Page</button>
+        {/* TestPage
+        <button onClick={hadleNavigate}>Go to About Page</button> */}
     </div>
   )
 }

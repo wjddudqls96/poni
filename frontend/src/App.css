@@ -7,7 +7,11 @@
   height: 100vh;
 }
 .device-main {
-  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  
+  border: 1px solid #D8D8D8;
+  background-color: #F8F8F8;
   width: 50vw; /* 화면 너비의 50% */
   height: calc(50vw * (19 / 9)); /* 너비의 19/9 비율로 높이 설정 */
   margin-left: 55vw;
@@ -22,12 +26,19 @@
 @media (max-width: 1500px) {
   .device-main {
     margin-left: 45vw; /* 화면이 작아질 때 마진 줄이기 */
+    min-width: 0px;
+    min-height: 0px;
+
+    max-height: 90vh;
   }
 }
 
 @media (max-width: 1000px) {
   .device-main {
     margin-left: 35vw; /* 화면이 작아질 때 마진 줄이기 */
+    width: 50vw; /* 화면 너비의 50% */
+    min-width: 0px;
+    min-height: 0px;
   }
 }
 

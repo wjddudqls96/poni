@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title th:text="${title}">Document</title>
+  <style>
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    .container {
+      padding: 20px;
+    }
+    h1 {
+      color: royalblue;
+    }
+    p {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1 th:text="${title}"></h1>
+  <p th:text="${message1}"></p>
+  <p th:text="${message2}"></p>
+</div>
+</body>
+</html>
