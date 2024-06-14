@@ -24,6 +24,14 @@ public class GptRequestDto {
         );
         return new GptRequestDto("gpt-3.5-turbo", messages, 0, 4096, 1);
     }
+
+    public static GptRequestDto translateSentence(String sentence) {
+        List<Message> messages = Arrays.asList(
+                new Message("user", "Translate the following sentence to Korean and provide the pronunciation:\n\n" + sentence),
+                new Message("user", "{ \"translatedText\": \"안녕하세요, 어떻게 지내세요?\", \"pronunciation\": \"annyeonghaseyo, eotteoke jinaeseyo?\" }")
+        );
+        return new GptRequestDto("gpt-3.5-turbo", messages, 0, 4096, 1);
+    }
 }
 
 @Data
