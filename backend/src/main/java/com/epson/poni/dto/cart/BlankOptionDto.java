@@ -11,7 +11,7 @@ import lombok.ToString;
 public class BlankOptionDto {
 
     private int count;
-    private String type;
+    private BlankType type;
     @JsonProperty("isTranslation")
     private boolean translation;
 }
