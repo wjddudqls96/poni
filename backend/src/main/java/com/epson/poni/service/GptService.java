@@ -38,18 +38,4 @@ public class GptService {
 
         firstRequest.subscribe(System.out::println, Throwable::printStackTrace);
     }
-
-    public void translateSentence(String sentence) {
-        GptRequestDto gptRequestDto = GptRequestDto.translateSentence(sentence);
-
-        Mono<String> firstRequest = webClient.post()
-                .uri("/chat/completions")
-                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                .header(HttpHeaders.AUTHORIZATION, "Bearer " + accessKey)
-                .bodyValue(gptRequestDto)
-                .retrieve()
-                .bodyToMono(String.class);
-
-        firstRequest.subscribe(System.out::println, Throwable::printStackTrace);
-    }
 }
