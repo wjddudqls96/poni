@@ -103,9 +103,9 @@ public class DictationService {
 
         try{
 //            if (fileType.equals("image/jpeg")) {
-//                return extractTextFromImage(file.getBytes());
+                return extractTextFromImage(file.getBytes());
 //            } else if (fileType.equals("multipart/form-data")) {
-                return extractTextFromPdf(file.getBytes());
+//                return extractTextFromPdf(file.getBytes());
 //            }
         }catch (IOException e){
             throw new RuntimeException(e);
@@ -135,4 +135,7 @@ public class DictationService {
     }
 
 
+    public void difficultyIncorrect(DifficultyIncorrectRequestDto difficultyIncorrectRequestDto) {
+
+    }
 }
