@@ -49,7 +49,7 @@ public class HtmlPdfService {
                 PdfDocument pdf = new PdfDocument(writer);
                 Document document = new Document(pdf, PageSize.A4)) {
 
-            document.setMargins(50, 50, 50, 50);
+            document.setMargins(0, 0, 0, 0);
             ConverterProperties properties = new ConverterProperties();
 
             // Thymeleaf를 사용하여 HTML 생성
@@ -63,6 +63,9 @@ public class HtmlPdfService {
             fontProvider.addFont("src/main/resources/static/fonts/NotoSansKR-VariableFont_wght.ttf");
             properties.setFontProvider(fontProvider);
             properties.setCharset("utf-8");
+
+            // CSS 포함
+            properties.setBaseUri("src/main/resources/templates/");
 
             HtmlConverter.convertToPdf(htmlContent, pdf, properties);
         } catch (IOException e) {
