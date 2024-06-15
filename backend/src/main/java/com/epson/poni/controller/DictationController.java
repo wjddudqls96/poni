@@ -4,7 +4,7 @@ import com.epson.poni.dto.dictation.DifficultyGradingResponseDto;
 import com.epson.poni.dto.dictation.DifficultyIncorrectRequestDto;
 import com.epson.poni.dto.dictation.DifficultySettingsRequestDto;
 import com.epson.poni.dto.dictation.DifficultySettingsResponseDto;
-import com.epson.poni.service.DictationService;
+import com.epson.poni.service.Dictation.DictationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;

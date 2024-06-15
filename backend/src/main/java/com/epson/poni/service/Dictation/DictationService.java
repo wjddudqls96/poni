@@ -1,4 +1,4 @@
-package com.epson.poni.service;
+package com.epson.poni.service.Dictation;
 
 import com.epson.poni.dto.dictation.*;
 import com.epson.poni.model.dictation.Difficulty;
@@ -7,7 +7,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.sourceforge.tess4j.TesseractException;
-import org.springframework.security.core.parameters.P;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,8 +21,15 @@ import java.util.List;
 @Slf4j
 public class DictationService {
     private final DifficultyRepository difficultyRepository;
-    private final OcrService ocrService;
     private final HttpSession session;
+
+    // 1-1. tesseract 사용
+//    @Autowired
+//    private final OCRService ocrService = new TesseractOCRService();
+    //1-2. naver-clova 사용
+    @Autowired
+    private final OCRService ocrService = new ClovaOCRService();
+
 
     /**
      * 흐름
@@ -60,13 +67,18 @@ public class DictationService {
      */
     public DifficultyGradingResponseDto difficultyGrading(MultipartFile file, String serialNumber) {
         //1. OCR을 통해 이미지 or pdf에서 글자를 추출(extractedTextArray)한다.
-        String[] extractedTextArray; // OCR 글자 추출 텍스트
+
+        List<String> extractedTextArray; // OCR 글자 추출 텍스트
         extractedTextArray = extractText(file);
         for (String s : extractedTextArray) {
             log.info(s);
         }
 
         // 2. 추출한 문장(extractedTextArray)과 정답 문장을 비교하여 정답 여부를 체크한다.
+        return checkForCorrectAnswer(extractedTextArray);
+    }
+
+    private DifficultyGradingResponseDto checkForCorrectAnswer(List<String> extractedTextArray) {
         Integer correct = 0;
         Integer incorrect = 0;
         DifficultyGradingResponseDto difficultyGradingResponseDto = new DifficultyGradingResponseDto();
@@ -96,43 +108,22 @@ public class DictationService {
     }
 
 
-    private String[] extractText(MultipartFile file){
-        // 파일 이름 처리
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        String fileType = file.getContentType();
+    private List<String> extractText(MultipartFile file){
+          return ocrService.extractTextFromImage(file);
 
-        try{
+//        try{
+//            return extractTextFromImage(file);
 //            if (fileType.equals("image/jpeg")) {
-                return extractTextFromImage(file.getBytes());
+//                return extractTextFromImage(file.getBytes());
 //            } else if (fileType.equals("multipart/form-data")) {
 //                return extractTextFromPdf(file.getBytes());
 //            }
-        }catch (IOException e){
-            throw new RuntimeException(e);
-        }
+//        }catch (IOException e){
+//            throw new RuntimeException(e);
+//        }
 //        return new String[0];
     }
 
-    private String[] extractTextFromPdf(byte[] bytes) {
-        try {
-            return ocrService.extractTextFromPdf(bytes);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        catch (TesseractException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private String[] extractTextFromImage(byte[] bytes) {
-        try {
-            return ocrService.extractTextFromImage(bytes);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (TesseractException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
 
     public void difficultyIncorrect(DifficultyIncorrectRequestDto difficultyIncorrectRequestDto) {
