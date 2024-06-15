@@ -1,0 +1,35 @@
+.container {
+    width: auto;
+    min-height: 197px;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FFFFFF;
+    padding: 5px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    min-height: 30px;
+}
+
+.header-title {
+    margin-left: 15px;
+}
+
+.content {
+    min-height: 120px;  /* Adjust based on your needs */
+    background-color: #F6F6F6;
+    padding: 15px;
+}
+
+.close-button {
+    width: 16px; /* 버튼 크기 */
+    height: 16px; /* 버튼 크기 */
+    cursor: pointer;
+}

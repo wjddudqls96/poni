@@ -1,0 +1,65 @@
+.explain-container {
+    display: flex;
+    flex-direction: column;
+}
+.main-sentence {
+    display: flex;
+    flex: 0.1;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.content-container {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 8px;
+}
+
+.content-label-container {
+    display: flex;
+    flex: 0.14;
+}
+
+.content-text-container {
+    display: flex;
+    flex-direction: column;
+    flex: 0.86;
+}
+
+.content-text-title {
+    font-size: 0.8rem;
+    font-weight: 400;
+    margin-bottom: 3px;
+}
+
+.content-text-explain {
+    font-size: 0.8rem;
+    font-weight: 400;
+}
+
+
+
+.explain-label {
+    padding: 3px 4px;
+    border-radius: 15px;
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 0.7rem;
+    text-align: center;
+    width: fit-content;
+    text-align: center;
+    height: fit-content;
+  }
+  
+  .red {
+    background-color: #ff7f7f; /* 빨간색 배경 */
+  }
+  
+  .blue {
+    background-color: #7f7fff; /* 파란색 배경 */
+  }
+  
+  .purple {
+    background-color: #b07fff; /* 보라색 배경 */
+  }
