@@ -17,4 +17,9 @@ public class Difficulty {
 
     @Column
     private String difficulty; //상,중, 하
+
+    @Column
+    private String content;
+
+
 }
