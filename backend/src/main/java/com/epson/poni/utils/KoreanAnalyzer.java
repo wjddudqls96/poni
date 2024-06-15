@@ -25,4 +25,9 @@ public class KoreanAnalyzer {
         // 명사들 집합
         System.out.println(analyzeResultList.getNouns());
     }
+
+    public List<String> getNouns(String korean) {
+        KomoranResult analyzeResultList = komoran.analyze(korean);
+        return analyzeResultList.getNouns();
+    }
 }
