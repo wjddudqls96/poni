@@ -8,15 +8,16 @@ import com.epson.poni.dto.cart.CombinedResultDto;
 import com.epson.poni.dto.cart.TraceOptionDto;
 import com.epson.poni.dto.explanation.ExplanationRequestDto;
 import com.epson.poni.dto.explanation.ExplanationResponseDto;
+import com.epson.poni.dto.translate.TranslateRequestDto;
+import com.epson.poni.dto.translate.TranslateResultDto;
 import com.epson.poni.service.BlankService;
 import com.epson.poni.service.ExplanationService;
 import com.epson.poni.service.TraceService;
 import java.util.List;
+
+import com.epson.poni.service.TranslateService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -27,6 +28,7 @@ public class WorkSheetController {
     private final TraceService traceService;
     private final ExplanationService explanationService;
     private final BlankService blankService;
+    private final TranslateService translateService;
 
     @PostMapping("/cart")
     public Mono<Response<CombinedResultDto>> createCart(@RequestBody CartOptionRequestDto requestDto) {
@@ -53,5 +55,16 @@ public class WorkSheetController {
     @PostMapping("/explanation")
     public void getExplanation(@RequestBody ExplanationRequestDto requestDto) {
 
+    }
+
+    @PostMapping("/translate")
+    public Mono<Response<TranslateResultDto>> translate(@RequestBody TranslateRequestDto request) {
+        return translateService.translate(request.getOriginalSentence())
+                .map(translationResults -> {
+                    TranslateResultDto resultDto = new TranslateResultDto();
+                    resultDto.setTranslatedSentence(translationResults.get(0).getTranslatedSentence()); // 번역된 문장 설정
+                    resultDto.setPronunciation(translationResults.get(0).getPronunciation()); // 발음 기호 설정
+                    return new Response<>("201", "번역이 완료되었습니다.", resultDto);
+                });
     }
 }

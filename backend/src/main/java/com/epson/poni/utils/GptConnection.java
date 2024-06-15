@@ -3,6 +3,8 @@ package com.epson.poni.utils;
 import com.epson.poni.dto.blank.BlankResponseDto;
 import com.epson.poni.dto.explanation.ExplanationResponseDto;
 import com.epson.poni.dto.gpt.GptRequestDto;
+import com.epson.poni.dto.translate.TranslateRequestDto;
+import com.epson.poni.dto.translate.TranslateResultDto;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
@@ -65,6 +67,26 @@ public class GptConnection {
                 .map(jsonStr -> {
                     try {
                         return parseJson(jsonStr, BlankResponseDto.class);
+                    } catch (IOException e) {
+                        throw new RuntimeException("Failed to parse JSON", e);
+                    }
+                });
+    }
+
+
+    public Mono<List<TranslateResultDto>> requestTranslateSentence(String sentence) {
+        GptRequestDto gptRequestDto = GptRequestDto.translateSentence(sentence);
+
+        return webClient.post()
+                .uri("/chat/completions")
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + accessKey)
+                .bodyValue(gptRequestDto)
+                .retrieve()
+                .bodyToMono(String.class)
+                .map(jsonStr -> {
+                    try {
+                        return parseJson(jsonStr, TranslateResultDto.class);
                     } catch (IOException e) {
                         throw new RuntimeException("Failed to parse JSON", e);
                     }
