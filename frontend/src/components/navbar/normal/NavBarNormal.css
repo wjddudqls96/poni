@@ -3,7 +3,8 @@
     flex-direction: row;
     /* justify-content: center; */
     align-items: center;
-    flex: 0.064;
+    flex: 0.1;
+    min-height: 50px;
     border-bottom: 1px solid #D8D8D8;
     background-color: #FFFFFF;
 }

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SpeechRecognition from "react-speech-recognition";
 import { useSpeechRecognition } from "react-speech-recognition";
-import recordBtn from "../../assets/recordBtn.png";
+import recordBtn from "../../assets/person.png";
 import stopBtn from "../../assets/stopBtn.png";
 
 interface RecordBoxProps {

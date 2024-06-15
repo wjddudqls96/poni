@@ -1,0 +1,33 @@
+.blank-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+.blank-container {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  
+  .blank-input {
+    border: 1px solid #D0D0D0;
+    border-radius: 4px;
+    margin: 0 5px;
+    width: 50px; /* 입력란의 너비 */
+    text-align: center;
+    font-size: 1rem;
+    outline: none;
+  }
+  
+  .blank-description {
+    font-size: 1rem;
+    margin-top: 5px;
+  }
+  
+  .blank-translate {
+    font-size: 0.8rem;
+    color: #999;
+  }
