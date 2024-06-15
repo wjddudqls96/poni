@@ -57,7 +57,7 @@ public class WorkSheetController {
 
     }
 
-    @GetMapping("/translate")
+    @PostMapping("/translate")
     public Mono<Response<TranslateResultDto>> translate(@RequestBody TranslateRequestDto request) {
         return translateService.translate(request.getOriginalSentence())
                 .map(translationResults -> {

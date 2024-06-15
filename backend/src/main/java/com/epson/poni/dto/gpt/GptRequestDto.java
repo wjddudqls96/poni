@@ -40,7 +40,7 @@ public class GptRequestDto {
 
     public static GptRequestDto translateSentence(String sentence) {
         List<Message> messages = Arrays.asList(
-                new Message("user", "{\"sentence\": \"Hello, how are you?\",  \"translatedSentence\": \"안녕하세요, 어떻게 지내세요?\", \"pronunciation\": \"annyeonghaseyo, eotteoke jinaeseyo?\""),
+                new Message("user", "{\"sentence\": \"Hello, how are you?\",  \"translatedSentence\": \"안녕하세요, 어떻게 지내세요?\", \"pronunciation\": \"an-nyeong-ha-se-yo, eo-tteo-ke ji-nae-se-yo?\""),
                 new Message("user", "너는 영어를 사용하는 사람들을 위한 한국어 선생님이야.내가 한국어로된 문장을 줄테니 내가준 JSON처럼 분석해서 JSON 데이터를 만들어서 줘 그리고 token 수가 4096 이내로 만들어줘"),
                 new Message("user", "문장 : " + sentence)
         );

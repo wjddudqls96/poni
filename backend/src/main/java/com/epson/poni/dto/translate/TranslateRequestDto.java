@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class TranslateRequestDto {
-    String originalSentence;
+    private String originalSentence;
 }
