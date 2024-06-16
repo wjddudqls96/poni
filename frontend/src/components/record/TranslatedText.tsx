@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "../../service/axiosConfig";
 
 interface OriginalTextProps {
   transcript?: string;
@@ -7,6 +8,8 @@ interface OriginalTextProps {
 const TranslatedText: React.FC<OriginalTextProps> = ({ transcript }) => {
   const [isReading, setIsReading] = useState(false);
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
+  const [translatedText, setTranslatedText] = useState<string | null>(null);
+  const [pronunciation, setPronunciation] = useState<string | null>(null);
 
   useEffect(() => {
     const synth = window.speechSynthesis;
@@ -19,6 +22,30 @@ const TranslatedText: React.FC<OriginalTextProps> = ({ transcript }) => {
       synth.onvoiceschanged = loadVoices;
     }
   }, []);
+
+  useEffect(() => {
+    const fetchTranslatedText = async () => {
+      if (transcript) {
+        try {
+          const response = await axios.post("/api/v1/worksheet/translate", {
+            originalSentence: transcript,
+          });
+
+          if (response.status === 200 || response.status === 201) {
+            console.log(response.data);
+            setTranslatedText(response.data.data.translatedSentence);
+            setPronunciation(response.data.data.pronunciation);
+          } else {
+            console.error("Failed to fetch translated text");
+          }
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      }
+    };
+
+    fetchTranslatedText();
+  }, [transcript]);
 
   const speakText = (text: string) => {
     const synth = window.speechSynthesis;
@@ -38,16 +65,17 @@ const TranslatedText: React.FC<OriginalTextProps> = ({ transcript }) => {
   };
 
   const handleButtonClick = () => {
-    if (transcript && !isReading) {
+    if (translatedText && !isReading) {
       setIsReading(true);
-      speakText(transcript);
+      speakText(translatedText);
     }
   };
 
   return (
     <div>
       <div>TranslatedText</div>
-      <div>{transcript}</div>
+      <div>{translatedText}</div>
+      <div>{pronunciation}</div>
       <button onClick={handleButtonClick} disabled={isReading}>
         {isReading ? "Reading..." : "Read Text"}
       </button>
