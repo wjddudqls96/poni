@@ -22,9 +22,9 @@ public class PdfController {
         Map<String, Object> map = new HashMap<>();
 
         // HTML에 넣을 변수들 지정
-        map.put("title", "Welcome to Our Website");
-        map.put("message1", "머라하노 ㅋㅋ");
-        map.put("message2", "엡손엡손엡손이다.");
+//        map.put("title", "Welcome to Our Website");
+//        map.put("message1", "머라하노 ㅋㅋ");
+//        map.put("message2", "엡손엡손엡손이다.");
 
         htmlPdfService.createAndUploadPdf(map);
     }
