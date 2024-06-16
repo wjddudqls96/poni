@@ -10,6 +10,7 @@ import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.font.FontProvider;
+import java.io.File;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
@@ -61,6 +62,8 @@ public class HtmlPdfService {
             // 폰트 설정
             FontProvider fontProvider = new FontProvider();
             fontProvider.addFont("src/main/resources/static/fonts/NotoSansKR-VariableFont_wght.ttf");
+            fontProvider.addFont("src/main/resources/static/fonts/NotoSansKR-Bold.ttf");
+            fontProvider.addFont("src/main/resources/static/fonts/NotoSansKR-Medium.ttf");
             properties.setFontProvider(fontProvider);
             properties.setCharset("utf-8");
 

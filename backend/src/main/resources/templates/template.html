@@ -2,13 +2,86 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" type="text/css" href="./css/style.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="css/explain.css">
+  <link rel="stylesheet" type="text/css" href="css/trace.css">
 </head>
 <body>
 <div class="container">
   <header>
-
+    <table style="width: 100%; background-color: #E3FFF4; height: 70px">
+      <tr>
+        <td style="width: 83px; text-align: right;">
+          <img src="images/poni_logo.png" alt="Sample Image" style="width: 53px; height: 30px;"/>
+        </td>
+        <td style="padding-top: 10px; padding-left: 10px; font-size: 10px; font-weight: bold">
+          나만의 맞춤 한국어 학습 서비스, 포니
+        </td>
+        <td style="padding-bottom: 10px; padding-top: 37px; padding-right: 20px; text-align: right; font-weight: 500; font-size: 12px;">
+          2024.06.12
+        </td>
+      </tr>
+    </table>
   </header>
+  <main>
+    <div class="content_wrapper">
+<!--      여기서 부터 용어설명에 해당되는 코드들   -->
+      <div class="content_wrapper">
+        <div class="main-sentence">
+          사슴이 이쁘다
+          <span class="pronunciation">joh-eun nal-i-ya</span>
+        </div>
+        <table>
+          <tbody>
+          <tr>
+            <td class="content-label-container">
+              <div class="label red">
+                주어
+              </div>
+            </td>
+            <td class="content-text-container">
+              <div class="content-text-title">
+                "사슴"
+              </div>
+              <div class="content-text-explain">
+                이 문장에서 주어는 "사슴"으로, 누구나 알고 있는 대상을 가리킵니다.
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        </div>
+      <!--      용어 설명 끝   -->
+
+      <div class="exercise">
+        <div class="korean-sentence">
+          놀이터<span class="blank"></span>집으로 가요
+        </div>
+        <div class="english-sentence">
+          I'm going home from the playground
+        </div>
+      </div>
+    </div>
+
+    <div class="trace-wrapper">
+      <h2>따라쓰기 - 글자형</h2>
+      <table class="writing-table">
+        <tbody>
+        <tr th:each="i : ${#numbers.sequence(1, 10)}">
+          <td class="fixed-cell">가</td>
+          <td class="faded-cell ">가</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>지</td>
+          <td>모</td>
+          <td></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
 </div>
 </body>
 </html>
