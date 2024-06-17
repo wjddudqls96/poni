@@ -1,0 +1,137 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* 투명도 있는 검정색 배경 */
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.modal-content {
+  width: 100%;
+  max-width: 400px;
+  background: #fff;
+  border-radius: 10px 10px 0 0;
+  padding: 20px;
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.modal-enter {
+  transform: translateY(100%);
+}
+
+.modal-enter-active {
+  transform: translateY(0);
+}
+
+.modal-exit {
+  transform: translateY(0);
+}
+
+.modal-exit-active {
+  transform: translateY(100%);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-body {
+  margin-top: 20px;
+}
+
+.option-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.two-option {
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+}
+
+.counter {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.counter button {
+  background: none;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  width: 30px;
+  height: 30px;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+  padding-top: 15px;
+}
+
+.apply, .not-apply {
+  background: #e0f7e0;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 5px 10px;
+}
+
+.two-button-main {
+  background: #ffff;
+  border: 1px solid #EAEAEA;
+  border-radius: 4px;
+  padding: 5px 10px;
+  width: 163px;
+  height: 44px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.apply {
+  border: 0;
+  background: #1ED88C;
+  color: white;
+}
+
+.not-apply {
+  background: #e0e0e0;
+  color: black;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.reset, .apply {
+  flex: 1;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.reset {
+  background: #e0e0e0;
+  margin-right: 10px;
+}
+
+.apply {
+  background: #00c853;
+  color: white;
+}

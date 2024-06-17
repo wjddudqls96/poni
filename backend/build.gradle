@@ -58,6 +58,7 @@ dependencies {
 
     implementation group: 'net.sourceforge.tess4j', name: 'tess4j', version: '5.11.0'
 
+    implementation 'commons-fileupload:commons-fileupload:1.4'
 }
 
 tasks.named('test') {

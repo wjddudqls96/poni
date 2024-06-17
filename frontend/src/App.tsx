@@ -7,8 +7,13 @@ import { PreviewPage } from "./pages/preview-page/PreviewPage";
 import "./App.css";
 import RecordContainer from "./components/record/RecordContainer";
 import { NavBarNormal } from './components/navbar/normal/NavBarNormal';
+import { StepOnePage } from "./pages/make-worksheet-page/StepOnePage";
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { modalVisibleState } from "./store/Modal";
 
 const App: React.FC = () => {
+    const modalVisible = useRecoilValue(modalVisibleState);
+
     return (
         <div className="main">
             <HomePage />
@@ -20,8 +25,9 @@ const App: React.FC = () => {
                     <div className="device-main-content">
                         <Routes>
                             <Route path="/" element={<TestPage />} />
-                            <Route path="/2" element={<PreviewPage />} />
+                            <Route path="/preview" element={<PreviewPage />} />
                             <Route path="/record" element={<RecordContainer />} />
+                            <Route path="/step1" element={<StepOnePage />} />
                         </Routes>
                     </div>
                 </Router>

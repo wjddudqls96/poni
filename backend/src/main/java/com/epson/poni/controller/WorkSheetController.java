@@ -17,8 +17,11 @@ import java.util.List;
 
 import com.epson.poni.service.TranslateService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
+import reactor.util.function.Tuple3;
 
 @RestController
 @RequestMapping("/api/v1/worksheet/")
@@ -30,31 +33,33 @@ public class WorkSheetController {
     private final BlankService blankService;
     private final TranslateService translateService;
 
+    private static final Logger log = LoggerFactory.getLogger(WorkSheetController.class);
+
     @PostMapping("/cart")
     public Mono<Response<CombinedResultDto>> createCart(@RequestBody CartOptionRequestDto requestDto) {
         BlankOptionDto blankOptionDto = requestDto.getBlankOption();
         TraceOptionDto traceOptionDto = requestDto.getTraceOption();
 
         // 1. WebFlux를 이용해서 비동기 방식으로 작동하게 한다.
-        Mono<List<ExplanationResponseDto>> grammarAnalysis = explanationService.create(requestDto.getContent());
-        Mono<TraceOptionDto> traceData = traceService.getTraceData(traceOptionDto);
-        Mono<List<BlankResponseDto>> blankData = blankService.create(requestDto.getContent(), blankOptionDto.getCount(), blankOptionDto.getType());
+        Mono<List<ExplanationResponseDto>> grammarAnalysis = explanationService.create(requestDto.getContent())
+                .doOnError(e -> log.error("Grammar analysis failed", e));
+        Mono<TraceOptionDto> traceData = traceService.getTraceData(traceOptionDto)
+                .doOnError(e -> log.error("Trace data retrieval failed", e));
+        Mono<List<BlankResponseDto>> blankData = blankService.create(requestDto.getContent(), blankOptionDto.getCount(), blankOptionDto.getType())
+                .doOnError(e -> log.error("Blank data creation failed", e));
 
         return Mono.zip(grammarAnalysis, traceData, blankData)
-                .map(tuple -> new Response<>(
-                        "201",
-                        "카트 데이터가 성공적으로 생성되었습니다.",
-                        new CombinedResultDto(tuple.getT1(), tuple.getT2(), tuple.getT3())
-                ));
+                .map(tuple -> createResponse(tuple))
+                .doOnError(e -> log.error("Error creating cart", e));
     }
 
-    /*
-    1. 용어설명은 옵션이 없다.
-    2. chatGPT API에 content를 넘겨줘서 데이터를 넘겨준다.
-    * */
-    @PostMapping("/explanation")
-    public void getExplanation(@RequestBody ExplanationRequestDto requestDto) {
-
+    private Response<CombinedResultDto> createResponse(
+            Tuple3<List<ExplanationResponseDto>, TraceOptionDto, List<BlankResponseDto>> tuple) {
+        return new Response<>(
+                "201",
+                "카트 데이터가 성공적으로 생성되었습니다.",
+                new CombinedResultDto(tuple.getT1(), tuple.getT2(), tuple.getT3())
+        );
     }
 
     @PostMapping("/translate")
