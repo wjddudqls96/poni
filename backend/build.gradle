@@ -56,8 +56,8 @@ dependencies {
     //thymleaf
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
-    //???
     implementation group: 'net.sourceforge.tess4j', name: 'tess4j', version: '5.11.0'
+
 }
 
 tasks.named('test') {
