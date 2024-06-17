@@ -1,0 +1,26 @@
+@page {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 793px;
+  height: 1118px;
+  box-sizing: border-box;
+  border: 1px solid black;
+}
+
+header {
+  background-color: #E3FFF4;
+}
+
+.content_wrapper {
+  width: 700px;
+  margin: 25px auto;
+}
