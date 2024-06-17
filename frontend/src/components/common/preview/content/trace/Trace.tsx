@@ -1,7 +1,8 @@
 import React from 'react'
 import "./Trace.css"
 
-export const Trace: React.FC = () => {
+export const Trace: React.FC<any> = ({traceOption}) => {
+
   return (
     <div>
       <table className="explain-grid">
@@ -9,7 +10,7 @@ export const Trace: React.FC = () => {
           <NormalTable/>
           <GuideTable/>
           <BlankTable/>
-          <CrossTable/>
+          <BlankTable/>
         </tbody>
       </table>
     </div>

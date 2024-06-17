@@ -5,6 +5,7 @@ declare module "Preview" {
     }
     interface ContentProps {
         type: string;
+        
     }
     interface BlankProps {
         text: string;

@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Preview } from '../../components/common/preview/Preview';
 import './PreviewPage.css';
+import { useRecoilValue } from 'recoil';
+import { worksheet } from '../../store/Worksheet';
+import { Worksheet } from 'worksheet';
 
 export const PreviewPage: React.FC = () => {
+  const worksheetData:Worksheet = useRecoilValue(worksheet);
+
+  useEffect(() => {
+    console.log(worksheetData.blank);
+  }, []);
+
+
   return (
     <div className='preview-main'>
       <div className='preview-page-container'>

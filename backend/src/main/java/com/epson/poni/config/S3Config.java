@@ -27,6 +27,7 @@ public class S3Config {
 
     @Bean
     public AmazonS3Client amazonS3Client() {
+
         try {
             //AWS 서비스에 접근하기 위한 기본적인 자격증명 정보인 access key와 secret key를 받아 객체를 생성
             BasicAWSCredentials awsCredentials = new BasicAWSCredentials(accessKey, secretKey);
