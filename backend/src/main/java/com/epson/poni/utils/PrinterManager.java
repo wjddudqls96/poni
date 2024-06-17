@@ -1,11 +1,15 @@
 package com.epson.poni.utils;
 
 import com.epson.poni.dto.print.EpsonTokenDto;
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.http.HttpHeaders;
@@ -93,5 +97,45 @@ public class PrinterManager {
             requestBody,
             String.class
         );
+    }
+
+    public void print() {
+
+    }
+
+    public void upload(File content) {
+        String jobId = "8aaa0b1f217245429bee37e5914fb0cb";
+        String baseUri = "https://www.epsonconnect.com/c33fe124ef80c3b13670be27a6b0bcd7/v1/storage/PostData?Key=2babc9a51a2c52b88bae92436d75676430203504703236422165c8b359f602eeb9bcdd90859787dc";
+        String localFilePath = "C:/dev/Section.jpeg";
+
+        String ext = localFilePath.substring(localFilePath.lastIndexOf('.'));
+        String fileName = "1" + ext;
+        String uploadUri = baseUri + "&File=" + fileName;
+
+        File file = new File(localFilePath);
+        long fileLength = file.length();
+        String errStr = "";
+        RestTemplate restTemplate = new RestTemplate();
+
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentLength(fileLength);
+            headers.setContentType(MediaType.IMAGE_JPEG);
+
+            FileSystemResource fileResource = new FileSystemResource(file);
+            HttpEntity<FileSystemResource> requestEntity = new HttpEntity<>(fileResource, headers);
+
+            ResponseEntity<String> response = restTemplate.exchange(uploadUri, HttpMethod.POST, requestEntity, String.class);
+
+            if (response.getStatusCode() == HttpStatus.OK) {
+                System.out.println(response);
+                System.out.println("File uploaded successfully.");
+            } else {
+                System.out.println("Failed to upload file: " + response.getStatusCode() + " " + response.getStatusCode());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }
