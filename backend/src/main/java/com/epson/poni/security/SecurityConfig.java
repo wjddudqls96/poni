@@ -59,7 +59,7 @@ public class SecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.addAllowedOrigin("http://localhost:5173"); // local 테스트 시
+        configuration.addAllowedOrigin("http://localhost5173"); // local 테스트 시
         configuration.setAllowCredentials(true);
         configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");
@@ -94,6 +94,11 @@ public class SecurityConfig {
         skipPathList.add(new Path(HttpMethod.POST, "/api/pdf/**"));
         skipPathList.add(new Path(HttpMethod.GET, "/test/**"));
         skipPathList.add(new Path(HttpMethod.POST, "/api/v1/worksheet/**"));
+        skipPathList.add(new Path(HttpMethod.POST, "/api/scan/**"));
+        skipPathList.add(new Path(HttpMethod.POST, "/api/print/**"));
+        skipPathList.add(new Path(HttpMethod.GET, "/**"));
+        skipPathList.add(new Path(HttpMethod.POST, "/**"));
+
 
         FilterSkipMatcher matcher = new FilterSkipMatcher(skipPathList, "/**");
         JwtAuthFilter filter = new JwtAuthFilter(matcher, extractor);
