@@ -1,6 +1,7 @@
 package com.epson.poni.utils;
 
 import com.epson.poni.dto.print.EpsonTokenDto;
+import com.epson.poni.dto.print.PrintInfo;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -40,8 +41,6 @@ public class PrinterManager {
     public EpsonTokenDto getToken() {
 
         String url = "https://api.epsonconnect.com/api/1/printing/oauth2/auth/token?subject=printer&grant_type=password&username=";
-        String username = "xri7063s9g2p35@print.epsonconnect.com";
-        String password = "yourPassword";
 
         String auth = clientId + ":" + secret;
         byte[] encodedAuth = Base64.getEncoder().encode(auth.getBytes(StandardCharsets.US_ASCII));
@@ -99,20 +98,43 @@ public class PrinterManager {
         );
     }
 
-    public void print() {
+    public void print(String filePath) {
+        EpsonTokenDto epsonTokenDto = getToken();
+        String jobId = upload(epsonTokenDto, filePath);
+        String accessToken = epsonTokenDto.getAccess_token();
+        String url = "https://api.epsonconnect.com/api/1/printing/printers/" + epsonTokenDto.getSubject_id() + "/jobs/" + jobId + "/print";
+
+        // 헤더 설정
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + accessToken);
+        headers.set("Content-Type","application/json; charset=UTF-8");
+
+        HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(headers);
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        restTemplate.exchange(
+            url,
+            HttpMethod.POST,
+            requestEntity,
+            void.class
+        );
 
     }
 
-    public void upload(File content) {
-        String jobId = "8aaa0b1f217245429bee37e5914fb0cb";
-        String baseUri = "https://www.epsonconnect.com/c33fe124ef80c3b13670be27a6b0bcd7/v1/storage/PostData?Key=2babc9a51a2c52b88bae92436d75676430203504703236422165c8b359f602eeb9bcdd90859787dc";
-        String localFilePath = "C:/dev/Section.jpeg";
+    public String upload(EpsonTokenDto epsonTokenDto, String filePath) {
 
-        String ext = localFilePath.substring(localFilePath.lastIndexOf('.'));
+        PrintInfo printInfo = getPrintInfo(epsonTokenDto.getSubject_id(), epsonTokenDto.getAccess_token());
+
+        String jobId = printInfo.getPrintId();
+        String baseUri = printInfo.getUploadUrl();
+
+
+        String ext = filePath.substring(filePath.lastIndexOf('.'));
         String fileName = "1" + ext;
         String uploadUri = baseUri + "&File=" + fileName;
 
-        File file = new File(localFilePath);
+        File file = new File(filePath);
         long fileLength = file.length();
         String errStr = "";
         RestTemplate restTemplate = new RestTemplate();
@@ -136,6 +158,33 @@ public class PrinterManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return jobId;
+    }
 
+    public PrintInfo getPrintInfo(String subjectId, String accessToken) {
+
+        String url = "https://api.epsonconnect.com/api/1/printing/printers/" + subjectId + "/jobs";
+        String jobName = "print";
+        String printMode = "photo";
+
+        // 헤더 설정
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + accessToken);
+        headers.set("Content-Type","application/json; charset=UTF-8");
+
+        Map<String, String> body = new HashMap<>();
+        body.put("job_name", jobName);
+        body.put("print_mode", printMode);
+
+        HttpEntity<Map<String, String>> requestBody = new HttpEntity<>(body, headers);
+        RestTemplate restTemplate = new RestTemplate();
+        PrintInfo printInfo = restTemplate.exchange(
+            url,
+            HttpMethod.POST,
+            requestBody,
+            PrintInfo.class
+        ).getBody();
+
+        return printInfo;
     }
 }

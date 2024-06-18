@@ -29,7 +29,7 @@ public class PrintController {
 
     private static String UPLOAD_DIR = "C:/dev/";
 
-    @PostMapping("/upload")
+    @PostMapping("/print")
     public String uploadFile(@RequestParam("file") MultipartFile file) {
         try {
             // 저장할 파일 경로 생성
@@ -42,7 +42,9 @@ public class PrintController {
             FileOutputStream fos = new FileOutputStream(convertedFile);
             fos.write(file.getBytes());
             fos.close();
-            printerManager.upload(convertedFile);
+//            파일 주소 받기
+            String localFilePath = "C:/dev/Section.jpeg";
+            printerManager.print(localFilePath);
             return content;
         } catch (IOException e) {
             e.printStackTrace();
