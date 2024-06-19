@@ -1,14 +1,18 @@
-package com.epson.poni.model;
+package com.epson.poni.model.User;
 
-import com.epson.poni.model.enums.AuthType;
+import com.epson.poni.model.Setting;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.antlr.v4.runtime.misc.NotNull;
 
 //@Data
 @Entity
 @Getter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class User {
     @Id
@@ -17,10 +21,10 @@ public class User {
     private Long id;
 
     @Column
-    private String userName;
+    private String email;
 
     @Column
-    private String password;
+    private String userName;
 
     @Column
     private String language;
@@ -28,36 +32,16 @@ public class User {
     @Column
     private String deviceId;
 
-    @Column
-    private String name;
+    @Enumerated(EnumType.STRING) // Enum 타입은 문자열 형태로 저장해야 함
+    private Role role;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "setting_id")
     private Setting setting;
 
-
-    @Column
-    @Enumerated(EnumType.STRING)
-    private AuthType type = AuthType.USER;
-
-    public User(String userName, String password){
-        this.userName = userName;
-        this.password = password;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", userId='" + userName + '\'' +
-                ", password='" + password + '\'' +
-                ", type=" + type +
-                '}';
-    }
-
-    @Builder
     public void Change(String language, String deviceId){
         this.deviceId = deviceId;
         this.language =  language;
     }
+
 }

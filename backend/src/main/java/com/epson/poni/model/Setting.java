@@ -1,5 +1,6 @@
 package com.epson.poni.model;
 
+import com.epson.poni.model.User.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

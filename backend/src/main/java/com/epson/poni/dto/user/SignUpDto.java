@@ -1,4 +1,4 @@
-package com.epson.poni.dto;
+package com.epson.poni.dto.user;
 
 import lombok.Data;
 
