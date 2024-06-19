@@ -1,28 +1,21 @@
 package com.epson.poni.controller;
 
-import com.epson.poni.repository.UserRepository;
+import com.epson.poni.dto.user.UserInfoUpdateRequestDto;
+import com.epson.poni.service.user.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
 public class UserController {
-    private final UserRepository userRepository;
-    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    private final UserService userService;
 
+    @PostMapping("/update")
+    public void userInfoUpdate(Authentication authentication, @RequestBody UserInfoUpdateRequestDto userInfoUpdateRequestDto){
+        userService.userInfoUpdate(userInfoUpdateRequestDto,authentication);
+    }
 
-
-//    @PostMapping("/user")
-//    public void signUpController(@RequestBody SignUpDto.Reqeust reqeust){
-//        String encodedPassword = passwordEncoder.encode(reqeust.getPassword());
-//        User user = new User(reqeust.getUserId(), encodedPassword);
-//        userRepository.save(user);
-//    }
-//
-//    @PostMapping("/test")
-//    public void test(@AuthenticationPrincipal UserDetailsImpl userDetails){
-//        User user = userDetails.getUser();
-//        System.out.println(user);
-//    }
 }
