@@ -14,6 +14,9 @@ import LoginPage from "./pages/login-page/LoginPage";
 import InsertPrinter from "./components/printer/InsertPrinter";
 import MainPage from "./pages/main-page/MainPage";
 import WorksheetOptionPage from "./pages/worksheet-option-page/WorksheetOptionPage";
+import SelectGradePage from "./pages/dictation-page/SelectGradePage";
+import DictationPage from "./pages/dictation-page/DictationPage";
+import ScanPage from "./pages/dictation-page/ScanPage";
 
 const App: React.FC = () => {
   const modalVisible = useRecoilValue(modalVisibleState);
@@ -43,6 +46,16 @@ const App: React.FC = () => {
                 path="/worksheet/option"
                 element={<WorksheetOptionPage />}
               ></Route>
+              {/* 받아쓰기 난이도 선택 페이지 */}
+              <Route path="/select/grade" element={<SelectGradePage />}></Route>
+              {/* 받아쓰기 페이지 */}
+              <Route path="/dictation" element={<DictationPage />}></Route>
+              {/* 받아쓰기 완료, 스캔 페이지 */}
+              <Route path="/scan" element={<ScanPage />}></Route>
+              {/* 받아쓰기 결과 페이지 */}
+              <Route path="/dictation/result"></Route>
+              {/* 출력 미리보기 */}
+              <Route path="/preview"></Route>
             </Routes>
           </div>
         </Router>
