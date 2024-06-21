@@ -1,0 +1,30 @@
+.modal-content {
+  position: absolute;
+  padding: 0;
+  height: 550px;
+  background-color: white;
+  bottom: 0;
+  /* padding-left: 1.2rem;
+  padding-top: 1.2rem; */
+}
+
+.close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: l;
+}
+
+.modal-contents {
+  margin-left: 1.2rem;
+  margin-top: 1.2rem;
+}
+
+.create-worksheet {
+  position: absolute;
+  bottom: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}

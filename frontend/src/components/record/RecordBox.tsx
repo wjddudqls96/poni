@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SpeechRecognition from "react-speech-recognition";
 import { useSpeechRecognition } from "react-speech-recognition";
 import recordBtn from "../../assets/person.png";
@@ -12,6 +12,11 @@ const RecordBox: React.FC<RecordBoxProps> = ({ onTranscriptChange }) => {
   const [isRecording, setIsRecording] = useState(false);
   const [buttonImage, setButtonImage] = useState(recordBtn); // 초기 이미지 설정
   const { transcript, resetTranscript } = useSpeechRecognition();
+
+  useEffect(() => {
+    // 페이지에 들어오자마자 녹음 시작
+    handleToggleRecording();
+  }, []);
 
   const handleToggleRecording = () => {
     if (!isRecording) {
