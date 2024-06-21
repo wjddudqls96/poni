@@ -5,6 +5,7 @@ import "./SelectGradePage.css";
 
 const SelectGradePage: React.FC = () => {
   const navigate = useNavigate();
+
   const handleNextClick = () => {
     navigate("/dictation");
   };

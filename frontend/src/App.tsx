@@ -5,7 +5,6 @@ import HomePage from "./pages/home-page/HomePage";
 import TestPage from "./pages/home-page/TestPage";
 import { PreviewPage } from "./pages/preview-page/PreviewPage";
 import "./App.css";
-import RecordContainer from "./components/record/RecordContainer";
 import { NavBarNormal } from "./components/navbar/normal/NavBarNormal";
 import { StepOnePage } from "./pages/make-worksheet-page/StepOnePage";
 import { useRecoilValue, useSetRecoilState } from "recoil";
@@ -17,6 +16,7 @@ import WorksheetOptionPage from "./pages/worksheet-option-page/WorksheetOptionPa
 import SelectGradePage from "./pages/dictation-page/SelectGradePage";
 import DictationPage from "./pages/dictation-page/DictationPage";
 import ScanPage from "./pages/dictation-page/ScanPage";
+import RecordPage from "./pages/record-page/RecordPage";
 
 const App: React.FC = () => {
   const modalVisible = useRecoilValue(modalVisibleState);
@@ -35,7 +35,7 @@ const App: React.FC = () => {
               <Route path="/main" element={<MainPage />}></Route>
               <Route path="/preview" element={<PreviewPage />} />
               {/* 녹음 페이지 */}
-              <Route path="/record" element={<RecordContainer />} />
+              <Route path="/record" element={<RecordPage />} />
               <Route path="/step1" element={<StepOnePage />} />
               {/* 로그인 페이지 */}
               <Route path="/login" element={<LoginPage />}></Route>

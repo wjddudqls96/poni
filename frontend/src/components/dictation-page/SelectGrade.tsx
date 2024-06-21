@@ -1,12 +1,11 @@
 import React from "react";
-import { useRecoilState } from "recoil";
-import { useNavigate } from "react-router-dom";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { grade } from "../../store/Grade";
 import "./SelectGrade.css"; // 추가된 CSS 파일
 
 const SelectGrade: React.FC = () => {
-  const [currentGrade, setGrade] = useRecoilState(grade);
-
+  const currentGrade = useRecoilValue(grade);
+  const setGrade = useSetRecoilState(grade);
   const handleClick = (selectedGrade: string) => {
     setGrade(selectedGrade);
   };
