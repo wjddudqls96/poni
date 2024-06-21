@@ -3,6 +3,7 @@ package com.epson.poni.service.Dictation;
 import com.epson.poni.dto.dictation.*;
 import com.epson.poni.model.dictation.Difficulty;
 import com.epson.poni.repository.DifficultyRepository;
+import com.epson.poni.service.print.ScanService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +24,7 @@ import java.util.List;
 public class DictationService {
     private final DifficultyRepository difficultyRepository;
     private final HttpSession session;
+    private final ScanService scanService;
 
     // 1-1. tesseract 사용
 //    @Autowired
@@ -65,7 +68,7 @@ public class DictationService {
      * 2. 추출한 문장과 정답 문장을 비교하여 정답 여부를 체크한다.
      * 3. 정답 여부를 모아 리턴한다.
      */
-    public DifficultyGradingResponseDto difficultyGrading(MultipartFile file, String serialNumber) {
+    public DifficultyGradingResponseDto difficultyGrading(MultipartFile file) {
         //1. OCR을 통해 이미지 or pdf에서 글자를 추출(extractedTextArray)한다.
 
         List<String> extractedTextArray; // OCR 글자 추출 텍스트

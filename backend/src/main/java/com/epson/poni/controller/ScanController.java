@@ -1,6 +1,7 @@
 package com.epson.poni.controller;
 
 import com.epson.poni.dto.Response;
+import com.epson.poni.dto.dictation.DifficultyGradingResponseDto;
 import com.epson.poni.service.print.ScanService;
 import com.epson.poni.utils.S3Uploader;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,8 +19,8 @@ public class ScanController {
     private final ScanService scanService;
 
     @PostMapping("/load")
-    public void scanData(HttpServletRequest request) throws IOException{
-        scanService.saveImage(request);
+    public DifficultyGradingResponseDto scanData(HttpServletRequest request) throws IOException{
+        return scanService.saveImage(request);
     }
 
     @PostMapping("/regist")

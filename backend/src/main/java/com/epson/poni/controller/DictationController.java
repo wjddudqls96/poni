@@ -25,13 +25,13 @@ public class DictationController {
         
     }
 
-    @PostMapping("/grading")
-    public DifficultyGradingResponseDto difficultyGrading(@RequestParam("file") MultipartFile file,
-                                  @RequestParam("serialNumber") String serialNumber){
-        DifficultyGradingResponseDto difficultyGradingResponseDto = dictationService.difficultyGrading(file, serialNumber);
-
-        return difficultyGradingResponseDto;
-    }
+//    @PostMapping("/grading")
+//    public DifficultyGradingResponseDto difficultyGrading(@RequestParam("file") MultipartFile file,
+//                                  @RequestParam("serialNumber") String serialNumber){
+//        DifficultyGradingResponseDto difficultyGradingResponseDto = dictationService.difficultyGrading(file, serialNumber);
+//
+//        return difficultyGradingResponseDto;
+//    }
 
     @PostMapping("/incorrect")
     public void difficultIncorrect(@RequestBody DifficultyIncorrectRequestDto difficultyIncorrectRequestDto){
