@@ -1,7 +1,10 @@
 package com.epson.poni.service.Dictation;
 
 import com.epson.poni.dto.dictation.*;
+import com.epson.poni.model.Dictation;
+import com.epson.poni.model.User.User;
 import com.epson.poni.model.dictation.Difficulty;
+import com.epson.poni.repository.DictationRepository;
 import com.epson.poni.repository.DifficultyRepository;
 import com.epson.poni.service.print.ScanService;
 import jakarta.servlet.http.HttpSession;
@@ -9,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.sourceforge.tess4j.TesseractException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 @Service
@@ -23,7 +29,7 @@ import java.util.Scanner;
 @Slf4j
 public class DictationService {
     private final DifficultyRepository difficultyRepository;
-    private final HttpSession session;
+    private final DictationRepository dictationRepository;
 
     // 1-1. tesseract 사용
 //    @Autowired
@@ -42,20 +48,32 @@ public class DictationService {
     public DifficultySettingsResponseDto difficultySettings(DifficultySettingsRequestDto difficultySettingsRequestDto) {
         List<Difficulty> byDifficultyEqual = difficultyRepository.findByDifficultyEqual(difficultySettingsRequestDto.getDifficulty(), difficultySettingsRequestDto.getCount());
 
+        //임시 저장
+        List<Dictation> dictationList = new ArrayList<>();
+        User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
         List<ContentDto> contentDtos = new ArrayList<>();
+
         for (Difficulty difficulty : byDifficultyEqual) {
             ContentDto contentDto = new ContentDto(difficulty.getId(), difficulty.getContent());
             contentDtos.add(contentDto);
+
+            //임시 저장
+            Dictation dictation = new Dictation();
+            dictation.setDictation(user.getId(),difficulty.getContent(),difficulty.getId());
+            dictationList.add(dictation);
         }
 
         DifficultySettingsResponseDto difficultySettingsResponseDto = new DifficultySettingsResponseDto();
         difficultySettingsResponseDto.setContentList(contentDtos);
 
-        //받아쓰기 정보 임시 저장
-        if (session.getAttribute("1") != null) {
-            session.removeAttribute("1");
+
+        Optional<List<Dictation>> byUserId = dictationRepository.findByUserId(user.getId());
+        if (byUserId.isPresent()){
+            dictationRepository.deleteByUserId(user.getId());
         }
-        session.setAttribute("1", difficultySettingsResponseDto);
+        //임시저장
+        dictationRepository.saveAll(dictationList);
 
         return difficultySettingsResponseDto;
     }
@@ -85,18 +103,19 @@ public class DictationService {
         Integer incorrect = 0;
         DifficultyGradingResponseDto difficultyGradingResponseDto = new DifficultyGradingResponseDto();
 
-        DifficultySettingsResponseDto sessionAttribute = (DifficultySettingsResponseDto) session.getAttribute("1");
-        List<ContentDto> contentList = sessionAttribute.getContentList();
+        User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Optional<List<Dictation>> dictation = dictationRepository.findByUserId(user.getId());
+
         Integer contentListIndex = 0;
         List<Ploblem> ploblemList = new ArrayList<>();
         for (String s : extractedTextArray) {
             if (s.isEmpty()) {continue;} //줄 띄어쓰기 생략
 
-            ContentDto contentDto = contentList.get(contentListIndex);
+            Dictation contentDto = dictation.get().get(contentListIndex);
             if (s.equals(contentDto.getContent())) correct++;
             else incorrect++;
 
-            ploblemList.add(new Ploblem(contentDto.getDifficulty_id(),contentDto.getContent(),s));
+            ploblemList.add(new Ploblem(contentDto.getDifficultyId(),contentDto.getContent(),s));
 
             contentListIndex++;
 
