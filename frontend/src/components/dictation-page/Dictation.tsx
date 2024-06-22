@@ -5,13 +5,13 @@ import { grade } from "../../store/Grade";
 import speakBtn from "../../assets/speak.png";
 import stopSpeakBtn from "../../assets/stopSpeak.png";
 import "./Dictation.css";
+import { useNavigate } from "react-router-dom";
 
 const Dictation: React.FC = () => {
   const difficulty = useRecoilValue(grade);
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
   const [contentList, setContentList] = useState(null);
-  const [idx, setIdx] = useState<number>(0);
-  var flag: boolean = true;
+  const navigate = useNavigate();
   useEffect(() => {
     // tts
     const synth = window.speechSynthesis;
@@ -52,20 +52,16 @@ const Dictation: React.FC = () => {
 
   const speak = async () => {
     if (contentList == null) return;
-    flag = true;
-    while (flag) {
-      const text = contentList[idx / 2];
-      console.log(contentList);
-      speakText(text.content);
-      await delay(4000);
-      setIdx(idx + 1);
-      console.log(idx);
-    }
-  };
+    speakText("문제는 총 세 문항이며 두 번 들려드립니다.");
+    await delay(6000);
 
-  const stopSpeak = async () => {
-    flag = false;
-    console.log(flag);
+    for (const text of contentList) {
+      speakText(text.content);
+      await delay(3000);
+      speakText(text.content);
+      await delay(6000);
+    }
+    navigate("/scan");
   };
 
   return (
@@ -74,7 +70,9 @@ const Dictation: React.FC = () => {
         <div>받아쓰기중..</div>
         <img src={speakBtn} />
       </div>
-      <img src={stopSpeakBtn} className="stop-btn" onClick={stopSpeak}></img>
+      {/* <img src={stopSpeakBtn} className="stop-btn">
+        정지버튼
+      </img> */}
     </div>
   );
 };
