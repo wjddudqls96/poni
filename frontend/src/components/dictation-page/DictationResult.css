@@ -1,0 +1,19 @@
+.result-name-box {
+  margin-left: 1.5rem;
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.result-text-box {
+  margin-left: 1.5rem;
+  display: flex;
+  gap: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.result-score {
+  color: greenyellow;
+}
