@@ -2,10 +2,7 @@ package com.epson.poni.controller;
 
 import com.epson.poni.dto.Response;
 import com.epson.poni.dto.blank.BlankResponseDto;
-import com.epson.poni.dto.cart.BlankOptionDto;
-import com.epson.poni.dto.cart.CartOptionRequestDto;
-import com.epson.poni.dto.cart.CombinedResultDto;
-import com.epson.poni.dto.cart.TraceOptionDto;
+import com.epson.poni.dto.cart.*;
 import com.epson.poni.dto.explanation.ExplanationResponseDto;
 import com.epson.poni.dto.translate.TranslateRequestDto;
 import com.epson.poni.dto.translate.TranslateResultDto;
@@ -31,6 +28,7 @@ public class WorkSheetController {
     private final BlankService blankService;
     private final TranslateService translateService;
     private final WorksheetSaveService worksheetSaveService;
+    private final WorksheetGetService worksheetGetService;
 
     private static final Logger log = LoggerFactory.getLogger(WorkSheetController.class);
 
@@ -75,5 +73,10 @@ public class WorkSheetController {
     @PostMapping("/save")
     public void saveCart(@RequestBody CombinedResultDto combinedResultDto, Authentication authentication){
         worksheetSaveService.saveCart(combinedResultDto,authentication);
+    }
+
+    @GetMapping("/")
+    public List<CartListAllResponse> getCart(Authentication authentication){
+        return worksheetGetService.getListAll(authentication);
     }
 }

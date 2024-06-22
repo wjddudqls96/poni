@@ -14,6 +14,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -103,7 +104,7 @@ public class WorksheetSaveService {
     private Cart saveCart(Authentication authentication) {
         Cart cart = new Cart();
         User user = (User) authentication.getPrincipal();
-        cart.cartSet(user);
+        cart.cartSet(user, new Date());
         cartRepository.save(cart);
         return cart;
     }

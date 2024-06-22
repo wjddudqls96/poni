@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Entity
 @Getter
 @NoArgsConstructor
@@ -16,12 +18,16 @@ public class Cart {
     @Column(name="cart_id",unique = true,nullable = false)
     private Long id;
 
+    @Column
+    private Date date;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
     @Builder
-    public void cartSet(User user){
+    public void cartSet(User user, Date date){
         this.user = user;
+        this.date = date;
     }
 }
