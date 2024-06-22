@@ -79,4 +79,10 @@ public class WorkSheetController {
     public List<CartListAllResponse> getCart(Authentication authentication){
         return worksheetGetService.getListAll(authentication);
     }
+
+    @PostMapping("/")
+    public void getSelectCart(@RequestBody GetSelectCartRequestDto getSelectCartRequestDto){
+        worksheetGetService.getList(getSelectCartRequestDto);
+
+    }
 }
