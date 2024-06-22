@@ -7,10 +7,9 @@ import { content } from "../../store/Content";
 interface ModalProps {
   onClose: () => void; // 모달 닫기 함수
 }
-const createWroksheetClick = () => {};
 
 const TextModal: React.FC<ModalProps> = ({ onClose, children }) => {
-  const setContent = useSetRecoilState(content);
+  const createWroksheetClick = () => {};
   return (
     <div className="modal-content" onClick={(e) => e.stopPropagation()}>
       <span className="close-btn" onClick={onClose}>
