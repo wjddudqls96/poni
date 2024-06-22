@@ -103,8 +103,9 @@ public class DictationService {
         Integer incorrect = 0;
         DifficultyGradingResponseDto difficultyGradingResponseDto = new DifficultyGradingResponseDto();
 
-        User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Optional<List<Dictation>> dictation = dictationRepository.findByUserId(user.getId());
+        Long userId = Long.parseLong(extractedTextArray.get(0));
+        extractedTextArray.remove(0);
+        Optional<List<Dictation>> dictation = dictationRepository.findByUserId(userId);
 
         Integer contentListIndex = 0;
         List<Ploblem> ploblemList = new ArrayList<>();
