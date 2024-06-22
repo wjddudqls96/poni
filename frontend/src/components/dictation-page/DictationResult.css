@@ -1,3 +1,7 @@
+.result-container {
+  height: 48.1rem;
+  background-color: blue;
+}
 .result-name-box {
   margin-left: 1.5rem;
   margin-top: 1.5rem;
@@ -22,4 +26,43 @@
   display: flex;
   gap: 1rem;
   margin-left: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.dictation-result-box {
+  width: 100;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.dictation-result {
+  background-color: white;
+  border-radius: 10px;
+  width: 90%;
+  height: 30rem;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+}
+
+.result-page-btns {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  display: flex;
+  justify-content: space-around;
+}
+.result-page-btn {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 4rem;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  background-color: red;
 }

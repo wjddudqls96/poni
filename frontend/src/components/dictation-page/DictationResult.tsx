@@ -3,7 +3,7 @@ import "./DictationResult.css";
 
 const DictationResult: React.FC = () => {
   return (
-    <div>
+    <div className="result-container">
       <div className="result-name-box">
         <div>~~~님 </div>
       </div>
@@ -27,9 +27,12 @@ const DictationResult: React.FC = () => {
         </div>
       </div>
 
-      <div>
-        <div>다시하기</div>
-        <div>오답노트 생성</div>
+      <div className="dictation-result-box">
+        <div className="dictation-result">리스트</div>
+      </div>
+      <div className="result-page-btns">
+        <div className="result-page-btn">다시하기</div>
+        <div className="result-page-btn">오답노트 생성</div>
       </div>
     </div>
   );
