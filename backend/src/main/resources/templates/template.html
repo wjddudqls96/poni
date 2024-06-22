@@ -26,10 +26,10 @@
   <main>
     <div class="content_wrapper">
 <!--      여기서 부터 용어설명에 해당되는 코드들   -->
-      <div class="content_wrapper">
-        <div class="main-sentence">
+      <div class="content_wrapper" th:each="explanation : ${explanations}">
+        <div class="main-sentence" th:text="${explanation.sentence}">
           사슴이 이쁘다
-          <span class="pronunciation">joh-eun nal-i-ya</span>
+          <span class="pronunciation" th:text="${explanation.speak}">joh-eun nal-i-ya</span>
         </div>
         <table>
           <tbody>

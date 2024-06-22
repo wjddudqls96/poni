@@ -14,4 +14,5 @@ public class CombinedResultDto {
     private List<ExplanationResponseDto> explanation;
     private TraceOptionDto traceOption;
     private List<BlankResponseDto> blank;
+    private String content;
 }

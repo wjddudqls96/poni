@@ -9,6 +9,9 @@ import com.epson.poni.dto.explanation.ExplanationResponseDto;
 import com.epson.poni.model.User.User;
 import com.epson.poni.model.worksheet.*;
 import com.epson.poni.repository.worksheet.*;
+import com.epson.poni.service.HtmlPdfService;
+import java.util.HashMap;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -28,6 +31,7 @@ public class WorksheetGetService {
     private final BlankRepository blankRepository;
     private final SynonymsRepository synonymsRepository;
     private final TraceRepository traceRepository;
+    private final HtmlPdfService htmlPdfService;
 
 
     public List<CartListAllResponse> getListAll(Authentication authentication) {
@@ -84,6 +88,17 @@ public class WorksheetGetService {
         for (TraceOptionDto traceOptionDto : cartResponse.getTraceOption()) {
             log.info(traceOptionDto.toString());
         }
+
+        Map<String, Object> map = new HashMap<>();
+
+        map.put("explanations", cartResponse.getExplanation());
+
+        // HTML에 넣을 변수들 지정
+//        map.put("title", "Welcome to Our Website");
+//        map.put("message1", "머라하노 ㅋㅋ");
+//        map.put("message2", "엡손엡손엡손이다.");
+
+        htmlPdfService.createAndUploadPdf(map);
     }
 
     private List<BlankResponseDto> blankAdd(Optional<Cart> cart) {
