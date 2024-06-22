@@ -1,5 +1,7 @@
 package com.epson.poni.service.print;
 
+import com.epson.poni.dto.dictation.DifficultyGradingResponseDto;
+import com.epson.poni.service.Dictation.DictationService;
 import com.epson.poni.utils.PrinterManager;
 import com.epson.poni.utils.S3Uploader;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,6 +21,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 @RequiredArgsConstructor
 public class ScanService {
     private final PrinterManager printerManager;
+    private final DictationService dictationService;
 
     private final S3Uploader s3Uploader;
 
@@ -26,8 +29,8 @@ public class ScanService {
         printerManager.registDestination();
     }
 
-    public void saveImage(HttpServletRequest request) throws IOException {
-
+    public DifficultyGradingResponseDto saveImage(HttpServletRequest request) throws IOException {
+        DifficultyGradingResponseDto difficultyGradingResponseDto = null;
         if (request instanceof MultipartHttpServletRequest) {
             MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
             Iterator<String> iterator = multipartRequest.getFileNames();
@@ -36,28 +39,34 @@ public class ScanService {
                 String key = iterator.next();
                 MultipartFile file = multipartRequest.getFile(key);
 
-                if (file != null) {
-                    ByteArrayOutputStream outputStream = convertMultipartFileToByteArrayOutputStream(file);
-                    String url = s3Uploader.UploadFileUsingStream(file.getOriginalFilename(),outputStream);
-                    // S3 저장 url
-                    System.out.println(url);
+                if ((file!=null)){
+                    difficultyGradingResponseDto = dictationService.difficultyGrading(file);
                 }
+
+//                if (file != null) {
+//                    ByteArrayOutputStream outputStream = convertMultipartFileToByteArrayOutputStream(file);
+//                    String url = s3Uploader.UploadFileUsingStream(file.getOriginalFilename(),outputStream);
+//                    // S3 저장 url
+//                    System.out.println(url);
+//                }
             }
 
             // 폼 데이터 (일반 텍스트 데이터)도 처리할 수 있습니다.
-            multipartRequest.getParameterMap().forEach((name, values) -> {
-                System.out.println("Parameter name: " + name);
-                for (String value : values) {
-                    System.out.println("3");
-                    System.out.println("Parameter value: " + value);
-                }
-            });
+//            multipartRequest.getParameterMap().forEach((name, values) -> {
+//                System.out.println("Parameter name: " + name);
+//                for (String value : values) {
+//                    System.out.println("3");
+//                    System.out.println("Parameter value: " + value);
+//                }
+//            });
         } else {
             // 멀티파트 요청이 아닌 경우 처리
             String data = new BufferedReader(request.getReader())
                 .lines().collect(Collectors.joining("\n"));
             System.out.println(data);
         }
+
+        return difficultyGradingResponseDto;
     }
 
     // MultipartFile을 ByteArrayOutputStream으로 변환하는 메서드
