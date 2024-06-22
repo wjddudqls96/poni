@@ -57,7 +57,7 @@ public class WorksheetGetService {
         return cartListAllResponseList;
     }
 
-    public void getList(GetSelectCartRequestDto getSelectCartRequestDto) {
+    public String getList(GetSelectCartRequestDto getSelectCartRequestDto) {
         GetSelectCartResponse cartResponse = new GetSelectCartResponse();
         cartResponse.setBlank(new ArrayList<>());
         cartResponse.setExplanation(new ArrayList<>());
@@ -98,12 +98,7 @@ public class WorksheetGetService {
         map.put("blanks", cartResponse.getBlank());
         map.put("traces", cartResponse.getTraceOption());
 
-        // HTML에 넣을 변수들 지정
-//        map.put("title", "Welcome to Our Website");
-//        map.put("message1", "머라하노 ㅋㅋ");
-//        map.put("message2", "엡손엡손엡손이다.");
-
-        htmlPdfService.createAndUploadPdf(map);
+        return htmlPdfService.createAndUploadPdf(map);
     }
 
     private List<BlankResponseDto> blankAdd(Optional<Cart> cart) {
