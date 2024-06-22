@@ -126,8 +126,8 @@ public class PrinterManager {
 
         PrintInfo printInfo = getPrintInfo(epsonTokenDto.getSubject_id(), epsonTokenDto.getAccess_token());
 
-        String jobId = printInfo.getPrintId();
-        String baseUri = printInfo.getUploadUrl();
+        String jobId = printInfo.getId();
+        String baseUri = printInfo.getUpload_uri();
 
 
         String ext = filePath.substring(filePath.lastIndexOf('.'));
@@ -184,7 +184,7 @@ public class PrinterManager {
             requestBody,
             PrintInfo.class
         ).getBody();
-
+        System.out.println(printInfo.getId());
         return printInfo;
     }
 }

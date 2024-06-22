@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class PrintInfo {
-    String printId;
-    String uploadUrl;
+    String id;
+    String upload_uri;
 }
