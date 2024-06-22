@@ -64,25 +64,18 @@ public class WorksheetGetService {
 
             if (cart.isPresent()){
                 List<ExplanationResponseDto> explanationResponseDtoList = explanationAdd(cart);
+                for (ExplanationResponseDto explanationResponseDto : explanationResponseDtoList) {
+                    cartResponse.getExplanation().add(explanationResponseDto);
+                }
+
                 TraceOptionDto traceOptionDto = traceAdd(cart);
-                List<BlankResponseDto> blankResponseDtoList = blankAdd(cart);
-
-                cartResponse.getExplanation().add(explanationResponseDtoList);
                 cartResponse.getTraceOption().add(traceOptionDto);
-                cartResponse.getBlank().add(blankResponseDtoList);
+
+                List<BlankResponseDto> blankResponseDtoList = blankAdd(cart);
+                for (BlankResponseDto blankResponseDto : blankResponseDtoList) {
+                    cartResponse.getBlank().add(blankResponseDto);
+                }
             }
-        }
-
-        for (List<BlankResponseDto> blankResponseDtos : cartResponse.getBlank()) {
-            log.info(blankResponseDtos.toString());
-        }
-
-        for (List<ExplanationResponseDto> explanationResponseDtos : cartResponse.getExplanation()) {
-            log.info(explanationResponseDtos.toString());
-        }
-
-        for (TraceOptionDto traceOptionDto : cartResponse.getTraceOption()) {
-            log.info(traceOptionDto.toString());
         }
     }
 

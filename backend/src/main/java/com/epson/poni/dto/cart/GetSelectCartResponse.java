@@ -13,7 +13,7 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 public class GetSelectCartResponse {
-    private List<List<ExplanationResponseDto>> explanation;
+    private List<ExplanationResponseDto> explanation;
     private List<TraceOptionDto> traceOption;
-    private List<List<BlankResponseDto>> blank;
+    private List<BlankResponseDto> blank;
 }
