@@ -13,6 +13,7 @@ public class DifficultyGradingResponseDto {
     private Integer problemsCount;
     private Integer correct;
     private Integer incorrect;
-    private List<Ploblem> ploblem;
+    private List<ProblemDto> ploblem;
+
 }
 

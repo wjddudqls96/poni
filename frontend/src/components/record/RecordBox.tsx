@@ -37,6 +37,7 @@ const RecordBox: React.FC<RecordBoxProps> = ({ onTranscriptChange }) => {
       <div>음성 입력해주세요</div>
       {/* 이미지 클릭 시 녹음 시작 또는 중지 */}
       <img
+        className="record-button"
         src={buttonImage}
         alt={isRecording ? "Stop Button" : "Record Button"}
         onClick={handleToggleRecording}

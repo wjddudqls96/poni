@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Ploblem {
+public class ProblemDto {
     private Long id;
     private String answer;
     private String input;

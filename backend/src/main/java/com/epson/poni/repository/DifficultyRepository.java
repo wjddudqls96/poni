@@ -1,7 +1,5 @@
 package com.epson.poni.repository;
 
-import com.epson.poni.dto.dictation.ContentDto;
-import com.epson.poni.dto.dictation.DifficultySettingsResponseDto;
 import com.epson.poni.model.dictation.Difficulty;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

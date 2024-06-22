@@ -65,7 +65,8 @@ public class SecurityConfig {
                                 new AntPathRequestMatcher("/images/**"),
                                 new AntPathRequestMatcher("/js/**"),
                                 new AntPathRequestMatcher("/api/v1/worksheet/cart"),
-                                new AntPathRequestMatcher("/api/print/**")
+                                new AntPathRequestMatcher("/api/print/**"),
+                                new AntPathRequestMatcher("/api/scan/**")
                         ).permitAll()
                         .anyRequest().authenticated()
                 )

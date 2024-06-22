@@ -19,7 +19,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Component
@@ -73,7 +75,12 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         String path = request.getRequestURI();
-        return "/".equals(path);
+
+        List<String> excludedPaths = Arrays.asList("/", "/api/print");
+        boolean isExcludedPath = excludedPaths.contains(path);
+        boolean isPrintPath = path.startsWith("/api/scan/load");
+        return  isExcludedPath || isPrintPath;
+        //        return "/".equals(path);
     }
 
 }
