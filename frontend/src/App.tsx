@@ -19,6 +19,7 @@ import ScanPage from "./pages/dictation-page/ScanPage";
 import RecordPage from "./pages/record-page/RecordPage";
 import PdfViewer from "./pages/pdf-viewer-page/PdfViewer";
 import PrintOptionPage from "./pages/print-option-page/PrintOptionPage";
+import { LoadingPage } from "./pages/loading-page/LoadingPage";
 
 const App: React.FC = () => {
   const modalVisible = useRecoilValue(modalVisibleState);
@@ -60,6 +61,7 @@ const App: React.FC = () => {
               <Route path="/preview"></Route>
               <Route path="/Pdfviewer" element={<PdfViewer/>}></Route>
               <Route path="/print/option" element={<PrintOptionPage/>}></Route>
+              <Route path="/loading" element={<LoadingPage/>}></Route>
             </Routes>
           </div>
         </Router>

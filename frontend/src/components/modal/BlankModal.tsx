@@ -36,7 +36,7 @@ export const BlankModal: React.FC<{ onClose: () => void; nodeRef: React.RefObjec
     
     return (
         <div className="modal-overlay" onClick={onClose}>
-          <div className="modal-content" ref={nodeRef} onClick={(e) => e.stopPropagation()}>
+          <div className="modal-content-option" ref={nodeRef} onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
               <h2>따라쓰기 설정</h2>
               <button onClick={onClose}>X</button>

@@ -59,6 +59,14 @@ dependencies {
     implementation group: 'net.sourceforge.tess4j', name: 'tess4j', version: '5.11.0'
 
     implementation 'commons-fileupload:commons-fileupload:1.4'
+
+
+// https://mvnrepository.com/artifact/net.sourceforge.tess4j/tess4j
+    // tesseract OCR
+    implementation group: 'net.sourceforge.tess4j', name: 'tess4j', version: '5.11.0'
+
+    //oauth
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 }
 
 tasks.named('test') {

@@ -8,9 +8,10 @@
   display: flex;
   justify-content: center;
   align-items: flex-end;
+  z-index: 2;
 }
 
-.modal-content {
+.modal-content-option {
   width: 100%;
   max-width: 400px;
   background: #fff;
