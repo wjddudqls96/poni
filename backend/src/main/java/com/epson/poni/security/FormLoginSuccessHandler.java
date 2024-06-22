@@ -24,7 +24,7 @@ public class FormLoginSuccessHandler implements AuthenticationSuccessHandler {
 
     String ACCESS_TOKEN_HEADER = "Authorization";
     String TOKEN_TYPE = "BEARER";
-    private static final String URI = "/";
+    private static final String URI = "http://localhost:5173/main?accessToken=";
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
@@ -36,7 +36,7 @@ public class FormLoginSuccessHandler implements AuthenticationSuccessHandler {
         response.addHeader(ACCESS_TOKEN_HEADER,  TOKEN_TYPE + " " + AccessToken);
         response.setContentType("application/json");
 
-//        response.sendRedirect(URI);
+        response.sendRedirect(URI + TOKEN_TYPE + " " + AccessToken);
 
         response.setCharacterEncoding("UTF-8");
 

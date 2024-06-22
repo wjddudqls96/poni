@@ -19,6 +19,7 @@ import PrintOptionPage from "./pages/print-option-page/PrintOptionPage";
 import { LoadingPage } from "./pages/loading-page/LoadingPage";
 import { CartPage } from "./pages/cart-page/CartPage";
 import MainLogo from "./assets/mainLogo.png";
+import { LoadingMake } from "./pages/loading-page/LoadingMake";
 
 const App: React.FC = () => {
   return (
@@ -81,7 +82,8 @@ const App: React.FC = () => {
               <Route path="/preview"></Route>
               <Route path="/Pdfviewer" element={<PdfViewer/>}></Route>
               <Route path="/print/option" element={<PrintOptionPage/>}></Route>
-              <Route path="/loading" element={<LoadingPage/>}></Route>
+              <Route path="/loading/print" element={<LoadingPage/>}></Route>
+              <Route path="/loading/worksheet" element={<LoadingMake/>}></Route>
               <Route path="/cart" element={<CartPage/>}></Route>
             </Routes>
           </div>

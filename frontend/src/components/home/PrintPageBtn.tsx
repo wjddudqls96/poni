@@ -7,8 +7,7 @@ import { useNavigate } from "react-router-dom";
 const PrintPageBtn: React.FC = () => {
   const navigate = useNavigate();
   const clickEvent = () => {
-    // navigate("/dictation");
-    // 출력하기 페이지로
+    navigate("/cart");
   };
 
   return (
