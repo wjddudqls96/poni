@@ -2,27 +2,22 @@ package com.epson.poni.service.Dictation;
 
 import com.epson.poni.dto.dictation.*;
 import com.epson.poni.model.Dictation;
+import com.epson.poni.model.Problem;
+import com.epson.poni.model.Score;
 import com.epson.poni.model.User.User;
 import com.epson.poni.model.dictation.Difficulty;
-import com.epson.poni.repository.DictationRepository;
-import com.epson.poni.repository.DifficultyRepository;
-import com.epson.poni.service.print.ScanService;
-import jakarta.servlet.http.HttpSession;
+import com.epson.poni.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.sourceforge.tess4j.TesseractException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Scanner;
 
 @Service
 @RequiredArgsConstructor
@@ -30,6 +25,9 @@ import java.util.Scanner;
 public class DictationService {
     private final DifficultyRepository difficultyRepository;
     private final DictationRepository dictationRepository;
+    private final ProblemRepository problemRepository;
+    private final ScoreRepository scoreRepository;
+    private final UserRepository userRepository;
 
     // 1-1. tesseract 사용
 //    @Autowired
@@ -108,7 +106,7 @@ public class DictationService {
         Optional<List<Dictation>> dictation = dictationRepository.findByUserId(userId);
 
         Integer contentListIndex = 0;
-        List<Ploblem> ploblemList = new ArrayList<>();
+        List<ProblemDto> ploblemList = new ArrayList<>();
         for (String s : extractedTextArray) {
             if (s.isEmpty()) {continue;} //줄 띄어쓰기 생략
 
@@ -116,7 +114,7 @@ public class DictationService {
             if (s.equals(contentDto.getContent())) correct++;
             else incorrect++;
 
-            ploblemList.add(new Ploblem(contentDto.getDifficultyId(),contentDto.getContent(),s));
+            ploblemList.add(new ProblemDto(contentDto.getDifficultyId(),contentDto.getContent(),s));
 
             contentListIndex++;
 
@@ -125,6 +123,24 @@ public class DictationService {
         difficultyGradingResponseDto.setIncorrect(incorrect);
         difficultyGradingResponseDto.setProblemsCount(correct + incorrect);
         difficultyGradingResponseDto.setPloblem(ploblemList);
+
+        Optional<User> user = userRepository.findById(userId);
+        Optional<Score> score = scoreRepository.findAllByUser(user.get());
+        score.ifPresent(scoreRepository::delete);
+
+        List<Problem> problemList = new ArrayList<>();
+        for (ProblemDto problemDto : ploblemList) {
+            Problem problem = new Problem();
+            problem.setProblem(problemDto.getId(),problemDto.getAnswer(),problemDto.getAnswer());
+
+            problemList.add(problem);
+        }
+
+        Score scoreSave = new Score();
+        scoreSave.setScore(correct+incorrect,correct,incorrect,user.get(),problemList);
+
+        problemRepository.saveAll(problemList);
+        scoreRepository.save(scoreSave);
 
         return difficultyGradingResponseDto;
     }
@@ -150,5 +166,29 @@ public class DictationService {
         }
 
         return incorrectList;
+    }
+
+    public DifficultyGradingResponseDto scoreResult(Authentication authentication) {
+        User user = (User) authentication.getPrincipal();
+
+        Score score = scoreRepository.findAllByUser(user).get();
+
+        DifficultyGradingResponseDto difficultyGradingResponseDto = new DifficultyGradingResponseDto();
+        difficultyGradingResponseDto.setProblemsCount(score.getProblemsCount());
+        difficultyGradingResponseDto.setCorrect(score.getCorrect());
+        difficultyGradingResponseDto.setIncorrect(score.getIncorrect());
+
+        List<ProblemDto> problemDtos = new ArrayList<>();
+        for (Problem problem : score.getProblemList()) {
+            ProblemDto problemDto = new ProblemDto();
+            problemDto.setId(problem.getDictation_id());
+            problemDto.setInput(problem.getInput());
+            problemDto.setAnswer(problem.getAnswer());
+
+            problemDtos.add(problemDto);
+        }
+        difficultyGradingResponseDto.setPloblem(problemDtos);
+
+        return difficultyGradingResponseDto;
     }
 }

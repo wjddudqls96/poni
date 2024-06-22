@@ -3,6 +3,7 @@ package com.epson.poni.controller;
 import com.epson.poni.dto.dictation.*;
 import com.epson.poni.service.Dictation.DictationService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -35,5 +36,10 @@ public class DictationController {
     @PostMapping("/incorrect")
     public List<DifficultyIncorrectResponseDto> difficultIncorrect(@RequestBody DifficultyIncorrectRequestDto difficultyIncorrectRequestDto){
         return dictationService.difficultyIncorrect(difficultyIncorrectRequestDto);
+    }
+
+    @GetMapping("/")
+    public DifficultyGradingResponseDto scoreResult(Authentication authentication){
+        return dictationService.scoreResult(authentication);
     }
 }
