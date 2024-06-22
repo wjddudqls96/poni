@@ -6,12 +6,6 @@ import { worksheet } from '../../store/Worksheet';
 import { Worksheet } from 'worksheet';
 
 export const PreviewPage: React.FC = () => {
-  const worksheetData:Worksheet = useRecoilValue(worksheet);
-
-  useEffect(() => {
-    console.log(worksheetData.blank);
-  }, []);
-
 
   return (
     <div className='preview-main'>
@@ -21,8 +15,7 @@ export const PreviewPage: React.FC = () => {
         <Preview title='빈칸문제' type='blank'/>
       </div>
       <div className='preview-button-wrap'>
-        <button className='preview-btn save'>담기</button>
-        <button className='preview-btn generate'>출력생성</button>
+        <button className='preview-btn generate'>담기</button>
       </div>
     </div>
   )
