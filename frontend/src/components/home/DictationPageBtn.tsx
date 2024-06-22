@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const DictationPageBtn: React.FC = () => {
   const navigate = useNavigate();
   const clickEvent = () => {
-    navigate("/dictation");
+    navigate("/select/grade");
   };
 
   return (
