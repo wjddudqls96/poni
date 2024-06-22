@@ -12,19 +12,21 @@ const DictationResult: React.FC = () => {
         <div className="result-score">~~점</div>
         <div>입니다.</div>
       </div>
+      <div className="result-score-box">
+        <div>
+          <span>문제</span>
+          <span>~개</span>
+        </div>
+        <div>
+          <span>정답</span>
+          <span>~개</span>
+        </div>
+        <div>
+          <span>오답</span>
+          <span>~개</span>
+        </div>
+      </div>
 
-      <div>
-        <div>문제</div>
-        <div>~개</div>
-      </div>
-      <div>
-        <div>정답</div>
-        <div>~개</div>
-      </div>
-      <div>
-        <div>오답</div>
-        <div>~개</div>
-      </div>
       <div>
         <div>다시하기</div>
         <div>오답노트 생성</div>

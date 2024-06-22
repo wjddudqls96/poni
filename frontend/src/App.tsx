@@ -19,6 +19,7 @@ import PrintOptionPage from "./pages/print-option-page/PrintOptionPage";
 import { LoadingPage } from "./pages/loading-page/LoadingPage";
 import { CartPage } from "./pages/cart-page/CartPage";
 import MainLogo from "./assets/mainLogo.png";
+import DictationResultPage from "./pages/dictation-page/DictationResultPage";
 
 const App: React.FC = () => {
   return (
@@ -27,24 +28,16 @@ const App: React.FC = () => {
         <div className="home-main-logo">
           <img src={MainLogo} width={199} height={111} />
         </div>
-        <div className="home-main-title">
-          포니
-        </div>
+        <div className="home-main-title">포니</div>
         <div className="home-main-explain">
-          <div>
-          당신을 위한 특별한 한국어 학습,
-          </div>
-          <div>
-          맞춤형으로 여정을 함께하세요.
-          </div>
+          <div>당신을 위한 특별한 한국어 학습,</div>
+          <div>맞춤형으로 여정을 함께하세요.</div>
         </div>
       </div>
       <div className="epson-footer">
-        <div className="epson-footer-title">
-          EPSON
-        </div>
+        <div className="epson-footer-title">EPSON</div>
         <div className="epson-footer-explain">
-        포니는 엡손 프린트를 활용한 맞춤형 학습지 서비스입니다.
+          포니는 엡손 프린트를 활용한 맞춤형 학습지 서비스입니다.
         </div>
       </div>
       <div className="device-main">
@@ -76,13 +69,16 @@ const App: React.FC = () => {
               {/* 받아쓰기 완료, 스캔 페이지 */}
               <Route path="/scan" element={<ScanPage />}></Route>
               {/* 받아쓰기 결과 페이지 */}
-              <Route path="/dictation/result"></Route>
+              <Route
+                path="/dictation/result"
+                element={<DictationResultPage />}
+              ></Route>
               {/* 출력 미리보기 */}
               <Route path="/preview"></Route>
-              <Route path="/Pdfviewer" element={<PdfViewer/>}></Route>
-              <Route path="/print/option" element={<PrintOptionPage/>}></Route>
-              <Route path="/loading" element={<LoadingPage/>}></Route>
-              <Route path="/cart" element={<CartPage/>}></Route>
+              <Route path="/Pdfviewer" element={<PdfViewer />}></Route>
+              <Route path="/print/option" element={<PrintOptionPage />}></Route>
+              <Route path="/loading" element={<LoadingPage />}></Route>
+              <Route path="/cart" element={<CartPage />}></Route>
             </Routes>
           </div>
         </Router>

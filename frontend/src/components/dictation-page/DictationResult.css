@@ -15,5 +15,11 @@
 }
 
 .result-score {
-  color: greenyellow;
+  color: rgba(30, 216, 140, 1);
+}
+
+.result-score-box {
+  display: flex;
+  gap: 1rem;
+  margin-left: 1.5rem;
 }
