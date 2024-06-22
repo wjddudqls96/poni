@@ -18,11 +18,18 @@ public class Problem {
     private String answer;
     private String input;
 
+    @ManyToOne
+    @JoinColumn(name = "score_id")
+    private Score score;
+
     @Builder
     public void setProblem(Long dictation_id, String answer, String input){
         this.dictation_id = dictation_id;
         this.answer = answer;
         this.input = input;
+    }
+    public void setScore(Score score) {
+        this.score = score;
     }
 
 }

@@ -132,14 +132,12 @@ public class DictationService {
         for (ProblemDto problemDto : ploblemList) {
             Problem problem = new Problem();
             problem.setProblem(problemDto.getId(),problemDto.getAnswer(),problemDto.getAnswer());
-
             problemList.add(problem);
         }
 
         Score scoreSave = new Score();
         scoreSave.setScore(correct+incorrect,correct,incorrect,user.get(),problemList);
-
-        problemRepository.saveAll(problemList);
+        problemList.forEach(problem -> problem.setScore(scoreSave));
         scoreRepository.save(scoreSave);
 
         return difficultyGradingResponseDto;

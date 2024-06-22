@@ -29,8 +29,7 @@ public class Score {
     private User user;
 
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "problem_id")
+    @OneToMany(mappedBy = "score", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Problem> problemList;
 
     @Builder
