@@ -2,6 +2,7 @@ package com.epson.poni.model.worksheet;
 
 import com.epson.poni.model.User.User;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -18,4 +19,9 @@ public class Cart {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @Builder
+    public void cartSet(User user){
+        this.user = user;
+    }
 }

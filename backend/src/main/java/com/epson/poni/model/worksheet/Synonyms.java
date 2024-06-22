@@ -1,6 +1,7 @@
 package com.epson.poni.model.worksheet;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -18,5 +19,11 @@ public class Synonyms {
     @ManyToOne
     @JoinColumn(name = "analysisItem_id")
     private AnalysisItem analysisItem;
+
+    @Builder
+    public void setSynonyms(String synonyms, AnalysisItem analysisItem){
+        this.synonyms = synonyms;
+        this.analysisItem = analysisItem;
+    }
 
 }

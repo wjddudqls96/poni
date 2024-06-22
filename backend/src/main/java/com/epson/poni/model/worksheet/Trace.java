@@ -1,6 +1,7 @@
 package com.epson.poni.model.worksheet;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -27,4 +28,12 @@ public class Trace {
     @ManyToOne
     @JoinColumn(name = "cart_id")
     private Cart cart;
+
+    @Builder
+    public void setTrace(Boolean blurry, Boolean grid, int count, Cart cart){
+        this.blurry = blurry;
+        this.grid = grid;
+        this.count = count;
+        this.cart = cart;
+    }
 }

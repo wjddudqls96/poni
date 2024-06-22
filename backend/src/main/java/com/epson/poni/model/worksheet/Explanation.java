@@ -1,6 +1,7 @@
 package com.epson.poni.model.worksheet;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -23,4 +24,11 @@ public class Explanation {
     @ManyToOne
     @JoinColumn(name = "cart_id")
     private Cart cart;
+
+    @Builder
+    public void explanationSet(String sentence, String speak, Cart cart){
+        this.sentence = sentence;
+        this.speak = speak;
+        this.cart = cart;
+    }
 }
