@@ -11,9 +11,8 @@ body {
 
 .container {
   width: 793px;
-  height: 1118px;
+  min-height: 1118px;
   box-sizing: border-box;
-  border: 1px solid black;
 }
 
 header {
@@ -23,4 +22,10 @@ header {
 .content_wrapper {
   width: 700px;
   margin: 25px auto;
+  margin-left: 50px;
+  margin-bottom: 70px;
+}
+
+.explain-h2 {
+  margin-left: 50px;
 }

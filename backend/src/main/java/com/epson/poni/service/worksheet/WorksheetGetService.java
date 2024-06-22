@@ -10,6 +10,7 @@ import com.epson.poni.model.User.User;
 import com.epson.poni.model.worksheet.*;
 import com.epson.poni.repository.worksheet.*;
 import com.epson.poni.service.HtmlPdfService;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
@@ -68,30 +69,35 @@ public class WorksheetGetService {
 
             if (cart.isPresent()){
                 List<ExplanationResponseDto> explanationResponseDtoList = explanationAdd(cart);
-                TraceOptionDto traceOptionDto = traceAdd(cart);
-                List<BlankResponseDto> blankResponseDtoList = blankAdd(cart);
+                for (ExplanationResponseDto explanationResponseDto : explanationResponseDtoList) {
+                    cartResponse.getExplanation().add(explanationResponseDto);
+                }
 
-                cartResponse.getExplanation().add(explanationResponseDtoList);
+                TraceHtmlDto traceOptionDto = traceAdd(cart);
                 cartResponse.getTraceOption().add(traceOptionDto);
-                cartResponse.getBlank().add(blankResponseDtoList);
+
+                List<BlankResponseDto> blankResponseDtoList = blankAdd(cart);
+                List<BlankHtmlDto> list = new ArrayList<>();
+                for (BlankResponseDto blankResponseDto : blankResponseDtoList) {
+
+
+                    for(ProblemDto problemDto :  blankResponseDto.getProblems()) {
+                        String[] splitArray = problemDto.getContent_kr().split("___");
+                        List<String> splitList = Arrays.asList(splitArray);
+                        list.add(new BlankHtmlDto(splitList, problemDto.getContent_en(), problemDto.getAnswer()));
+                    }
+                }
+
+                cartResponse.setBlank(list);
             }
         }
 
-        for (List<BlankResponseDto> blankResponseDtos : cartResponse.getBlank()) {
-            log.info(blankResponseDtos.toString());
-        }
-
-        for (List<ExplanationResponseDto> explanationResponseDtos : cartResponse.getExplanation()) {
-            log.info(explanationResponseDtos.toString());
-        }
-
-        for (TraceOptionDto traceOptionDto : cartResponse.getTraceOption()) {
-            log.info(traceOptionDto.toString());
-        }
-
+        System.out.println(cartResponse.getTraceOption());
         Map<String, Object> map = new HashMap<>();
 
         map.put("explanations", cartResponse.getExplanation());
+        map.put("blanks", cartResponse.getBlank());
+        map.put("traces", cartResponse.getTraceOption());
 
         // HTML에 넣을 변수들 지정
 //        map.put("title", "Welcome to Our Website");
@@ -120,12 +126,38 @@ public class WorksheetGetService {
         return blankResponseDtoList;
     }
 
-    private TraceOptionDto traceAdd(Optional<Cart> cart) {
-        TraceOptionDto traceOptionDto = new TraceOptionDto();
+    private TraceHtmlDto traceAdd(Optional<Cart> cart) {
+        List<List<Character>> strs = new ArrayList<>();
+
+
+        TraceHtmlDto traceOptionDto = new TraceHtmlDto();
         Trace trace = traceRepository.findByCart(cart.get());
         traceOptionDto.setCount(trace.getCount());
         traceOptionDto.setGrid(trace.getGrid());
         traceOptionDto.setBlurry(trace.getBlurry());
+
+//        for (char c : cart.get().getContent().toCharArray()) {
+//            characters.add(c);
+//        }
+        String inputString = cart.get().getContent();
+        // 9단어씩 자르기
+        for (int i = 0; i < inputString.length(); i += 9) {
+            int end = Math.min(i + 9, inputString.length());
+            String substring = inputString.substring(i, end);
+            if (substring.length() < 9) {
+                // 9글자가 되도록 공백으로 채우기
+                substring = String.format("%-9s", substring);
+            }
+            List<Character> characters = new ArrayList<>();
+
+            for (char c : substring.toCharArray()) {
+                characters.add(c);
+            }
+
+            strs.add(characters);
+        }
+
+        traceOptionDto.setContent(strs);
         return traceOptionDto;
     }
 

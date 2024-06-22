@@ -22,7 +22,7 @@
 
 .content-text-title {
   font-size: 0.8rem;
-  font-weight: 400;
+  font-weight: bold;
   margin-bottom: 3px;
 }
 
@@ -55,12 +55,20 @@
   background-color: #b07fff; /* 보라색 배경 */
 }
 
+.color2 {
+  background-color: #7fc8ff;
+}
+
+.color3 {
+  background-color: #cccccc;
+}
+
 .exercise {
   margin-top: 20px;
   text-align: center;
 }
 
-.exercise .korean-sentence {
+.exercise .korean-sentence span{
   font-size: 1.2rem;
   font-weight: bold;
 }
@@ -72,6 +80,7 @@
   border: 1px solid #ccc;
   vertical-align: middle;
   margin: 0 10px;
+  margin-top: 20px;
 }
 
 .exercise .english-sentence {
