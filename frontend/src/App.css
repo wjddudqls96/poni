@@ -2,15 +2,68 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
   width: 100vw;
   height: 100vh;
+  background: linear-gradient(to bottom, #1ED88D, hsl(156, 70%, 75%));
 }
+.epson-footer {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 0;
+  bottom: 10%;
+  margin-top: 7%;
+  margin-left: 15%;
+  height: 100px;
+  z-index: 2;
+}
+
+.epson-footer-title {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.epson-footer-explain {
+  font-size: 1rem;
+  font-weight: 500;
+  color: white;
+}
+
+.home-main-content {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin-top: 7%;
+  margin-left: 15%;
+  width: 450px;
+  z-index: 2;
+}
+
+.home-main-logo {
+  height: 111px;
+}
+
+.home-main-title {
+  height: auto;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 3rem;
+  color: white;
+}
+
+.home-main-explain {
+  height: auto;
+  font-size: 1.5rem;
+  color: white;
+}
+
 .device-main {
   display: flex;
   flex-direction: column;
-  
-  border: 1px solid #D8D8D8;
   background-color: #F8F8F8;
   width: 50vw; /* 화면 너비의 50% */
   height: calc(50vw * (19 / 9)); /* 너비의 19/9 비율로 높이 설정 */
@@ -21,6 +74,8 @@
 
   min-width: 390px;
   min-height: 841px;
+
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .device-main-content {
@@ -32,15 +87,20 @@
     margin-left: 45vw; /* 화면이 작아질 때 마진 줄이기 */
     min-width: 0px;
     min-height: 0px;
-
     max-height: 90vh;
   }
 }
 
+@media (max-width: 1120px) {
+  .home-main-content {
+    display: none;
+  }
+}
+
+
 @media (max-width: 1000px) {
   .device-main {
     margin-left: 35vw; /* 화면이 작아질 때 마진 줄이기 */
-    width: 50vw; /* 화면 너비의 50% */
     min-width: 0px;
     min-height: 0px;
   }
@@ -49,6 +109,8 @@
 @media (max-width: 800px) {
   .device-main {
     margin-left: 0px;
+    min-width: 390px;
+    min-height: 841px;
   }
 }
 

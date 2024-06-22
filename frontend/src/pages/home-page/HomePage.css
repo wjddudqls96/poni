@@ -1,0 +1,8 @@
+.home-main-content {
+    position: absolute;
+    top: 20px;
+    width: 500px;
+    height: 10px;
+    background-color: rebeccapurple;
+    z-index: 2;
+}
