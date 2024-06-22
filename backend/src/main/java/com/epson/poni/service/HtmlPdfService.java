@@ -34,12 +34,12 @@ public class HtmlPdfService {
     private final TemplateEngine templateEngine;
 
     // PDF를 만들고 S3에 올리는 서비스로직.
-    public void createAndUploadPdf(Map<String, Object> data)  {
+    public String createAndUploadPdf(Map<String, Object> data)  {
         String templateName = "template";
         ByteArrayOutputStream pdfStream = convertHtmlToPdf(templateName, data);
         String fileName = UUID.randomUUID().toString() + ".pdf";
         String fileUrl = s3Uploader.UploadFileUsingStream(fileName, pdfStream);
-        System.out.println(fileUrl);
+        return fileUrl;
     }
 
     // HTML 파일을 PDF로 변환하는 메소드

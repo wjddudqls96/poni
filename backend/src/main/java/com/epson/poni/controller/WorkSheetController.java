@@ -81,7 +81,7 @@ public class WorkSheetController {
     }
 
     @PostMapping("/")
-    public void getSelectCart(@RequestBody GetSelectCartRequestDto getSelectCartRequestDto){
-        worksheetGetService.getList(getSelectCartRequestDto);
+    public String getSelectCart(@RequestBody GetSelectCartRequestDto getSelectCartRequestDto){
+        return worksheetGetService.getList(getSelectCartRequestDto);
     }
 }

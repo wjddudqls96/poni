@@ -1,8 +1,12 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import { resolve } from 'path';
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  assetsInclude: ['**/*.pdf'], // 이 줄을 추가하여 PDF 파일을 포함
+  resolve: {
+    alias: {
+      'pdfjs-dist/build/pdf.worker.entry': resolve(__dirname, 'node_modules/pdfjs-dist/build/pdf.worker.entry.js'),
+    },
+  },
 });

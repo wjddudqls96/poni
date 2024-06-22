@@ -1,0 +1,23 @@
+.pdf-viewer-container {
+    position: relative;
+    height: 100vh;
+    max-height: 100%;
+    overflow-x: hidden; /* 가로 스크롤 숨기기 */
+  }
+  .step-one-submit-wrapper {
+    width: 100%;
+    height: 66px;
+    background-color: #ABF2D5;
+    position: absolute;
+    bottom: 0;
+    cursor: pointer;
+    border: 0;
+    color: #ffff;
+    font-weight: 500;
+    font-size: 1.2rem;
+    z-index: 1;
+}
+
+.step-one-submit-wrapper:hover {
+    background-color: #1ED88C;
+}
