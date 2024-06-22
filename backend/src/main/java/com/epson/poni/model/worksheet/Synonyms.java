@@ -7,20 +7,16 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor
-public class Explanation {
-
+public class Synonyms {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="explanation_id",unique = true,nullable = false)
+    @Column(name="synonyms_id",unique = true,nullable = false)
     private Long id;
 
-    @Column
-    private String sentence;
-
-    @Column
-    private String speak;
+    private String synonyms;
 
     @ManyToOne
-    @JoinColumn(name = "cart_id")
-    private Cart cart;
+    @JoinColumn(name = "analysisItem_id")
+    private AnalysisItem analysisItem;
+
 }

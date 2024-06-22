@@ -1,6 +1,5 @@
 package com.epson.poni.model.worksheet;
 
-import com.epson.poni.model.Cart;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,13 +15,13 @@ public class Blank {
     private Long id;
 
     @Column
-    private String content;
+    private String content_kr;
 
     @Column
-    private String translation;
+    private String content_en;
 
     @Column
-    private String word;
+    private String answer;
 
     @ManyToOne
     @JoinColumn(name = "cart_id")

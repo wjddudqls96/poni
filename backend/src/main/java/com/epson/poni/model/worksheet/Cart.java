@@ -1,4 +1,4 @@
-package com.epson.poni.model;
+package com.epson.poni.model.worksheet;
 
 import com.epson.poni.model.User.User;
 import jakarta.persistence.*;
@@ -14,18 +14,6 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="cart_id",unique = true,nullable = false)
     private Long id;
-
-    @Column
-    private String type;
-
-    @Column
-    private String title;
-
-    @Column
-    private String createAt;
-
-    @Column
-    private String pdfUrl;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

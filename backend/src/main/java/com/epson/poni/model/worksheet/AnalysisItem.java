@@ -7,20 +7,24 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor
-public class Explanation {
+public class AnalysisItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="explanation_id",unique = true,nullable = false)
+    @Column(name="analysisItem_id",unique = true,nullable = false)
     private Long id;
 
     @Column
-    private String sentence;
+    private String word;
 
     @Column
-    private String speak;
+    private String grammar;
+
+    @Column
+    private String word_description;
 
     @ManyToOne
-    @JoinColumn(name = "cart_id")
-    private Cart cart;
+    @JoinColumn(name = "explanation_id")
+    private Explanation explanation;
+
 }
