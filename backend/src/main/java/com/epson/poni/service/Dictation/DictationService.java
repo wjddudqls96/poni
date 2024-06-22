@@ -112,23 +112,23 @@ public class DictationService {
 
     private List<String> extractText(MultipartFile file){
           return ocrService.extractTextFromImage(file);
-
-//        try{
-//            return extractTextFromImage(file);
-//            if (fileType.equals("image/jpeg")) {
-//                return extractTextFromImage(file.getBytes());
-//            } else if (fileType.equals("multipart/form-data")) {
-//                return extractTextFromPdf(file.getBytes());
-//            }
-//        }catch (IOException e){
-//            throw new RuntimeException(e);
-//        }
-//        return new String[0];
     }
 
 
 
-    public void difficultyIncorrect(DifficultyIncorrectRequestDto difficultyIncorrectRequestDto) {
+    public List<DifficultyIncorrectResponseDto> difficultyIncorrect(DifficultyIncorrectRequestDto difficultyIncorrectRequestDto) {
+        List<String> contents = difficultyIncorrectRequestDto.getIdList();
+        List<DifficultyIncorrectResponseDto> incorrectList = new ArrayList<>();
+        for (String content : contents) {
+            DifficultyIncorrectResponseDto dto = new DifficultyIncorrectResponseDto();
+            dto.setBlurry(true);
+            dto.setGrid(true);
+            dto.setCount(3); // 사용자 설정으로 변경시 변경
+            dto.setContent(content);
 
+            incorrectList.add(dto);
+        }
+
+        return incorrectList;
     }
 }
