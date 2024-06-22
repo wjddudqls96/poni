@@ -6,7 +6,15 @@ import DictationPageBtn from "../../components/home/DictationPageBtn";
 
 const MainPage: React.FC = () => {
   return (
-    <div>
+    <div
+      style={{
+        position: "relative",
+        height: "100vh",
+        maxHeight: "98%",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <Banner />
       <WorksheetPageBtn />
       <DictationPageBtn />

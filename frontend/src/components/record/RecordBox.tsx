@@ -3,6 +3,7 @@ import SpeechRecognition from "react-speech-recognition";
 import { useSpeechRecognition } from "react-speech-recognition";
 import recordBtn from "../../assets/person.png";
 import stopBtn from "../../assets/stopBtn.png";
+import "./RecordBox.css";
 
 interface RecordBoxProps {
   onTranscriptChange: (transcript: string) => void;
@@ -32,7 +33,7 @@ const RecordBox: React.FC<RecordBoxProps> = ({ onTranscriptChange }) => {
   };
 
   return (
-    <div>
+    <div className="record-box">
       <div>음성 입력해주세요</div>
       {/* 이미지 클릭 시 녹음 시작 또는 중지 */}
       <img

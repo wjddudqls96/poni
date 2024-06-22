@@ -1,0 +1,6 @@
+.record-container {
+  position: relative;
+  height: 100vh;
+  max-height: 98%;
+  align-items: center;
+}
