@@ -10,6 +10,7 @@ interface ModalProps {
 }
 
 const TextModal: React.FC<ModalProps> = ({ onClose, children }) => {
+
   const setContent = useSetRecoilState(content);
   const navigate = useNavigate();
 
