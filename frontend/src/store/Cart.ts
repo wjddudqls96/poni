@@ -34,3 +34,13 @@ export const blankSelect = atom<boolean>({
     key: 'blankSelect',
     default: false
 });
+
+export const cartIds = atom<any>({
+    key: 'cartIds',
+    default: null
+});
+
+export const pdfUrl = atom<string>({
+    key: 'pdfUrl',
+    default: ""
+});

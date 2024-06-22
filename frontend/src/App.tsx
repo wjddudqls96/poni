@@ -19,6 +19,7 @@ import PrintOptionPage from "./pages/print-option-page/PrintOptionPage";
 import { LoadingPage } from "./pages/loading-page/LoadingPage";
 import { CartPage } from "./pages/cart-page/CartPage";
 import MainLogo from "./assets/mainLogo.png";
+import { LoadingMake } from "./pages/loading-page/LoadingMake";
 import DictationResultPage from "./pages/dictation-page/DictationResultPage";
 
 const App: React.FC = () => {
@@ -75,10 +76,11 @@ const App: React.FC = () => {
               ></Route>
               {/* 출력 미리보기 */}
               <Route path="/preview"></Route>
-              <Route path="/Pdfviewer" element={<PdfViewer />}></Route>
-              <Route path="/print/option" element={<PrintOptionPage />}></Route>
-              <Route path="/loading" element={<LoadingPage />}></Route>
-              <Route path="/cart" element={<CartPage />}></Route>
+              <Route path="/Pdfviewer" element={<PdfViewer/>}></Route>
+              <Route path="/print/option" element={<PrintOptionPage/>}></Route>
+              <Route path="/loading/print" element={<LoadingPage/>}></Route>
+              <Route path="/loading/worksheet" element={<LoadingMake/>}></Route>
+              <Route path="/cart" element={<CartPage/>}></Route>
             </Routes>
           </div>
         </Router>

@@ -71,8 +71,9 @@ public class WorkSheetController {
     }
 
     @PostMapping("/save")
-    public void saveCart(@RequestBody CombinedResultDto combinedResultDto, Authentication authentication){
+    public Response<String> saveCart(@RequestBody CombinedResultDto combinedResultDto, Authentication authentication){
         worksheetSaveService.saveCart(combinedResultDto,authentication);
+        return new Response<>("201", "카트 데이터 저장 완료.", "success");
     }
 
     @GetMapping("/")
@@ -81,7 +82,8 @@ public class WorkSheetController {
     }
 
     @PostMapping("/")
-    public String getSelectCart(@RequestBody GetSelectCartRequestDto getSelectCartRequestDto){
-        return worksheetGetService.getList(getSelectCartRequestDto);
+    public Response<String> getSelectCart(@RequestBody GetSelectCartRequestDto getSelectCartRequestDto){
+        String url = worksheetGetService.getList(getSelectCartRequestDto);
+        return new Response<>("200", "정상적으로 PDF가 만들어졌습니다.", url);
     }
 }

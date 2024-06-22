@@ -19,14 +19,7 @@ export const StepOnePage: React.FC = () => {
   const getContent: string = useRecoilValue(content);
 
   const submit = async () => {
-    const worksheetData: Worksheet = await getworkSheetData(
-      getTrace,
-      getBlank,
-      getExplainSelect,
-      getContent
-    );
-    setWorksheetData(worksheetData);
-    navigate("/preview");
+    navigate("/loading/worksheet");
   };
 
   return (
