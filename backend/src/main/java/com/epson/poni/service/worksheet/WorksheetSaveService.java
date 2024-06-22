@@ -29,7 +29,7 @@ public class WorksheetSaveService {
 
     public void saveCart(CombinedResultDto combinedResultDto, Authentication authentication) {
 
-        Cart cart = saveCart(authentication);
+        Cart cart = saveCart(authentication, combinedResultDto.getContent());
 
         saveExplanations(combinedResultDto, cart);
 
@@ -101,10 +101,10 @@ public class WorksheetSaveService {
 
     }
 
-    private Cart saveCart(Authentication authentication) {
+    private Cart saveCart(Authentication authentication, String content) {
         Cart cart = new Cart();
         User user = (User) authentication.getPrincipal();
-        cart.cartSet(user, new Date());
+        cart.cartSet(user, content, new Date());
         cartRepository.save(cart);
         return cart;
     }

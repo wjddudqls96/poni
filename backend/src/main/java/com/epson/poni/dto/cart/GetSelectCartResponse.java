@@ -14,6 +14,6 @@ import java.util.List;
 @NoArgsConstructor
 public class GetSelectCartResponse {
     private List<ExplanationResponseDto> explanation;
-    private List<TraceOptionDto> traceOption;
-    private List<BlankResponseDto> blank;
+    private List<TraceHtmlDto> traceOption;
+    private List<BlankHtmlDto> blank;
 }

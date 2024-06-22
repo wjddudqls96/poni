@@ -46,16 +46,16 @@ public class WorkSheetController {
                 .doOnError(e -> log.error("Blank data creation failed", e));
 
         return Mono.zip(grammarAnalysis, traceData, blankData)
-                .map(tuple -> createResponse(tuple))
+                .map(tuple -> createResponse(tuple, requestDto.getContent()))
                 .doOnError(e -> log.error("Error creating cart", e));
     }
 
     private Response<CombinedResultDto> createResponse(
-            Tuple3<List<ExplanationResponseDto>, TraceOptionDto, List<BlankResponseDto>> tuple) {
+            Tuple3<List<ExplanationResponseDto>, TraceOptionDto, List<BlankResponseDto>> tuple, String content) {
         return new Response<>(
                 "201",
                 "카트 데이터가 성공적으로 생성되었습니다.",
-                new CombinedResultDto(tuple.getT1(), tuple.getT2(), tuple.getT3())
+                new CombinedResultDto(tuple.getT1(), tuple.getT2(), tuple.getT3(), content)
         );
     }
 
@@ -83,6 +83,5 @@ public class WorkSheetController {
     @PostMapping("/")
     public void getSelectCart(@RequestBody GetSelectCartRequestDto getSelectCartRequestDto){
         worksheetGetService.getList(getSelectCartRequestDto);
-
     }
 }

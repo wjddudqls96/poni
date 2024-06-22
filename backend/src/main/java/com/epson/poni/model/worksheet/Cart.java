@@ -19,6 +19,9 @@ public class Cart {
     private Long id;
 
     @Column
+    private String content;
+
+    @Column
     private Date date;
 
     @ManyToOne
@@ -26,7 +29,8 @@ public class Cart {
     private User user;
 
     @Builder
-    public void cartSet(User user, Date date){
+    public void cartSet(User user, String content, Date date){
+        this.content = content;
         this.user = user;
         this.date = date;
     }

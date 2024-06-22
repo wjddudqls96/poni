@@ -25,25 +25,52 @@
   </header>
   <main>
     <div class="content_wrapper">
+
+      <!--    따라쓰기-->
+      <div class="trace-wrapper">
+        <h2>1. 따라쓰기</h2>
+        <table class="writing-table" th:each="trace : ${traces}">
+          <tbody >
+          <tr th:each="content : ${trace.content}">
+            <td th:each="char : ${content}" th:text="${char}" class="fixed-cell" ></td>
+          </tr>
+          </tbody>
+          <tbody th:each="i : ${#numbers.sequence(1, trace.count)}">
+          <tr th:each="content : ${trace.content}">
+            <td th:if="${trace.blurry == true}" th:each="char : ${content}" th:text="${char}" class="faded-cell" ></td>
+            <td th:unless="${trace.blurry == true}" th:each="char : ${content}"></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
 <!--      여기서 부터 용어설명에 해당되는 코드들   -->
-      <div class="content_wrapper">
-        <div class="main-sentence">
+      <h2 class="explain-h2">2. 용어해설</h2>
+      <div class="content_wrapper" th:each="explanation : ${explanations}">
+        <div class="main-sentence" th:text="${explanation.sentence}">
           사슴이 이쁘다
-          <span class="pronunciation">joh-eun nal-i-ya</span>
+          <span class="pronunciation" th:text="${explanation.speak}">joh-eun nal-i-ya</span>
         </div>
         <table>
-          <tbody>
+          <tbody th:each="item : ${explanation.analysis}">
           <tr>
             <td class="content-label-container">
-              <div class="label red">
-                주어
+              <div th:if="${item.grammar == '주어'}" class="label red" th:text="${item.grammar}">
+              </div>
+              <div th:if="${item.grammar == '동사'}" class="label blue" th:text="${item.grammar}">
+              </div>
+              <div th:if="${item.grammar == '보어'}" class="label purple" th:text="${item.grammar}">
+              </div>
+              <div th:if="${item.grammar == '형용사'}" class="label color2" th:text="${item.grammar}">
+              </div>
+              <div th:unless="${item.grammar == '주어' || item.grammar == '동사' || item.grammar == '보어' || item.grammar == '형용사'}" class="label color3" th:text="${item.grammar}">
               </div>
             </td>
             <td class="content-text-container">
-              <div class="content-text-title">
+              <div class="content-text-title" th:text="${item.word}">
                 "사슴"
               </div>
-              <div class="content-text-explain">
+              <div class="content-text-explain" th:text="${item.word_description}">
                 이 문장에서 주어는 "사슴"으로, 누구나 알고 있는 대상을 가리킵니다.
               </div>
             </td>
@@ -52,35 +79,19 @@
         </table>
         </div>
       <!--      용어 설명 끝   -->
-
-      <div class="exercise">
+      <h2 class="explain-h2">3. 빈칸문제</h2>
+      <div class="exercise" th:each="blank : ${blanks}">
         <div class="korean-sentence">
-          놀이터<span class="blank"></span>집으로 가요
+          <span th:text="${blank.contents.get(0)}">놀이터</span>
+          <span class="blank"></span>
+          <span th:text="${blank.contents.get(1)}">집으로 가요</span>
         </div>
-        <div class="english-sentence">
+        <div class="english-sentence" th:text="${blank.content_en}">
           I'm going home from the playground
         </div>
       </div>
     </div>
 
-    <div class="trace-wrapper">
-      <h2>따라쓰기 - 글자형</h2>
-      <table class="writing-table">
-        <tbody>
-        <tr th:each="i : ${#numbers.sequence(1, 10)}">
-          <td class="fixed-cell">가</td>
-          <td class="faded-cell ">가</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td>지</td>
-          <td>모</td>
-          <td></td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
   </main>
 </div>
 </body>
