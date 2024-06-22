@@ -1,7 +1,7 @@
 package com.epson.poni.controller;
 
 import com.epson.poni.dto.blank.BlankResponseDto;
-import com.epson.poni.service.BlankService;
+import com.epson.poni.service.worksheet.BlankService;
 import com.epson.poni.utils.GptConnection;
 import com.epson.poni.utils.KoreanAnalyzer;
 import java.util.Arrays;

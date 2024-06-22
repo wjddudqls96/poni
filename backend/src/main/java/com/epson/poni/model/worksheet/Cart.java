@@ -1,9 +1,12 @@
-package com.epson.poni.model;
+package com.epson.poni.model.worksheet;
 
 import com.epson.poni.model.User.User;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.Date;
 
 @Entity
 @Getter
@@ -16,18 +19,15 @@ public class Cart {
     private Long id;
 
     @Column
-    private String type;
-
-    @Column
-    private String title;
-
-    @Column
-    private String createAt;
-
-    @Column
-    private String pdfUrl;
+    private Date date;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @Builder
+    public void cartSet(User user, Date date){
+        this.user = user;
+        this.date = date;
+    }
 }

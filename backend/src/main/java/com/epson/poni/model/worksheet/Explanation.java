@@ -1,7 +1,7 @@
 package com.epson.poni.model.worksheet;
 
-import com.epson.poni.model.Cart;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -16,18 +16,19 @@ public class Explanation {
     private Long id;
 
     @Column
-    private String word;
+    private String sentence;
 
     @Column
-    private String grammar;
-
-    @Column
-    private String word_description;
-
-    @Column
-    private String synonyms;
+    private String speak;
 
     @ManyToOne
     @JoinColumn(name = "cart_id")
     private Cart cart;
+
+    @Builder
+    public void explanationSet(String sentence, String speak, Cart cart){
+        this.sentence = sentence;
+        this.speak = speak;
+        this.cart = cart;
+    }
 }

@@ -2,23 +2,18 @@ package com.epson.poni.controller;
 
 import com.epson.poni.dto.Response;
 import com.epson.poni.dto.blank.BlankResponseDto;
-import com.epson.poni.dto.cart.BlankOptionDto;
-import com.epson.poni.dto.cart.CartOptionRequestDto;
-import com.epson.poni.dto.cart.CombinedResultDto;
-import com.epson.poni.dto.cart.TraceOptionDto;
-import com.epson.poni.dto.explanation.ExplanationRequestDto;
+import com.epson.poni.dto.cart.*;
 import com.epson.poni.dto.explanation.ExplanationResponseDto;
 import com.epson.poni.dto.translate.TranslateRequestDto;
 import com.epson.poni.dto.translate.TranslateResultDto;
-import com.epson.poni.service.BlankService;
-import com.epson.poni.service.ExplanationService;
-import com.epson.poni.service.TraceService;
+import com.epson.poni.service.worksheet.*;
+
 import java.util.List;
 
-import com.epson.poni.service.TranslateService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 import reactor.util.function.Tuple3;
@@ -32,6 +27,8 @@ public class WorkSheetController {
     private final ExplanationService explanationService;
     private final BlankService blankService;
     private final TranslateService translateService;
+    private final WorksheetSaveService worksheetSaveService;
+    private final WorksheetGetService worksheetGetService;
 
     private static final Logger log = LoggerFactory.getLogger(WorkSheetController.class);
 
@@ -71,5 +68,21 @@ public class WorkSheetController {
                     resultDto.setPronunciation(translationResults.get(0).getPronunciation()); // 발음 기호 설정
                     return new Response<>("201", "번역이 완료되었습니다.", resultDto);
                 });
+    }
+
+    @PostMapping("/save")
+    public void saveCart(@RequestBody CombinedResultDto combinedResultDto, Authentication authentication){
+        worksheetSaveService.saveCart(combinedResultDto,authentication);
+    }
+
+    @GetMapping("/")
+    public List<CartListAllResponse> getCart(Authentication authentication){
+        return worksheetGetService.getListAll(authentication);
+    }
+
+    @PostMapping("/")
+    public void getSelectCart(@RequestBody GetSelectCartRequestDto getSelectCartRequestDto){
+        worksheetGetService.getList(getSelectCartRequestDto);
+
     }
 }
