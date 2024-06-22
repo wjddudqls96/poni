@@ -24,7 +24,6 @@ import java.util.Scanner;
 public class DictationService {
     private final DifficultyRepository difficultyRepository;
     private final HttpSession session;
-    private final ScanService scanService;
 
     // 1-1. tesseract 사용
 //    @Autowired
