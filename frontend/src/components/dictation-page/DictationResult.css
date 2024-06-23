@@ -92,6 +92,7 @@
 }
 
 .create-note {
+  width: 100%;
   background-color: rgba(30, 216, 140, 1);
   color: white;
 }

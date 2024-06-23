@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./DictationResult.css";
 import axios from "../../service/axiosConfig";
+import { useNavigate } from "react-router-dom";
 
 const DictationResult: React.FC = () => {
   const [resultList, setResultList] = useState(null);
@@ -22,7 +23,10 @@ const DictationResult: React.FC = () => {
     getDictationResult();
     console.log(resultList);
   }, []);
-
+  const navigate = useNavigate();
+  const goHome = () => {
+    navigate("/main");
+  };
   return (
     <div className="result-container">
       <div className="result-name-box">
@@ -50,8 +54,8 @@ const DictationResult: React.FC = () => {
       <div className="dictation-result-box">
         <div className="dictation-result">
           {resultList &&
-            resultList.map((item) => (
-              <div>
+            resultList.map((item, index) => (
+              <div key={index}>
                 <div
                   className={`dictation-input ${
                     item.input !== item.answer && "wrong"
@@ -65,8 +69,9 @@ const DictationResult: React.FC = () => {
         </div>
       </div>
       <div className="result-page-btns">
-        <div className="result-page-btn">Restart</div>
-        <div className="result-page-btn create-note">Review</div>
+        <div className="result-page-btn create-note" onClick={goHome}>
+          DONE
+        </div>
       </div>
     </div>
   );
