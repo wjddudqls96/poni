@@ -128,17 +128,21 @@ public class DictationService {
         Optional<Score> score = scoreRepository.findAllByUser(user.get());
         score.ifPresent(scoreRepository::delete);
 
+        Score scoreSave = new Score();
+        scoreSave.setScore(correct+incorrect,correct,incorrect,user.get(),null);
+        scoreRepository.save(scoreSave);
+
         List<Problem> problemList = new ArrayList<>();
         for (ProblemDto problemDto : ploblemList) {
             Problem problem = new Problem();
             problem.setProblem(problemDto.getId(),problemDto.getAnswer(),problemDto.getAnswer());
             problemList.add(problem);
         }
+        problemRepository.saveAll(problemList);
 
-        Score scoreSave = new Score();
-        scoreSave.setScore(correct+incorrect,correct,incorrect,user.get(),problemList);
         problemList.forEach(problem -> problem.setScore(scoreSave));
         scoreRepository.save(scoreSave);
+
 
         return difficultyGradingResponseDto;
     }
