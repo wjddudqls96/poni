@@ -121,7 +121,7 @@ public class DictationService {
         difficultyGradingResponseDto.setCorrect(correct);
         difficultyGradingResponseDto.setIncorrect(incorrect);
         difficultyGradingResponseDto.setProblemsCount(correct + incorrect);
-        difficultyGradingResponseDto.setPloblem(ploblemList);
+        difficultyGradingResponseDto.setProblem(ploblemList);
 
 
         Optional<User> user = userRepository.findById(userId);
@@ -188,8 +188,8 @@ public class DictationService {
 
             problemDtos.add(problemDto);
         }
-        difficultyGradingResponseDto.setPloblem(problemDtos);
-
+        difficultyGradingResponseDto.setProblem(problemDtos);
+        difficultyGradingResponseDto.setUsername(user.getUserName());
         return difficultyGradingResponseDto;
     }
 }
