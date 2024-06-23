@@ -19,11 +19,11 @@ const DictationResult: React.FC = () => {
         </div>
         <div>
           <span>정답</span>
-          <span>~개</span>
+          <span style={{ color: "#5585FF" }}>~개</span>
         </div>
         <div>
           <span>오답</span>
-          <span>~개</span>
+          <span style={{ color: "#FF6262" }}>~개</span>
         </div>
       </div>
 
@@ -32,7 +32,7 @@ const DictationResult: React.FC = () => {
       </div>
       <div className="result-page-btns">
         <div className="result-page-btn">다시하기</div>
-        <div className="result-page-btn">오답노트 생성</div>
+        <div className="result-page-btn create-note">오답노트 생성</div>
       </div>
     </div>
   );
