@@ -135,7 +135,7 @@ public class DictationService {
         List<Problem> problemList = new ArrayList<>();
         for (ProblemDto problemDto : ploblemList) {
             Problem problem = new Problem();
-            problem.setProblem(problemDto.getId(),problemDto.getAnswer(),problemDto.getAnswer(), saved.getId());
+            problem.setProblem(problemDto.getId(),problemDto.getAnswer(),problemDto.getInput(), saved.getId());
             problemList.add(problem);
 
             problemRepository.save(problem);
