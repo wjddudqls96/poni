@@ -28,12 +28,12 @@ export const PreviewPage: React.FC = () => {
   return (
     <div className='preview-main'>
       <div className='preview-page-container'>
-        <Preview title='따라쓰기' type='trace'/>
-        <Preview title='용어 설명' type='explain'/>
-        <Preview title='빈칸문제' type='blank'/>
+        <Preview title='Write along' type='trace'/>
+        <Preview title='Create a glossary' type='explain'/>
+        <Preview title='Blank question' type='blank'/>
       </div>
       <div className='preview-button-wrap'>
-        <button className='preview-btn generate' onClick={submit}>담기</button>
+        <button className='preview-btn generate' onClick={submit}>Save</button>
       </div>
     </div>
   )

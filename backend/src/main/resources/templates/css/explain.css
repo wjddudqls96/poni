@@ -67,24 +67,35 @@
   margin-top: 20px;
   text-align: center;
 }
-
-.exercise .korean-sentence span{
-  font-size: 1.2rem;
-  font-weight: bold;
+.korean-sentence {
+  display: table;
+  text-align: center;
+  padding-bottom: 10px;
+  margin: 0 auto;
+  margin-top: 40px;
+}
+.exercise .korean-sentence div{
+  font-size: 2.4rem;
+  font-weight: normal;
+  display: table-cell;
+  padding: 0 20px;
 }
 
 .exercise .blank {
-  display: inline-block;
-  width: 50px;
-  height: 30px;
+  display: table-cell;
+  width: 100px;
+  height: 40px;
   border: 1px solid #ccc;
-  vertical-align: middle;
-  margin: 0 10px;
-  margin-top: 20px;
+  margin-left: 10px;
 }
 
 .exercise .english-sentence {
+  width: auto;
   margin-top: 10px;
   font-size: 1rem;
   color: gray;
+}
+
+.explain-tbody {
+  margin-bottom: 15px;
 }

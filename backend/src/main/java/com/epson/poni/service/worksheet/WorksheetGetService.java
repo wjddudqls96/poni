@@ -9,7 +9,9 @@ import com.epson.poni.model.User.User;
 import com.epson.poni.model.worksheet.*;
 import com.epson.poni.repository.worksheet.*;
 import com.epson.poni.service.HtmlPdfService;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
@@ -92,12 +94,17 @@ public class WorksheetGetService {
         }
 
         Map<String, Object> map = new HashMap<>();
+        Date date = new Date();
+        // SimpleDateFormat을 사용하여 날짜 형식을 "yyyy.MM.dd"로 지정
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
+        // Date 객체를 지정한 형식의 문자열로 변환
+        String formattedDate = dateFormat.format(date);
 
-        System.out.println(cartResponse.getExplanation().get(0).getSpeak());
 
         map.put("explanations", cartResponse.getExplanation());
         map.put("blanks", cartResponse.getBlank());
         map.put("traces", cartResponse.getTraceOption());
+        map.put("time", formattedDate);
 
         return htmlPdfService.createAndUploadPdf(map);
     }

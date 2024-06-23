@@ -41,13 +41,13 @@ const Content: React.FC<{analysis: Analysis}>= ({ analysis }) => {
 
 const getColorByType = (grammar: string) => {
   switch (grammar) {
-    case '주어':
+    case 'subject':
       return '#ff7f7f'; // 빨간색
-    case '동사':
+    case 'verb':
       return '#7f7fff'; // 파란색
-    case '보어':
+    case 'complement':
       return '#b07fff'; // 보라색
-    case '형용사':
+    case 'adjective':
       return '#7fc8ff'; // 보라색
     default:
       return '#cccccc'; // 기본 회색

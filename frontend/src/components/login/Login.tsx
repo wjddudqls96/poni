@@ -6,10 +6,10 @@ import "./Login.css"
 const Login: React.FC = () => {
   return (
     <div className="login-wrapper">
-      <img src={logo} alt="" width={100} height={56}/>
-      <div className="login-content">지금 바로</div>
-      <div className="login-content"><span className="font-green">나만의 학습지</span>를</div>
-      <div className="login-content">만들어보세요.</div>
+      <img src={logo} alt="" width={100} height={56} style={{marginBottom: "10px"}}/>
+      <div className="login-content">Create your own</div>
+      <div className="login-content"><span className="font-green">study sheets</span></div>
+      <div className="login-content">now!.</div>
     </div>
   );
 };
