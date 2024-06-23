@@ -25,6 +25,7 @@ const MainPage: React.FC = () => {
   }, [location]);
 
   useEffect(() => {
+    console.log(localStorage.getItem('accessToken'));
     setTitle("List")
     setType("normal");
     setStep(0);

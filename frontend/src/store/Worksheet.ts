@@ -10,3 +10,8 @@ export const worksheet = atom<Worksheet>({
         blank: null
     },
   });
+
+  export const stepCount = atom<number>({
+    key: 'stepCount',
+    default: 0,
+  });

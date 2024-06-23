@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './PrintOptions.css';
 import { step, title, type } from '../../store/NavBar';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { pdfUrl } from '../../store/Cart';
+import { requestPrint } from '../../service/requestPrint';
 
 const PrintOptionPage: React.FC = () => {
   const [colorMode, setColorMode] = useState<boolean>(false);
@@ -11,6 +13,7 @@ const PrintOptionPage: React.FC = () => {
   const setTitle = useSetRecoilState(title);
   const setType = useSetRecoilState(type);
   const setStep = useSetRecoilState(step);
+  const getPdfUrl = useRecoilValue(pdfUrl);
 
   useEffect(() => {
     setTitle("Print Options")
@@ -34,8 +37,36 @@ const PrintOptionPage: React.FC = () => {
     setReverseMode(!reverseMode);
   }
 
-  const submit = () => {
+  const submit = async () => {
+    var url =  getPdfUrl.substring(8)
+    var color_mode = "mono"
+    var print_quality = "normal"
+    var sided = "none"
+    var reverse_order = reverseMode;
 
+    console.log(url);
+
+    if(colorMode) {
+      color_mode = "color";
+    }
+
+    if(quilityMode) {
+      print_quality = "high"
+    }
+
+    if(bothMode) {
+      sided = "long"
+    }
+    
+    const data = {
+      s3url: url,
+      color_mode: color_mode,
+      print_quality: print_quality,
+      sided: sided,
+      reverse_order: reverse_order
+    }
+
+    await requestPrint(data);
   }
 
   return (

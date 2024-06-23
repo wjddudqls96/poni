@@ -38,6 +38,10 @@ public class WorkSheetController {
         TraceOptionDto traceOptionDto = requestDto.getTraceOption();
 
         // 1. WebFlux를 이용해서 비동기 방식으로 작동하게 한다.
+
+        System.out.println(blankOptionDto);
+        System.out.println(traceOptionDto);
+
         Mono<List<ExplanationResponseDto>> grammarAnalysis = explanationService.create(requestDto.getContent())
                 .doOnError(e -> log.error("Grammar analysis failed", e));
         Mono<TraceOptionDto> traceData = traceService.getTraceData(traceOptionDto)
