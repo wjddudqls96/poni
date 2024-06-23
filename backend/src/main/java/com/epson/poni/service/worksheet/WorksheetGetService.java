@@ -91,8 +91,9 @@ public class WorksheetGetService {
             }
         }
 
-        System.out.println(cartResponse.getTraceOption());
         Map<String, Object> map = new HashMap<>();
+
+        System.out.println(cartResponse.getExplanation().get(0).getSpeak());
 
         map.put("explanations", cartResponse.getExplanation());
         map.put("blanks", cartResponse.getBlank());
