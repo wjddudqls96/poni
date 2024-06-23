@@ -12,8 +12,8 @@ const WorksheetPageBtn: React.FC = () => {
     <div className="main-page-btn" onClick={clickEvent}>
       <img src={icon} alt="" className="icon" />
       <div className="text-box">
-        <div className="function-name">학습지 생성</div>
-        <div className="explanation">맞춤 학습지를 만들어보세요</div>
+        <div className="function-name">Create a study sheet</div>
+        <div className="explanation">Create a personalized study sheet</div>
       </div>
       <img src={arrow} alt="" className="arrow" />
     </div>

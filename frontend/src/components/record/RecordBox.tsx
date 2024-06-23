@@ -34,7 +34,7 @@ const RecordBox: React.FC<RecordBoxProps> = ({ onTranscriptChange }) => {
 
   return (
     <div className="record-box">
-      <div>음성 입력해주세요</div>
+      <div>Please enter your voice</div>
       {/* 이미지 클릭 시 녹음 시작 또는 중지 */}
       <img
         className="record-button"
