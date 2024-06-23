@@ -5,14 +5,22 @@ import { getCartData } from '../../service/getCart';
 import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { cartIds } from '../../store/Cart';
+import { step, title, type } from '../../store/NavBar';
 
 export const CartPage: React.FC = () => {
   const [carts, setCarts] = useState<any[]>([]); // 상태를 빈 배열로 초기화
   const [selectedItems, setSelectedItems] = useState<any[]>([]); // 선택된 아이템 상태 추가
   const setCardIds = useSetRecoilState(cartIds)
   const navigate = useNavigate();
+  const setTitle = useSetRecoilState(title);
+  const setType = useSetRecoilState(type);
+  const setStep = useSetRecoilState(step);
+  
 
   useEffect(() => {
+    setTitle("List")
+    setType("step");
+    setStep(0);
     const getCart = async () => {
       try {
         const body = await getCartData();
@@ -60,9 +68,7 @@ export const CartPage: React.FC = () => {
             isSelected={selectedItems.includes(cart)} // 선택된 상태를 전달
           />
         ))
-      ) : (
-        <p>장바구니가 비어 있습니다.</p>
-      )}
+      ) : <></>}
       <div style={{ height: "30px" }}></div>
       <button className='cart-submit-wrapper' onClick={submit}>출력하기</button>
     </div>

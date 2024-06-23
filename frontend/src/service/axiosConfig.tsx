@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const axiosInstance = axios.create({
   baseURL: "http://localhost:8080",
@@ -13,6 +14,11 @@ axiosInstance.interceptors.request.use(
     const token = localStorage.getItem("accessToken");
     console.log(token);
     
+    if(!token) {
+      window.location.href = "http://localhost:5173/"
+    }
+
+
     if (token) {
       config.headers.Authorization = token;
     }

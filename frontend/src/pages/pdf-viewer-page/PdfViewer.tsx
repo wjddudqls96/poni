@@ -6,9 +6,10 @@ import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 import * as pdfjsLib from 'pdfjs-dist';
 import 'pdfjs-dist/build/pdf.worker.entry';
 import "./PdfViewer.css"
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { pdfUrl } from '../../store/Cart';
 import { useNavigate } from 'react-router-dom';
+import { step, title, type } from '../../store/NavBar';
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = new URL('pdfjs-dist/build/pdf.worker.min.js', import.meta.url).toString();
 
@@ -17,6 +18,15 @@ const PdfViewer: React.FC = () => {
   const navigate = useNavigate();
   const s3PdfUrl = useRecoilValue(pdfUrl);
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
+  const setTitle = useSetRecoilState(title);
+  const setType = useSetRecoilState(type);
+  const setStep = useSetRecoilState(step);
+
+  useEffect(() => {
+    setTitle("Print Preview")
+    setType("step");
+    setStep(0);
+  }, []);
 
   const handleClick = () => {
     navigate("/print/option")

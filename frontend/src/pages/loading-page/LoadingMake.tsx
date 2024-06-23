@@ -7,6 +7,7 @@ import { worksheet } from '../../store/Worksheet';
 import { content } from '../../store/Content';
 import { Worksheet } from 'worksheet';
 import { getworkSheetData } from '../../service/cartRequest';
+import { step, title, type } from '../../store/NavBar';
 
 export const LoadingMake:React.FC = () => {
   const navigate = useNavigate();
@@ -15,6 +16,9 @@ export const LoadingMake:React.FC = () => {
   const getTrace = useRecoilValue(traceOption);
   const setWorksheetData = useSetRecoilState(worksheet);
   const getContent: string = useRecoilValue(content);
+  const setTitle = useSetRecoilState(title);
+  const setType = useSetRecoilState(type);
+  const setStep = useSetRecoilState(step);
 
   useEffect(() => {
     const getResponse = async () => {
@@ -25,6 +29,9 @@ export const LoadingMake:React.FC = () => {
         getContent
       );
       setWorksheetData(worksheetData);
+      setTitle("create")
+      setType("step");
+      setStep(3)
       navigate("/preview");
     };
     getResponse();
