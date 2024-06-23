@@ -1,0 +1,48 @@
+.insert-printer-container {
+  height: auto;
+}
+
+.message-box {
+  width: auto;
+  height: 4rem;
+  margin-left: 1rem;
+  margin-top: 2rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.input-box-tag {
+  margin-top: 1rem;
+  margin-left: 1.3rem;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.input-box {
+  margin-top: 1rem;
+  justify-content: center;
+  display: flex;
+}
+
+.input-text-box {
+  height: 3rem;
+  width: 87%;
+  border-radius: 10px;
+  border: 1px solid gray;
+  opacity: 0.5;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  outline: none;
+}
+
+.submit-btn {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  height: 4rem;
+  background-color: rgba(30, 216, 140, 1);
+  color: white;
+  font-weight: bold;
+
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
