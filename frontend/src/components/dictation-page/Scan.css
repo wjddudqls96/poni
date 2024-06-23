@@ -20,7 +20,9 @@
 }
 
 .get-print-btn {
-  background-color: red;
+  background-color: rgba(30, 216, 140, 1);
+  color: white;
+  font-weight: bold;
   position: absolute;
   bottom: 0;
   width: 100%;
