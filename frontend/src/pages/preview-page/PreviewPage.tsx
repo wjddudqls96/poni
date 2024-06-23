@@ -8,6 +8,7 @@ import { saveCartData } from '../../service/cartSave';
 import { content } from '../../store/Content';
 import { useNavigate } from 'react-router-dom';
 import { step, title, type } from '../../store/NavBar';
+import useResetAllAtoms from '../../store/CartReset';
 
 export const PreviewPage: React.FC = () => {
   const getWorksheet = useRecoilValue(worksheet);
@@ -16,6 +17,8 @@ export const PreviewPage: React.FC = () => {
   const setTitle = useSetRecoilState(title);
   const setType = useSetRecoilState(type);
   const setStep = useSetRecoilState(step);
+  const reseltStep = useResetAllAtoms();
+
   
   const submit = async () => {
     console.log(getWorksheet);
@@ -25,6 +28,7 @@ export const PreviewPage: React.FC = () => {
     const isSuccess = await saveCartData(getWorksheet, getContent);
 
     if(isSuccess) {
+      reseltStep();
       setTitle("List")
       setType("normal");
       setStep(0);

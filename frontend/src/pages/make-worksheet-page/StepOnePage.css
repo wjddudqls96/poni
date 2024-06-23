@@ -1,4 +1,4 @@
-.step-one-submit-wrapper {
+.step-one-submit-wrapper2 {
     width: 100%;
     height: 66px;
     background-color: #ABF2D5;
@@ -12,6 +12,6 @@
     z-index: 1;
 }
 
-.step-one-submit-wrapper:hover {
+.step-one-submit-wrapper-on {
     background-color: #1ED88C;
 }

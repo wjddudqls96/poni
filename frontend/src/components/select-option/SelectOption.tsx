@@ -4,6 +4,7 @@ import "./SelectOption.css"
 import Check from "../../assets/check.png"
 import { modalTypeState, modalVisibleState } from '../../store/Modal';
 import { blankSelect, explainSelect, traceSelect } from '../../store/Cart';
+import { stepCount } from '../../store/Worksheet';
 
 
 export const SelectOption:React.FC = () => {
@@ -15,28 +16,42 @@ export const SelectOption:React.FC = () => {
     const setBlankSelect = useSetRecoilState(blankSelect);
     const setTraceSelect = useSetRecoilState(traceSelect);
     const setExplainSelect = useSetRecoilState(explainSelect);
+    const setStepCount = useSetRecoilState(stepCount);
+    const getStepCount = useRecoilValue(stepCount);
 
     const handleTraceClick = () => {
         if(getTraceSelect) {
             setTraceSelect(false);
+            setStepCount(getStepCount - 1);
         }
         else {
             setModalType("trace");
             setModalVisible(true);
+            setStepCount(getStepCount + 1);
         }
     }
 
     const handleExplainClick = () => {
+
+        if(getExplainSelect) {
+            setStepCount(getStepCount - 1);
+        }
+        else {
+            setStepCount(getStepCount + 1);
+        }
+
         setExplainSelect(!getExplainSelect);
     }
 
     const handleBlankClick = () => {
         if(getBlankSelect) {
             setBlankSelect(false);
+            setStepCount(getStepCount - 1);
         }
         else {
             setModalType("blank");
             setModalVisible(true);
+            setStepCount(getStepCount + 1);
         }
     }
 

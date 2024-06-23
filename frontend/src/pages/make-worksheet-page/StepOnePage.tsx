@@ -6,7 +6,7 @@ import "./StepOnePage.css";
 import { blankOption, explainSelect, traceOption } from "../../store/Cart";
 import { getworkSheetData } from "../../service/cartRequest";
 import { Worksheet } from "worksheet";
-import { worksheet } from "../../store/Worksheet";
+import { stepCount, worksheet } from "../../store/Worksheet";
 import { useNavigate } from "react-router-dom";
 import { content } from "../../store/Content";
 import { step, title, type } from "../../store/NavBar";
@@ -21,11 +21,15 @@ export const StepOnePage: React.FC = () => {
   const setTitle = useSetRecoilState(title);
   const setType = useSetRecoilState(type);
   const setStep = useSetRecoilState(step);
+  const getCount = useRecoilValue(stepCount);
+  
 
   useEffect(() => {
     setTitle("Create")
     setType("step");
     setStep(2)
+    console.log(getCount);
+    
   }, [])
 
   const submit = async () => {
@@ -35,10 +39,10 @@ export const StepOnePage: React.FC = () => {
   };
 
   return (
-    <div style={{ position: "relative", height: "100vh", maxHeight: "97.6%" }}>
+    <div style={{ position: "relative", height: "100vh", maxHeight: "97.4%" }}>
       <SelectOption />
       <OptionModal />
-      <button className="step-one-submit-wrapper" onClick={submit}>
+      <button className={`step-one-submit-wrapper2 ${getCount > 0 ? "step-one-submit-wrapper-on" : ""}`} onClick={submit}>
         Next
       </button>
     </div>
