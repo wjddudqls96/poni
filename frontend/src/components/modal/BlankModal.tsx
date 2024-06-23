@@ -53,8 +53,8 @@ export const BlankModal: React.FC<{ onClose: () => void; nodeRef: React.RefObjec
                 </div>
               </div>
               <div className="modal-footer">
-                <button className="reset">초기화</button>
-                <button className="apply" onClick={()=>submit()}>적용</button>
+                <button className="footer-button reset2">초기화</button>
+                <button className="footer-button submit" onClick={()=>submit()}>적용</button>
               </div>
             </div>
           </div>

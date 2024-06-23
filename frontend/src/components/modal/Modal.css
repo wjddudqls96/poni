@@ -16,7 +16,7 @@
   max-width: 400px;
   background: #fff;
   border-radius: 10px 10px 0 0;
-  padding: 20px;
+  padding-top: 20px;
   box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
 }
@@ -41,6 +41,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 0 auto;
+  width: 90%;
+  font-size: 0.8rem;
 }
 
 .modal-body {
@@ -51,12 +54,15 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  margin-bottom: 100px;
 }
 
 .option {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  align-items: start;
+  flex-direction: column;
+  width: 90%;
+  margin: 0 auto;
 }
 
 .two-option {
@@ -69,6 +75,7 @@
   display: flex;
   gap: 10px;
   align-items: center;
+  margin-top: 20px;
 }
 
 .counter button {
@@ -106,7 +113,7 @@
 
 .apply {
   border: 0;
-  background: #1ED88C;
+  background-color: #1ED88C;
   color: white;
 }
 
@@ -117,22 +124,28 @@
 
 .modal-footer {
   display: flex;
-  justify-content: space-between;
+  width: 100%;
   margin-top: 20px;
+  height: 50px;
 }
 
-.reset, .apply {
-  flex: 1;
+.reset2, .submit {
   padding: 10px;
-  border-radius: 4px;
 }
 
-.reset {
-  background: #e0e0e0;
-  margin-right: 10px;
+.footer-button {
+  width: 50%;
+  font-weight: bold;
 }
 
-.apply {
-  background: #00c853;
+.reset2 {
+  background: #fff;
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.submit {
+  background: #1ED88C;
   color: white;
+  border: 0px;
 }
