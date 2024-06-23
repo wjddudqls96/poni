@@ -44,10 +44,10 @@ export const LoadingMake:React.FC = () => {
         <img src={Loading} width={100} height={100}/>
         </div>
         <div>
-        나만의 맞춤 학습지
+        Study sheet
         </div>
         <div>
-        생성중....
+        Making...
         </div>
     </div>
   )
