@@ -13,8 +13,8 @@ const DictationPageBtn: React.FC = () => {
     <div className="main-page-btn" onClick={clickEvent}>
       <img src={icon} alt="" className="icon" />
       <div className="text-box">
-        <div className="function-name">받아쓰기</div>
-        <div className="explanation">한국어 실력을 확인해보세요</div>
+        <div className="function-name">Dictation</div>
+        <div className="explanation">Check your Korean language skills.</div>
       </div>
       <img src={arrow} alt="" className="arrow" />
     </div>

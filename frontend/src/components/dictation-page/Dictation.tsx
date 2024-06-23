@@ -67,7 +67,7 @@ const Dictation: React.FC = () => {
   return (
     <div className="speak-container">
       <div onClick={speak} className="speak-btn">
-        <div>받아쓰기중..</div>
+        <div style={{ fontWeight: "bold" }}>Dictating</div>
         <img src={speakBtn} />
       </div>
       {/* <img src={stopSpeakBtn} className="stop-btn">

@@ -27,28 +27,28 @@ const SelectGrade: React.FC = () => {
         onClick={() => handleClick("입문")}
         className={`grade-option ${currentGrade === "입문" ? "selected" : ""}`}
       >
-        입문
+        Introductory
       </div>
       <div
         onClick={() => handleClick("초급")}
         className={`grade-option ${currentGrade === "초급" ? "selected" : ""}`}
       >
-        초급
+        Beginner
       </div>
       <div
         onClick={() => handleClick("중급")}
         className={`grade-option ${currentGrade === "중급" ? "selected" : ""}`}
       >
-        중급
+        Intermediate
       </div>
       <div
         onClick={() => handleClick("고급")}
         className={`grade-option ${currentGrade === "고급" ? "selected" : ""}`}
       >
-        고급
+        Advanced
       </div>
       <div onClick={handleNextClick} className={`next-button`}>
-        다음
+        Next
       </div>
     </div>
   );

@@ -1,14 +1,21 @@
 import React from "react";
 import "./Scan.css";
+import { useNavigate } from "react-router-dom";
 
 const Scan: React.FC = () => {
+  const navigate = useNavigate();
+  const clickPrintBtn = () => {
+    navigate("/dictation/result");
+  };
   return (
     <div>
       <div className="scan-text-box">
-        <div className="complete-dictation">받아쓰기 완료</div>
-        <div className="scan-text">작성한 답안지를 스캔해주세요</div>
+        <div className="complete-dictation">Finished</div>
+        <div className="scan-text">Scan your completed answer sheet</div>
       </div>
-      <div className="get-print-btn">출력 생성</div>
+      <div className="get-print-btn" onClick={clickPrintBtn}>
+        Print
+      </div>
     </div>
   );
 };
