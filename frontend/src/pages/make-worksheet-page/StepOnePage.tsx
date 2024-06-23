@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { SelectOption } from "../../components/select-option/SelectOption";
 import { OptionModal } from "../../components/modal/OptionModal";
 import { useRecoilValue, useSetRecoilState } from "recoil";
@@ -9,6 +9,7 @@ import { Worksheet } from "worksheet";
 import { worksheet } from "../../store/Worksheet";
 import { useNavigate } from "react-router-dom";
 import { content } from "../../store/Content";
+import { step, title, type } from "../../store/NavBar";
 
 export const StepOnePage: React.FC = () => {
   const navigate = useNavigate();
@@ -17,8 +18,19 @@ export const StepOnePage: React.FC = () => {
   const getTrace = useRecoilValue(traceOption);
   const setWorksheetData = useSetRecoilState(worksheet);
   const getContent: string = useRecoilValue(content);
+  const setTitle = useSetRecoilState(title);
+  const setType = useSetRecoilState(type);
+  const setStep = useSetRecoilState(step);
+
+  useEffect(() => {
+    setTitle("create")
+    setType("step");
+    setStep(2)
+  }, [])
 
   const submit = async () => {
+    setTitle("create")
+    setType("step");
     navigate("/loading/worksheet");
   };
 

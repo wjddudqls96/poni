@@ -1,11 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './PrintOptions.css';
+import { step, title, type } from '../../store/NavBar';
+import { useSetRecoilState } from 'recoil';
 
 const PrintOptionPage: React.FC = () => {
   const [colorMode, setColorMode] = useState<boolean>(false);
   const [bothMode, setBothMode] = useState<boolean>(false);
   const [quilityMode, setQuilityMode] = useState<boolean>(false);
   const [reverseMode, setReverseMode] = useState<boolean>(false);
+  const setTitle = useSetRecoilState(title);
+  const setType = useSetRecoilState(type);
+  const setStep = useSetRecoilState(step);
+
+  useEffect(() => {
+    setTitle("Print Options")
+    setType("step");
+    setStep(0);
+  }, []);
 
   const handleColorMode = () => {
     setColorMode(!colorMode);

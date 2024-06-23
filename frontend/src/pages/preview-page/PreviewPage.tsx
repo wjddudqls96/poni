@@ -1,18 +1,22 @@
 import React, { useEffect } from 'react';
 import { Preview } from '../../components/common/preview/Preview';
 import './PreviewPage.css';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { worksheet } from '../../store/Worksheet';
 import { Worksheet } from 'worksheet';
 import { saveCartData } from '../../service/cartSave';
 import { content } from '../../store/Content';
 import { useNavigate } from 'react-router-dom';
+import { step, title, type } from '../../store/NavBar';
 
 export const PreviewPage: React.FC = () => {
   const getWorksheet = useRecoilValue(worksheet);
   const getContent = useRecoilValue(content);
   const useNavige = useNavigate();
-
+  const setTitle = useSetRecoilState(title);
+  const setType = useSetRecoilState(type);
+  const setStep = useSetRecoilState(step);
+  
   const submit = async () => {
     console.log(getWorksheet);
     console.log(getContent);
@@ -21,7 +25,10 @@ export const PreviewPage: React.FC = () => {
     const isSuccess = await saveCartData(getWorksheet, getContent);
 
     if(isSuccess) {
-      useNavige('/main');
+      setTitle("List")
+      setType("normal");
+      setStep(0);
+      useNavige('/cart');
     }
   }
 

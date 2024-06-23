@@ -4,9 +4,14 @@ import PrintPageBtn from "../../components/home/PrintPageBtn";
 import WorksheetPageBtn from "../../components/home/WorksheetPageBtn";
 import DictationPageBtn from "../../components/home/DictationPageBtn";
 import { useLocation } from "react-router-dom";
+import { step, title, type } from "../../store/NavBar";
+import { useSetRecoilState } from "recoil";
 
 const MainPage: React.FC = () => {
   const location = useLocation();
+  const setTitle = useSetRecoilState(title);
+  const setType = useSetRecoilState(type);
+  const setStep = useSetRecoilState(step);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -18,6 +23,12 @@ const MainPage: React.FC = () => {
       console.log('Access Token:', localStorage.getItem("accessToken"));
     }
   }, [location]);
+
+  useEffect(() => {
+    setTitle("List")
+    setType("normal");
+    setStep(0);
+  }, [])
 
   
   return (
