@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { useSetRecoilState } from 'recoil';
 import { traceOption, traceSelect } from '../../store/Cart';
 import { modalVisibleState } from '../../store/Modal';
+import Close from "../../assets/close.png";
 
 export const TraceModal: React.FC<{ onClose: () => void; nodeRef: React.RefObject<HTMLDivElement> }> = ({ onClose, nodeRef }) => {
     const [number, setNumber] = useState<number>(0);
@@ -50,13 +51,14 @@ export const TraceModal: React.FC<{ onClose: () => void; nodeRef: React.RefObjec
         <div className="modal-overlay" onClick={onClose}>
           <div className="modal-content-option" ref={nodeRef} onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
-              <h2>따라쓰기 설정</h2>
-              <button onClick={onClose}>X</button>
+              <h2>Setting</h2>
+              
+              <img src={Close} width={24} height={24} onClick={onClose}/>
             </div>
             <div className="modal-body">
               <div className="option-container">
                 <div className="option">
-                  <div>칸 설정</div>
+                  <div>Column settings</div>
                   <div className="counter">
                     <button onClick={numberDown}>-</button>
                     <span>{number}</span>
@@ -64,16 +66,16 @@ export const TraceModal: React.FC<{ onClose: () => void; nodeRef: React.RefObjec
                   </div>
                 </div>
                 <div className="option two-option">
-                  <div>흐린선</div>
+                  <div>Guidelines</div>
                   <div className="buttons">
-                    <button className={`two-button-main ${selectFade ? "apply" : ""}`} onClick={() => clickFadeOption("fade")}>적용</button>
-                    <button className={`two-button-main ${!selectFade ? "apply" : ""}`} onClick={() => clickFadeOption("no")}>미적용</button>
+                    <button className={`two-button-main ${selectFade ? "apply" : ""}`} onClick={() => clickFadeOption("fade")}>Apply</button>
+                    <button className={`two-button-main ${!selectFade ? "apply" : ""}`} onClick={() => clickFadeOption("no")}>Not applied</button>
                   </div>
                 </div>
               </div>
               <div className="modal-footer">
-                <button className="reset">초기화</button>
-                <button className="apply" onClick={()=>submit()}>적용</button>
+                <button className="footer-button reset2">Reset</button>
+                <button className="footer-button submit" onClick={()=>submit()}>Submit</button>
               </div>
             </div>
           </div>

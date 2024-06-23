@@ -45,7 +45,7 @@ export const SelectOption:React.FC = () => {
         <div className={`list-wrapper ${getTraceSelect ? 'selected' : ''}`} onClick={handleTraceClick}>
             <div className='list-title'>
                 <div>
-                따라쓰기
+                Write along
                 </div>
             </div>
             {getTraceSelect ? <CheckDiv/> : <></>}
@@ -54,7 +54,7 @@ export const SelectOption:React.FC = () => {
         <div className={`list-wrapper ${getExplainSelect ? 'selected' : ''}`} onClick={handleExplainClick}>
             <div className='list-title'>
                 <div>
-                용어 설명 생성
+                Create a glossary
                 </div>
             </div>
             {getExplainSelect ? <CheckDiv/> : <></>}
@@ -62,7 +62,7 @@ export const SelectOption:React.FC = () => {
         <div className={`list-wrapper ${getBlankSelect ? 'selected' : ''}`} onClick={handleBlankClick}>
             <div className='list-title'>
                 <div>
-                빈칸 문제 생성
+                Create a Blank question
                 </div>
             </div>
             {getBlankSelect ? <CheckDiv/> : <></>}

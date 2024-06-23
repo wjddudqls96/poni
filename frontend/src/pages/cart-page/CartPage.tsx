@@ -70,7 +70,7 @@ export const CartPage: React.FC = () => {
         ))
       ) : <></>}
       <div style={{ height: "30px" }}></div>
-      <button className='cart-submit-wrapper' onClick={submit}>출력하기</button>
+      <button className='cart-submit-wrapper' onClick={submit}>Print</button>
     </div>
   );
 };

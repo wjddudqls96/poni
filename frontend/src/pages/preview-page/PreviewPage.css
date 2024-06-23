@@ -25,6 +25,7 @@
     font-weight: 500;
     border: none;
     cursor: pointer;
+    height: 60px;
 }
 
 .save {
@@ -33,7 +34,7 @@
 }
 
 .generate {
-    background-color: #00C48C; /* 배경색 */
+    background-color: #1ED88C; /* 배경색 */
     color: #ffffff; /* 텍스트 색 */
 }
 
