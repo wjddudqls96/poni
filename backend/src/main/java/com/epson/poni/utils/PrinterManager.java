@@ -1,5 +1,6 @@
 package com.epson.poni.utils;
 
+import com.epson.poni.dto.cart.WorksheetPrintRequestDto;
 import com.epson.poni.dto.print.EpsonTokenDto;
 import com.epson.poni.dto.print.PrintInfo;
 import java.io.File;
@@ -100,7 +101,7 @@ public class PrinterManager {
 
     public void print(String filePath) {
         EpsonTokenDto epsonTokenDto = getToken();
-        String jobId = upload(epsonTokenDto, filePath);
+        String jobId = upload(epsonTokenDto, filePath,null,null,null,false);
         String accessToken = epsonTokenDto.getAccess_token();
         String url = "https://api.epsonconnect.com/api/1/printing/printers/" + epsonTokenDto.getSubject_id() + "/jobs/" + jobId + "/print";
 
@@ -122,9 +123,38 @@ public class PrinterManager {
 
     }
 
-    public String upload(EpsonTokenDto epsonTokenDto, String filePath) {
+    public void print(String filePath, WorksheetPrintRequestDto worksheetPrintRequestDto) {
+        EpsonTokenDto epsonTokenDto = getToken();
+        String jobId = upload(epsonTokenDto, filePath,worksheetPrintRequestDto.getPrint_quality(),worksheetPrintRequestDto.getColor_mode(),worksheetPrintRequestDto.getSided(),worksheetPrintRequestDto.getReverse_order());
+        String accessToken = epsonTokenDto.getAccess_token();
+        String url = "https://api.epsonconnect.com/api/1/printing/printers/" + epsonTokenDto.getSubject_id() + "/jobs/" + jobId + "/print";
 
-        PrintInfo printInfo = getPrintInfo(epsonTokenDto.getSubject_id(), epsonTokenDto.getAccess_token());
+        // 헤더 설정
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + accessToken);
+        headers.set("Content-Type","application/json; charset=UTF-8");
+
+        HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(headers);
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        restTemplate.exchange(
+                url,
+                HttpMethod.POST,
+                requestEntity,
+                void.class
+        );
+
+    }
+
+    public String upload(EpsonTokenDto epsonTokenDto, String filePath, String print_quality, String color_mode, String sided, Boolean reverse_order) {
+
+        PrintInfo printInfo = getPrintInfo(epsonTokenDto.getSubject_id(), epsonTokenDto.getAccess_token(),
+                print_quality,
+                color_mode,
+                sided,
+                reverse_order
+                );
 
         String jobId = printInfo.getId();
         String baseUri = printInfo.getUpload_uri();
@@ -161,7 +191,7 @@ public class PrinterManager {
         return jobId;
     }
 
-    public PrintInfo getPrintInfo(String subjectId, String accessToken) {
+    public PrintInfo getPrintInfo(String subjectId, String accessToken, String print_quality, String color_mode, String sided, Boolean reverse_order) {
 
         String url = "https://api.epsonconnect.com/api/1/printing/printers/" + subjectId + "/jobs";
         String jobName = "print";
@@ -172,11 +202,30 @@ public class PrinterManager {
         headers.set("Authorization", "Bearer " + accessToken);
         headers.set("Content-Type","application/json; charset=UTF-8");
 
-        Map<String, String> body = new HashMap<>();
+        Map<String, Object> body = new HashMap<>();
         body.put("job_name", jobName);
         body.put("print_mode", printMode);
+        //프린트 설정 넣기
+        if(print_quality != null ){
+            body.put("job_name", "sample");
+            body.put("print_mode", "document");
 
-        HttpEntity<Map<String, String>> requestBody = new HttpEntity<>(body, headers);
+            Map<String, Object> printSetting = new HashMap<>();
+            printSetting.put("media_size", "ms_a4");
+            printSetting.put("media_type", "mt_plainpaper");
+            printSetting.put("borderless", false);
+            printSetting.put("print_quality", print_quality);
+            printSetting.put("source", "auto");
+            printSetting.put("color_mode", color_mode);
+            printSetting.put("2_sided", sided);
+            printSetting.put("reverse_order", reverse_order);
+            printSetting.put("copies", 1);
+            printSetting.put("collate", true);
+
+            body.put("print_setting", printSetting);
+        }
+
+        HttpEntity<Map<String, Object>> requestBody = new HttpEntity<>(body, headers);
         RestTemplate restTemplate = new RestTemplate();
         PrintInfo printInfo = restTemplate.exchange(
             url,

@@ -1,6 +1,7 @@
 package com.epson.poni.controller;
 
 import com.epson.poni.dto.Response;
+import com.epson.poni.dto.cart.WorksheetPrintRequestDto;
 import com.epson.poni.dto.print.RegistPrinter;
 import com.epson.poni.service.print.PrintService;
 import com.epson.poni.utils.PrinterManager;
@@ -50,5 +51,12 @@ public class PrintController {
             e.printStackTrace();
             return "Failed to upload file";
         }
+    }
+
+
+    //학습지 프린트
+    @PostMapping("/worksheetPrint")
+    public String worksheetPrint(@RequestBody WorksheetPrintRequestDto worksheetPrintRequestDto) {
+        return printService.worksheetPrint(worksheetPrintRequestDto);
     }
 }
