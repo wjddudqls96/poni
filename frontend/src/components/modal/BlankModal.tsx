@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { blankOption, blankSelect } from '../../store/Cart';
 import { modalVisibleState } from '../../store/Modal';
+import Close from "../../assets/close.png";
 
 export const BlankModal: React.FC<{ onClose: () => void; nodeRef: React.RefObject<HTMLDivElement> }> = ({ onClose, nodeRef }) => {
     const [number, setNumber] = useState<number>(0);
@@ -38,13 +39,13 @@ export const BlankModal: React.FC<{ onClose: () => void; nodeRef: React.RefObjec
         <div className="modal-overlay" onClick={onClose}>
           <div className="modal-content-option" ref={nodeRef} onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
-              <h2>따라쓰기 설정</h2>
-              <button onClick={onClose}>X</button>
+              <h2>Setting</h2>
+              <img src={Close} width={24} height={24} onClick={onClose}/>
             </div>
             <div className="modal-body">
               <div className="option-container">
                 <div className="option">
-                  <div>칸 설정</div>
+                  <div>Number of questions</div>
                   <div className="counter">
                     <button onClick={numberDown}>-</button>
                     <span>{number}</span>
@@ -53,8 +54,8 @@ export const BlankModal: React.FC<{ onClose: () => void; nodeRef: React.RefObjec
                 </div>
               </div>
               <div className="modal-footer">
-                <button className="footer-button reset2">초기화</button>
-                <button className="footer-button submit" onClick={()=>submit()}>적용</button>
+                <button className="footer-button reset2">Reset</button>
+                <button className="footer-button submit" onClick={()=>submit()}>Submit</button>
               </div>
             </div>
           </div>

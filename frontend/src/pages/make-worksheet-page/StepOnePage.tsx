@@ -23,23 +23,23 @@ export const StepOnePage: React.FC = () => {
   const setStep = useSetRecoilState(step);
 
   useEffect(() => {
-    setTitle("create")
+    setTitle("Create")
     setType("step");
     setStep(2)
   }, [])
 
   const submit = async () => {
-    setTitle("create")
+    setTitle("Create")
     setType("step");
     navigate("/loading/worksheet");
   };
 
   return (
-    <div style={{ position: "relative", height: "100vh", maxHeight: "770px" }}>
+    <div style={{ position: "relative", height: "100vh", maxHeight: "97.6%" }}>
       <SelectOption />
       <OptionModal />
       <button className="step-one-submit-wrapper" onClick={submit}>
-        다 음
+        Next
       </button>
     </div>
   );
