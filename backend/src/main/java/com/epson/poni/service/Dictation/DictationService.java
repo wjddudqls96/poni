@@ -43,12 +43,12 @@ public class DictationService {
      * 2. 사용자가 설정한 값에 따라 사전에 넣어둔 받아쓰기 문장이 출력된다.
      * 3. 해당 문장들을 체점 전에 임시 저장해둔다.
      */
-    public DifficultySettingsResponseDto difficultySettings(DifficultySettingsRequestDto difficultySettingsRequestDto) {
+    public DifficultySettingsResponseDto difficultySettings(DifficultySettingsRequestDto difficultySettingsRequestDto,Authentication authentication) {
         List<Difficulty> byDifficultyEqual = difficultyRepository.findByDifficultyEqual(difficultySettingsRequestDto.getDifficulty(), difficultySettingsRequestDto.getCount());
 
         //임시 저장
         List<Dictation> dictationList = new ArrayList<>();
-        User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = (User) authentication.getPrincipal();
 
         List<ContentDto> contentDtos = new ArrayList<>();
 

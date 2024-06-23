@@ -17,9 +17,9 @@ public class DictationController {
     private final DictationService dictationService;
 
     @PostMapping("/difficulty")
-    public DifficultySettingsResponseDto difficultySettings(@RequestBody DifficultySettingsRequestDto difficultySettingsRequestDto){
+    public DifficultySettingsResponseDto difficultySettings(@RequestBody DifficultySettingsRequestDto difficultySettingsRequestDto,Authentication authentication){
         DifficultySettingsResponseDto difficultySettingsResponseDto
-                = dictationService.difficultySettings(difficultySettingsRequestDto);
+                = dictationService.difficultySettings(difficultySettingsRequestDto,authentication);
 
         return difficultySettingsResponseDto;
         
