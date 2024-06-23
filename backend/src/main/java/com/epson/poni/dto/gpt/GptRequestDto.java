@@ -19,7 +19,7 @@ public class GptRequestDto {
     public static GptRequestDto createDefault(String sentence) {
         List<Message> messages = Arrays.asList(
                 new Message("user", "{\"sentence\": \"사슴이 이쁘다.\", \"speak\": \"[sa-su-mi i-ppeu-da]\", \"analysis\": [{\"word\": \"사슴\", \"grammar\": \"subject\", \"word_description\": \"It is a type of animal, usually referred to as a large, slender, horned animal.\", \"synonyms\": [\"deer\"]}, {\"word\": \"이쁘다\", \"grammar\": \"verb\", \"word_description\": \"It is a verb that means that the appearance or appearance is beautiful and attractive.\", \"synonyms\": [\"beautiful\", \"pretty\", \"lovely\"]}]}"),
-                new Message("user", "너는 최고의 영어를 사용하는 사람들을 위한 한국어 선생님이야.내가 한국어로된 문장을 줄테니 내가준 JSON처럼 분석해서 JSON 데이터를 만들어서 줘 그리고 token 수가 4096 이내로 만들어줘"),
+                new Message("user", "너는 최고의 영어를 사용하는 사람들을 위한 한국어 선생님이야.내가 한국어로된 문장을 줄테니 내가준 JSON처럼 분석해서 JSON 데이터를 만들어서 줘 그리고 token 수가 4096 이내로 만들어줘. speak 칼럼은 발음기호야 speak 무조건 넣어야되는 데이터야. 발음기호를 넣어서 JSON 데이터를 만들어줘."),
                 new Message("user", "문장 : " + sentence)
         );
         return new GptRequestDto("gpt-3.5-turbo", messages, 0, 4096, 1);

@@ -100,7 +100,7 @@ public class WorksheetGetService {
         // Date 객체를 지정한 형식의 문자열로 변환
         String formattedDate = dateFormat.format(date);
 
-
+        System.out.println(cartResponse.getExplanation());
         map.put("explanations", cartResponse.getExplanation());
         map.put("blanks", cartResponse.getBlank());
         map.put("traces", cartResponse.getTraceOption());

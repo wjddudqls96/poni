@@ -5,7 +5,7 @@
 }
 
 .pronunciation {
-  font-size: 1rem;
+  font-size: 0.7rem;
   color: gray;
   margin-left: 10px;
   font-weight: 200;
@@ -33,7 +33,7 @@
 
 .label {
   display: inline-block;
-  padding: 3px 4px;
+  padding: 3px 7px;
   border-radius: 15px;
   color: white;
   font-weight: bold;
