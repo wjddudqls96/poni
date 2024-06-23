@@ -28,13 +28,8 @@ public class Score {
     @JoinColumn(name = "user_id")
     private User user;
 
-
-    @OneToMany(mappedBy = "score", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Problem> problemList;
-
     @Builder
-    public void setScore(Integer problemsCount, Integer correct, Integer incorrect, User user, List<Problem> problemList){
-        this.problemList = problemList;
+    public void setScore(Integer problemsCount, Integer correct, Integer incorrect, User user){
         this.problemsCount = problemsCount;
         this.correct = correct;
         this.incorrect = incorrect;

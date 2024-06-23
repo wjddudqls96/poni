@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -124,25 +123,23 @@ public class DictationService {
         difficultyGradingResponseDto.setProblemsCount(correct + incorrect);
         difficultyGradingResponseDto.setPloblem(ploblemList);
 
+
         Optional<User> user = userRepository.findById(userId);
         Optional<Score> score = scoreRepository.findAllByUser(user.get());
         score.ifPresent(scoreRepository::delete);
 
         Score scoreSave = new Score();
-        scoreSave.setScore(correct+incorrect,correct,incorrect,user.get(),null);
-        scoreRepository.save(scoreSave);
+        scoreSave.setScore(correct+incorrect,correct,incorrect,user.get());
+        Score saved = scoreRepository.saveAndFlush(scoreSave);
 
         List<Problem> problemList = new ArrayList<>();
         for (ProblemDto problemDto : ploblemList) {
             Problem problem = new Problem();
-            problem.setProblem(problemDto.getId(),problemDto.getAnswer(),problemDto.getAnswer());
+            problem.setProblem(problemDto.getId(),problemDto.getAnswer(),problemDto.getAnswer(), saved.getId());
             problemList.add(problem);
+
+            problemRepository.save(problem);
         }
-        problemRepository.saveAll(problemList);
-
-        problemList.forEach(problem -> problem.setScore(scoreSave));
-        scoreRepository.save(scoreSave);
-
 
         return difficultyGradingResponseDto;
     }
@@ -180,8 +177,10 @@ public class DictationService {
         difficultyGradingResponseDto.setCorrect(score.getCorrect());
         difficultyGradingResponseDto.setIncorrect(score.getIncorrect());
 
+        List<Problem> byScoreId = problemRepository.findByScoreId(score.getId());
+
         List<ProblemDto> problemDtos = new ArrayList<>();
-        for (Problem problem : score.getProblemList()) {
+        for (Problem problem : byScoreId) {
             ProblemDto problemDto = new ProblemDto();
             problemDto.setId(problem.getDictation_id());
             problemDto.setInput(problem.getInput());

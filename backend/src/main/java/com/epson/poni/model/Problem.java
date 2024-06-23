@@ -17,19 +17,14 @@ public class Problem {
     private Long dictation_id;
     private String answer;
     private String input;
-
-    @ManyToOne
-    @JoinColumn(name = "score_id")
-    private Score score;
+    private Long scoreId;
 
     @Builder
-    public void setProblem(Long dictation_id, String answer, String input){
+    public void setProblem(Long dictation_id, String answer, String input, Long score_id){
         this.dictation_id = dictation_id;
         this.answer = answer;
         this.input = input;
-    }
-    public void setScore(Score score) {
-        this.score = score;
+        this.scoreId = score_id;
     }
 
 }
