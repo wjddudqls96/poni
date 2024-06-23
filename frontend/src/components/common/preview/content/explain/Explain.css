@@ -18,13 +18,13 @@
 
 .content-label-container {
     display: flex;
-    flex: 0.14;
+    flex: 0.19;
 }
 
 .content-text-container {
     display: flex;
     flex-direction: column;
-    flex: 0.86;
+    flex: 0.81;
 }
 
 .content-text-title {

@@ -15,9 +15,9 @@
           <img src="images/poni_logo.png" alt="Sample Image" style="width: 53px; height: 30px;"/>
         </td>
         <td style="padding-top: 10px; padding-left: 10px; font-size: 10px; font-weight: bold">
-          나만의 맞춤 한국어 학습 서비스, 포니
+          Pony, your personalized Korean learning service
         </td>
-        <td style="padding-bottom: 10px; padding-top: 37px; padding-right: 20px; text-align: right; font-weight: 500; font-size: 12px;">
+        <td style="padding-bottom: 10px; padding-top: 37px; padding-right: 20px; text-align: right; font-weight: 500; font-size: 12px;" th:text="${time}">
           2024.06.12
         </td>
       </tr>
@@ -28,7 +28,7 @@
 
       <!--    따라쓰기-->
       <div class="trace-wrapper">
-        <h2>1. 따라쓰기</h2>
+        <h2>1. Write along</h2>
         <table class="writing-table" th:each="trace : ${traces}">
           <tbody >
           <tr th:each="content : ${trace.content}">
@@ -45,25 +45,25 @@
       </div>
 
 <!--      여기서 부터 용어설명에 해당되는 코드들   -->
-      <h2 class="explain-h2">2. 용어해설</h2>
+      <h2 class="explain-h2">2. Glossary</h2>
       <div class="content_wrapper" th:each="explanation : ${explanations}">
         <div class="main-sentence">
           <span th:text="${explanation.sentence}"> </span>
           <span class="pronunciation" th:text="${explanation.speak}">joh-eun nal-i-ya</span>
         </div>
         <table>
-          <tbody th:each="item : ${explanation.analysis}">
+          <tbody class="explain-tbody" th:each="item : ${explanation.analysis}">
           <tr>
             <td class="content-label-container">
-              <div th:if="${item.grammar == '주어'}" class="label red" th:text="${item.grammar}">
+              <div th:if="${item.grammar == 'subject'}" class="label red" th:text="${item.grammar}">
               </div>
-              <div th:if="${item.grammar == '동사'}" class="label blue" th:text="${item.grammar}">
+              <div th:if="${item.grammar == 'verb'}" class="label blue" th:text="${item.grammar}">
               </div>
-              <div th:if="${item.grammar == '보어'}" class="label purple" th:text="${item.grammar}">
+              <div th:if="${item.grammar == 'adjective'}" class="label purple" th:text="${item.grammar}">
               </div>
-              <div th:if="${item.grammar == '형용사'}" class="label color2" th:text="${item.grammar}">
+              <div th:if="${item.grammar == 'complement'}" class="label color2" th:text="${item.grammar}">
               </div>
-              <div th:unless="${item.grammar == '주어' || item.grammar == '동사' || item.grammar == '보어' || item.grammar == '형용사'}" class="label color3" th:text="${item.grammar}">
+              <div th:unless="${item.grammar == 'subject' || item.grammar == 'verb' || item.grammar == 'adjective' || item.grammar == 'complement'}" class="label color3" th:text="${item.grammar}">
               </div>
             </td>
             <td class="content-text-container">
@@ -79,12 +79,14 @@
         </table>
         </div>
       <!--      용어 설명 끝   -->
-      <h2 class="explain-h2">3. 빈칸문제</h2>
+      <h2 class="explain-h2">3. Blank question</h2>
       <div class="exercise" th:each="blank : ${blanks}">
         <div class="korean-sentence">
-          <span th:text="${blank.contents.get(0)}">놀이터</span>
-          <span class="blank"></span>
-          <span th:text="${blank.contents.get(1)}">집으로 가요</span>
+          <div th:text="${blank.contents.get(0)}">놀이터</div>
+          <div class="blank"></div>
+          <div th:text="${blank.contents.get(1)}">
+            집으로 가요
+          </div>
         </div>
         <div class="english-sentence" th:text="${blank.content_en}">
           I'm going home from the playground
