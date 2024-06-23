@@ -1,0 +1,105 @@
+.print-options-container {
+    margin: 0 auto;
+    padding: 20px;
+    padding-top: 50px;
+  }
+
+  .print-title {
+    height: 40px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 40px;
+  }
+  
+  .print-options-section {
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+  
+  .print-options-label {
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  
+  .print-options-paper-size {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #EAEAEA;
+    border-radius: 5px;
+    background-color: #F2F3F7;
+    color: #868686;
+    font-weight: 400;
+  }
+  
+  .print-options-submit-button{
+    width: 100%;
+    height: 66px;
+    background-color: #ABF2D5;
+    position: absolute;
+    bottom: 0;
+    cursor: pointer;
+    border: 0;
+    color: #ffff;
+    font-weight: 500;
+    font-size: 1.2rem;
+}
+
+.print-options-submit-button:hover {
+    background-color: #1ED88C;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    padding-top: 15px;
+  }
+  
+  .apply, .not-apply {
+    background: #e0f7e0;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 5px 10px;
+  }
+  
+  .two-button-main {
+    background: #ffff;
+    border: 1px solid #EAEAEA;
+    border-radius: 4px;
+    padding: 5px 10px;
+    width: 163px;
+    height: 44px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  
+  .apply {
+    border: 0;
+    background-color: #1ED88C;
+    color: white;
+  }
+  
+  .not-apply {
+    background: #e0e0e0;
+    color: black;
+  }
+  
+  .modal-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .reset, .apply {
+    flex: 1;
+    padding: 10px;
+    border-radius: 4px;
+  }
+  
+  .reset {
+    background: #e0e0e0;
+    margin-right: 10px;
+  }
+  

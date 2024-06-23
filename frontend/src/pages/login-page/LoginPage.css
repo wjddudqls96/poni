@@ -1,0 +1,9 @@
+.google-button {
+    position: absolute;
+    bottom: 310px;
+    left: 37px;
+    cursor: pointer;
+}
+.login-space {
+    height: 170px;
+}

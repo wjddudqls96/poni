@@ -1,0 +1,54 @@
+.explain-grid {
+  width: 100%; /* 전체 테이블 너비 조정 */
+  border-collapse: collapse;
+  background-color: #fff;
+}
+
+.explain-grid td {
+  width: 38px; /* 셀의 너비를 고정 */
+  height: 38px; /* 셀의 높이를 고정 */
+  border: 1px solid #ccc;
+  text-align: center;
+  vertical-align: middle;
+  position: relative; /* 십자 모양을 위해 position 추가 */
+  font-size: 1.5rem;
+}
+
+.trace-label {
+  background-color: #fff;
+  color: black;
+}
+
+.faded-label {
+  background-color: #fff;
+  color: lightgray;
+}
+
+.explain-grid-cross::before, .explain-grid-cross::after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+}
+
+.explain-grid-cross::before {
+  width: 1px;
+  height: 100%;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 1px dashed #bbb;
+}
+
+.explain-grid-cross::after {
+  height: 1px;
+  width: 100%;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  border-top: 1px dashed #bbb;
+}
+
+.explain-grid td > span {
+  position: relative;
+  z-index: 2; /* 텍스트를 십자선 위로 올리기 위해 z-index 설정 */
+}

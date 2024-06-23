@@ -1,0 +1,43 @@
+.preview-main {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* 부모 컨테이너의 높이를 100%로 설정 */
+}
+
+.preview-page-container {
+    flex: 1;
+    padding: 5%; /* 좌우 여백을 화면 비율에 따라 설정 */
+    overflow-y: auto; /* 수직 스크롤 활성화 */
+    box-sizing: border-box;
+}
+
+.preview-button-wrap {
+    display: flex;
+    flex-direction: row;
+    background-color: #f0f0f0; /* 배경색 (옵션) */
+    min-height: 40px;
+}
+
+.preview-btn {
+    flex: 1;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    height: 60px;
+}
+
+.save {
+    background-color: #ffffff; /* 배경색 */
+    color: #000000; /* 텍스트 색 */
+}
+
+.generate {
+    background-color: #1ED88C; /* 배경색 */
+    color: #ffffff; /* 텍스트 색 */
+}
+
+.save:hover, .generate:hover {
+    opacity: 0.8;
+}

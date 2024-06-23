@@ -1,0 +1,98 @@
+.result-container {
+  height: auto;
+  /* background-color: blue; */
+}
+.result-name-box {
+  margin-left: 1.5rem;
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.result-text-box {
+  margin-left: 1.5rem;
+  display: flex;
+  gap: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.result-score {
+  color: rgba(30, 216, 140, 1);
+}
+
+.result-score-box {
+  font-weight: bold;
+  display: flex;
+  gap: 1rem;
+  margin-left: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  font-size: 0.8rem;
+}
+
+.dictation-result-box {
+  width: 100;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.dictation-result {
+  background-color: white;
+  border-radius: 10px;
+  width: 90%;
+  height: 30rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.result-page-btns {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  display: flex;
+  justify-content: space-around;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.result-page-btn {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 4rem;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  /* color: white; */
+  text-align: center;
+  /* background-color: red; */
+  border-top: 3;
+}
+
+.dictation-input {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-left: 2rem;
+  margin-top: 2rem;
+}
+
+.dictation-input.wrong {
+  color: #f80000;
+}
+
+.dictation-answer {
+  margin-left: 2rem;
+  color: #aaaaaa;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.create-note {
+  width: 100%;
+  background-color: rgba(30, 216, 140, 1);
+  color: white;
+}

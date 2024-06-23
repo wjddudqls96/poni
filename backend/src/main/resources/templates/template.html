@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="css/explain.css">
+  <link rel="stylesheet" type="text/css" href="css/trace.css">
+</head>
+<body>
+<div class="container">
+  <header>
+    <table style="width: 100%; background-color: #E3FFF4; height: 70px">
+      <tr>
+        <td style="width: 83px; text-align: right;">
+          <img src="images/poni_logo.png" alt="Sample Image" style="width: 53px; height: 30px;"/>
+        </td>
+        <td style="padding-top: 10px; padding-left: 10px; font-size: 10px; font-weight: bold">
+          Pony, your personalized Korean learning service
+        </td>
+        <td style="padding-bottom: 10px; padding-top: 37px; padding-right: 20px; text-align: right; font-weight: 500; font-size: 12px;" th:text="${time}">
+          2024.06.12
+        </td>
+      </tr>
+    </table>
+  </header>
+  <main>
+    <div class="content_wrapper">
+
+      <!--    따라쓰기-->
+      <div class="trace-wrapper">
+        <h2>1. Write along</h2>
+        <table class="writing-table" th:each="trace : ${traces}">
+          <tbody >
+          <tr th:each="content : ${trace.content}">
+            <td th:each="char : ${content}" th:text="${char}" class="fixed-cell" ></td>
+          </tr>
+          </tbody>
+          <tbody th:each="i : ${#numbers.sequence(1, trace.count)}">
+          <tr th:each="content : ${trace.content}">
+            <td th:if="${trace.blurry == true}" th:each="char : ${content}" th:text="${char}" class="faded-cell" ></td>
+            <td th:unless="${trace.blurry == true}" th:each="char : ${content}"></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+<!--      여기서 부터 용어설명에 해당되는 코드들   -->
+      <h2 class="explain-h2">2. Glossary</h2>
+      <div class="content_wrapper" th:each="explanation : ${explanations}">
+        <div class="main-sentence">
+          <span th:text="${explanation.sentence}"> </span>
+          <div class="pronunciation" th:text="${explanation.speak}">joh-eun nal-i-ya</div>
+        </div>
+        <table>
+          <tbody class="explain-tbody" th:each="item : ${explanation.analysis}">
+          <tr>
+            <td class="content-label-container">
+              <div th:if="${item.grammar == 'subject'}" class="label red" th:text="${item.grammar}">
+              </div>
+              <div th:if="${item.grammar == 'verb'}" class="label blue" th:text="${item.grammar}">
+              </div>
+              <div th:if="${item.grammar == 'adjective'}" class="label purple" th:text="${item.grammar}">
+              </div>
+              <div th:if="${item.grammar == 'complement'}" class="label color2" th:text="${item.grammar}">
+              </div>
+              <div th:unless="${item.grammar == 'subject' || item.grammar == 'verb' || item.grammar == 'adjective' || item.grammar == 'complement'}" class="label color3" th:text="${item.grammar}">
+                adjective
+              </div>
+            </td>
+            <td class="content-text-container">
+              <div class="content-text-title" th:text="${item.word}">
+                "사슴"
+              </div>
+              <div class="content-text-explain" th:text="${item.word_description}">
+                이 문장에서 주어는 "사슴"으로, 누구나 알고 있는 대상을 가리킵니다.
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        </div>
+      <!--      용어 설명 끝   -->
+      <h2 class="explain-h2">3. Blank question</h2>
+      <div class="exercise" th:each="blank : ${blanks}">
+        <div class="korean-sentence">
+          <div th:text="${blank.contents.get(0)}">놀이터</div>
+          <div class="blank"></div>
+          <div th:text="${blank.contents.get(1)}">
+            집으로 가요
+          </div>
+        </div>
+        <div class="english-sentence" th:text="${blank.content_en}">
+          I'm going home from the playground
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+</body>
+</html>

@@ -1,0 +1,19 @@
+.login-wrapper {
+    width: 206px;
+    height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.login-content {
+    font-size: 1.7rem;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.font-green {
+    color: #1BCB83;
+}

@@ -1,0 +1,43 @@
+.list-container {
+    width: 355px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    position: relative;
+}
+.list-wrapper {
+    display: flex;
+    flex-direction: row;
+    width: 99%;
+    height: 56px;
+    border-radius: 12px;
+    box-shadow: 1px 4px 8px rgba(174, 174, 174, 0.1);
+    background-color: #FFFFFF;
+    margin-bottom: 12px;
+}
+
+.selected {
+    background-color: #E2F9EF;
+    border: 2px solid #1ED88C;
+}
+.list-title {
+    display: flex;
+    align-items: center;
+    flex: 0.8;
+    padding-left: 40px;
+    padding-top: 3px;
+    font-size: 1rem;
+}
+.list-title div {
+    margin-top: auto;
+    margin-bottom: auto;
+    font-weight: 500;
+}
+.list-select {
+    display: flex;
+    flex: 0.2;
+    justify-content: center;
+    align-items: center;
+}

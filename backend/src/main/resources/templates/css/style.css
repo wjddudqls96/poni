@@ -1,0 +1,31 @@
+@page {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 793px;
+  min-height: 1118px;
+  box-sizing: border-box;
+}
+
+header {
+  background-color: #E3FFF4;
+}
+
+.content_wrapper {
+  width: 700px;
+  margin: 25px auto;
+  margin-left: 50px;
+  margin-bottom: 70px;
+}
+
+.explain-h2 {
+  margin-left: 50px;
+}

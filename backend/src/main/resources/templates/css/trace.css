@@ -1,0 +1,65 @@
+.trace-wrapper {
+  margin-left: 40px;
+  margin-right: 40px;
+  margin-bottom: 70px;
+}
+
+.writing-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+.writing-table th,
+.writing-table td {
+  border: 1px solid #ddd;
+  min-width: 40px;
+  height: 70px;
+
+  text-align: center;
+  vertical-align: middle;
+  font-size: 35px;
+}
+
+.writing-table .fixed-cell {
+  font-weight: bold;
+  color: black;
+}
+
+.writing-table .faded-cell {
+  color: lightgray;
+}
+
+.writing-table .dotted-cell {
+  position: relative;
+}
+
+.writing-table .dotted-cell::before,
+.writing-table .dotted-cell::after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+}
+
+.writing-table .dotted-cell::before {
+  width: 1px;
+  height: 100%;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 1px dashed #bbb;
+}
+
+.writing-table .dotted-cell::after {
+  height: 1px;
+  width: 100%;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  border-top: 1px dashed #bbb;
+}
+
+.writing-table td > span {
+  position: relative;
+  z-index: 2; /* 텍스트를 십자선 위로 올리기 위해 z-index 설정 */
+}

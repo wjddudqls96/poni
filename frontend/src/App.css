@@ -1,42 +1,140 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(to bottom, #1ED88D, hsl(156, 70%, 75%));
+}
+.epson-footer {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 0;
+  bottom: 10%;
+  margin-top: 7%;
+  margin-left: 15%;
+  height: 100px;
+  z-index: 2;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.epson-footer-title {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 10px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.epson-footer-explain {
+  font-size: 1rem;
+  font-weight: 300;
+  color: white;
+}
+
+.home-main-content {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin-top: 7%;
+  margin-left: 15%;
+  width: 450px;
+  z-index: 2;
+}
+
+.home-main-logo {
+  height: 111px;
+}
+
+.home-main-title {
+  height: auto;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 3rem;
+  color: white;
+  font-weight: bold;
+}
+
+.home-main-explain {
+  height: auto;
+  font-size: 1.5rem;
+  color: white;
+  font-weight: 300;
+}
+
+.device-main {
+  display: flex;
+  flex-direction: column;
+  background-color: #F8F8F8;
+  width: 50vw; /* 화면 너비의 50% */
+  height: calc(50vw * (19 / 9)); /* 너비의 19/9 비율로 높이 설정 */
+  margin-left: 55vw;
+
+  max-width: 375px;
+  max-height: 812px;
+
+  min-width: 390px;
+  min-height: 841px;
+
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.device-main-content {
+  overflow-y: auto;
+}
+
+@media (max-width: 1500px) {
+  .device-main {
+    margin-left: 45vw; /* 화면이 작아질 때 마진 줄이기 */
+    min-width: 0px;
+    min-height: 0px;
+    max-height: 90vh;
   }
-  to {
-    transform: rotate(360deg);
+}
+
+@media (max-width: 1120px) {
+  .home-main-content {
+    display: none;
+  }
+  .epson-footer {
+    display: none;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+
+@media (max-width: 1000px) {
+  .device-main {
+    margin-left: 35vw; /* 화면이 작아질 때 마진 줄이기 */
+    min-width: 0px;
+    min-height: 0px;
   }
 }
 
-.card {
-  padding: 2em;
+@media (max-width: 800px) {
+  .device-main {
+    margin-left: 0px;
+    min-width: 390px;
+    min-height: 841px;
+  }
 }
 
-.read-the-docs {
-  color: #888;
+@media (max-width: 450px) {
+  .device-main {
+    margin-left: 0px;
+    min-width: 100vw;
+    min-height: 100vh;
+  }
 }
+
+
+/* @media (max-width: 500px) and (max-width: 900px) {
+  .device-main {
+    width: 100%;
+    height: 100%;
+    margin-left: 0px;
+
+    min-width: 0px;
+    min-height: 0px;
+  }
+} */
