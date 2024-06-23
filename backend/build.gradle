@@ -67,6 +67,9 @@ dependencies {
 
     //oauth
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
+    //s3
+    implementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 tasks.named('test') {

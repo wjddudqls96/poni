@@ -4,10 +4,13 @@ import com.epson.poni.dto.cart.WorksheetPrintRequestDto;
 import com.epson.poni.dto.print.EpsonTokenDto;
 import com.epson.poni.dto.print.PrintInfo;
 import java.io.File;
+import java.sql.SQLOutput;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -120,7 +123,6 @@ public class PrinterManager {
             requestEntity,
             void.class
         );
-
     }
 
     public void print(String filePath, WorksheetPrintRequestDto worksheetPrintRequestDto) {
@@ -138,12 +140,13 @@ public class PrinterManager {
 
         RestTemplate restTemplate = new RestTemplate();
 
-        restTemplate.exchange(
+        ResponseEntity<String> response = restTemplate.exchange(
                 url,
                 HttpMethod.POST,
                 requestEntity,
-                void.class
+                String.class
         );
+        System.out.println(response);
 
     }
 
@@ -164,24 +167,19 @@ public class PrinterManager {
         String fileName = "1" + ext;
         String uploadUri = baseUri + "&File=" + fileName;
 
-        File file = new File(filePath);
-        long fileLength = file.length();
-        String errStr = "";
         RestTemplate restTemplate = new RestTemplate();
 
         try {
             HttpHeaders headers = new HttpHeaders();
-            headers.setContentLength(fileLength);
-            headers.setContentType(MediaType.IMAGE_JPEG);
+            headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 
-            FileSystemResource fileResource = new FileSystemResource(file);
-            HttpEntity<FileSystemResource> requestEntity = new HttpEntity<>(fileResource, headers);
+            Resource fileResource = new UrlResource(filePath);
+            headers.setContentLength(fileResource.contentLength());
+            HttpEntity<Resource> requestEntity = new HttpEntity<>(fileResource, headers);
 
             ResponseEntity<String> response = restTemplate.exchange(uploadUri, HttpMethod.POST, requestEntity, String.class);
 
             if (response.getStatusCode() == HttpStatus.OK) {
-                System.out.println(response);
-                System.out.println("File uploaded successfully.");
             } else {
                 System.out.println("Failed to upload file: " + response.getStatusCode() + " " + response.getStatusCode());
             }
@@ -210,19 +208,19 @@ public class PrinterManager {
             body.put("job_name", "sample");
             body.put("print_mode", "document");
 
-            Map<String, Object> printSetting = new HashMap<>();
-            printSetting.put("media_size", "ms_a4");
-            printSetting.put("media_type", "mt_plainpaper");
-            printSetting.put("borderless", false);
-            printSetting.put("print_quality", print_quality);
-            printSetting.put("source", "auto");
-            printSetting.put("color_mode", color_mode);
-            printSetting.put("2_sided", sided);
-            printSetting.put("reverse_order", reverse_order);
-            printSetting.put("copies", 1);
-            printSetting.put("collate", true);
-
-            body.put("print_setting", printSetting);
+//            Map<String, Object> printSetting = new HashMap<>();
+//            printSetting.put("media_size", "ms_a4");
+//            printSetting.put("media_type", "mt_plainpaper");
+//            printSetting.put("borderless", false);
+//            printSetting.put("print_quality", print_quality);
+//            printSetting.put("source", "auto");
+//            printSetting.put("color_mode", color_mode);
+//            printSetting.put("2_sided", sided);
+//            printSetting.put("reverse_order", reverse_order);
+//            printSetting.put("copies", 1);
+//            printSetting.put("collate", true);
+//
+//            body.put("print_setting", printSetting);
         }
 
         HttpEntity<Map<String, Object>> requestBody = new HttpEntity<>(body, headers);
