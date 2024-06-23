@@ -7,6 +7,7 @@ const DictationResult: React.FC = () => {
   const [correct, setCorrect] = useState(0);
   const [incorrect, setIncorrect] = useState(0);
   const [problemsCount, setProblemsCount] = useState(0);
+  const [username, setUsername] = useState("");
 
   useEffect(() => {
     const getDictationResult = async () => {
@@ -15,7 +16,8 @@ const DictationResult: React.FC = () => {
       setCorrect(data.correct);
       setIncorrect(data.incorrect);
       setProblemsCount(data.problemsCount);
-      setResultList(data.ploblem);
+      setResultList(data.problem);
+      setUsername(data.username);
     };
     getDictationResult();
     console.log(resultList);
@@ -24,7 +26,7 @@ const DictationResult: React.FC = () => {
   return (
     <div className="result-container">
       <div className="result-name-box">
-        <div>Maria,</div>
+        <div>{username}</div>
       </div>
       <div className="result-text-box">
         <div>the dictation result is</div>

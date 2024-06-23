@@ -14,6 +14,6 @@ public class DifficultyGradingResponseDto {
     private Integer correct;
     private Integer incorrect;
     private List<ProblemDto> problem;
-
+    private String username;
 }
 
