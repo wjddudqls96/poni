@@ -20,8 +20,8 @@ const SelectGrade: React.FC = () => {
   return (
     <div className="grade-container">
       <div className="grade-text">
-        <div>한국어 난이도를</div>
-        <div>선택해주세요.</div>
+        <div>The Korean level of difficulty</div>
+        <div>Please choose.</div>
       </div>
       <div
         onClick={() => handleClick("입문")}
